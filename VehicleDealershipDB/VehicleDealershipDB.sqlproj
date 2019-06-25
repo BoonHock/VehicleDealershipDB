@@ -66,8 +66,6 @@
     <Folder Include="veh\Tables\" />
     <Folder Include="dbhistory\" />
     <Folder Include="dbhistory\Tables\" />
-    <Folder Include="dbo\" />
-    <Folder Include="dbo\Functions\" />
     <Folder Include="dbsecurity\Stored Procedures\" />
     <Folder Include="Security\" />
   </ItemGroup>
@@ -83,7 +81,6 @@
     <Build Include="veh\Tables\vehicle.sql" />
     <Build Include="dbhistory\Tables\user.sql" />
     <Build Include="dbsecurity\Tables\user.sql" />
-    <Build Include="dbo\Functions\sfn_get_datetime2.sql" />
     <Build Include="dbsecurity\Stored Procedures\sp_update_usergroup_permission.sql" />
     <Build Include="dbsecurity\Stored Procedures\sp_delete_usergroup.sql" />
     <Build Include="dbsecurity\Stored Procedures\sp_update_user_active.sql" />
