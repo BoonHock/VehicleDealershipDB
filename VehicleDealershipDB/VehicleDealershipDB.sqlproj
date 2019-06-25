@@ -1,0 +1,108 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <Name>VehicleDealershipDB</Name>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectVersion>4.1</ProjectVersion>
+    <ProjectGuid>{78ee018b-6c85-43a4-953c-052928b6b344}</ProjectGuid>
+    <DSP>Microsoft.Data.Tools.Schema.Sql.Sql130DatabaseSchemaProvider</DSP>
+    <OutputType>Database</OutputType>
+    <RootPath>
+    </RootPath>
+    <RootNamespace>VehicleDealershipDB</RootNamespace>
+    <AssemblyName>VehicleDealershipDB</AssemblyName>
+    <ModelCollation>1033,CI</ModelCollation>
+    <DefaultFileStructure>BySchemaAndSchemaType</DefaultFileStructure>
+    <DeployToDatabase>True</DeployToDatabase>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <TargetLanguage>CS</TargetLanguage>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <SqlServerVerification>False</SqlServerVerification>
+    <IncludeCompositeObjects>True</IncludeCompositeObjects>
+    <TargetDatabaseSet>True</TargetDatabaseSet>
+    <DefaultCollation>Latin1_General_CI_AI</DefaultCollation>
+    <DefaultFilegroup>PRIMARY</DefaultFilegroup>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <OutputPath>bin\Release\</OutputPath>
+    <BuildScriptName>$(MSBuildProjectName).sql</BuildScriptName>
+    <TreatWarningsAsErrors>False</TreatWarningsAsErrors>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <DefineDebug>false</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <OutputPath>bin\Debug\</OutputPath>
+    <BuildScriptName>$(MSBuildProjectName).sql</BuildScriptName>
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <DefineDebug>true</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">11.0</VisualStudioVersion>
+    <!-- Default to the v11.0 targets path if the targets file for the current VS version is not found -->
+    <SSDTExists Condition="Exists('$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v$(VisualStudioVersion)\SSDT\Microsoft.Data.Tools.Schema.SqlTasks.targets')">True</SSDTExists>
+    <VisualStudioVersion Condition="'$(SSDTExists)' == ''">11.0</VisualStudioVersion>
+  </PropertyGroup>
+  <Import Condition="'$(SQLDBExtensionsRefPath)' != ''" Project="$(SQLDBExtensionsRefPath)\Microsoft.Data.Tools.Schema.SqlTasks.targets" />
+  <Import Condition="'$(SQLDBExtensionsRefPath)' == ''" Project="$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v$(VisualStudioVersion)\SSDT\Microsoft.Data.Tools.Schema.SqlTasks.targets" />
+  <ItemGroup>
+    <Folder Include="Properties" />
+    <Folder Include="hr\" />
+    <Folder Include="hr\Tables\" />
+    <Folder Include="dbsecurity\" />
+    <Folder Include="dbsecurity\Tables\" />
+    <Folder Include="veh\" />
+    <Folder Include="veh\Tables\" />
+    <Folder Include="dbhistory\" />
+    <Folder Include="dbhistory\Tables\" />
+    <Folder Include="dbo\" />
+    <Folder Include="dbo\Functions\" />
+    <Folder Include="dbsecurity\Stored Procedures\" />
+    <Folder Include="Security\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Build Include="hr\Tables\country.sql" />
+    <Build Include="hr\Tables\salesman.sql" />
+    <Build Include="hr\Tables\company.sql" />
+    <Build Include="hr\Tables\person.sql" />
+    <Build Include="dbsecurity\Tables\permission.sql" />
+    <Build Include="dbsecurity\Tables\usergroup_permission.sql" />
+    <Build Include="dbsecurity\Tables\user_usergroup.sql" />
+    <Build Include="dbsecurity\Tables\usergroup.sql" />
+    <Build Include="veh\Tables\vehicle.sql" />
+    <Build Include="dbhistory\Tables\user.sql" />
+    <Build Include="dbsecurity\Tables\user.sql" />
+    <Build Include="dbo\Functions\sfn_get_datetime2.sql" />
+    <Build Include="dbsecurity\Stored Procedures\sp_update_usergroup_permission.sql" />
+    <Build Include="dbsecurity\Stored Procedures\sp_delete_usergroup.sql" />
+    <Build Include="dbsecurity\Stored Procedures\sp_update_user_active.sql" />
+    <Build Include="dbsecurity\Stored Procedures\sp_update_user_password.sql" />
+    <Build Include="dbsecurity\Stored Procedures\sp_check_user_permission.sql" />
+    <Build Include="dbsecurity\Stored Procedures\sp_check_username_available.sql" />
+    <Build Include="dbsecurity\Stored Procedures\sp_insert_user.sql" />
+    <Build Include="dbsecurity\Stored Procedures\sp_search_user.sql" />
+    <Build Include="dbsecurity\Stored Procedures\sp_select_user.sql" />
+    <Build Include="dbsecurity\Stored Procedures\sp_user_login.sql" />
+    <Build Include="dbsecurity\Stored Procedures\sp_select_user_by_username.sql" />
+    <Build Include="dbsecurity\Stored Procedures\sp_update_user.sql" />
+    <Build Include="dbsecurity\Stored Procedures\sp_select_usergroup_permission.sql" />
+    <Build Include="dbsecurity\Stored Procedures\sp_check_usergroup_available.sql" />
+    <Build Include="dbsecurity\Stored Procedures\sp_insert_usergroup.sql" />
+    <Build Include="dbsecurity\Stored Procedures\sp_update_usergroup.sql" />
+    <Build Include="Security\dbhistory.sql" />
+    <Build Include="Security\dbsecurity.sql" />
+    <Build Include="Security\hr.sql" />
+    <Build Include="Security\veh.sql" />
+  </ItemGroup>
+</Project>
