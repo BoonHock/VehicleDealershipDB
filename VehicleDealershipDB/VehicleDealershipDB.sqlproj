@@ -101,5 +101,6 @@
     <Build Include="Security\dbsecurity.sql" />
     <Build Include="Security\hr.sql" />
     <Build Include="Security\veh.sql" />
+    <Build Include="dbsecurity\Stored Procedures\usp_assign_all_permission_to_administrator.sql" />
   </ItemGroup>
 </Project>
