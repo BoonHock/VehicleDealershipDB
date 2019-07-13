@@ -1,0 +1,25 @@
+﻿CREATE TABLE [dbhistory].[organisation] (
+    [organisation]    INT            NOT NULL,
+    [name]            NVARCHAR (150) NOT NULL,
+    [registration_no] NVARCHAR (30)  NOT NULL,
+    [person_org_type] INT            NOT NULL,
+    [branch]          NVARCHAR (20)  NOT NULL,
+    [address]         NVARCHAR (255) NOT NULL,
+    [city]            NVARCHAR (15)  NOT NULL,
+    [state]           NVARCHAR (20)  NOT NULL,
+    [postcode]        NVARCHAR (10)  NOT NULL,
+    [country]         NVARCHAR (2)   NOT NULL,
+    [phone1]          NVARCHAR (20)  NOT NULL,
+    [phone2]          NVARCHAR (20)  NOT NULL,
+    [phone3]          NVARCHAR (20)  NOT NULL,
+    [email1]          NVARCHAR (100) NOT NULL,
+    [email2]          NVARCHAR (100) NOT NULL,
+    [email3]          NVARCHAR (100) NOT NULL,
+    [url]             NVARCHAR (255) NOT NULL,
+    [fax1]            NVARCHAR (50)  NOT NULL,
+    [fax2]            NVARCHAR (50)  NOT NULL,
+    [remarks]         NVARCHAR (255) NOT NULL,
+    [modified_by]     INT            NOT NULL,
+    [modified_on]     DATETIME2 (0)  CONSTRAINT [DF_organisation_modified_on] DEFAULT (sysdatetime()) NOT NULL
+);
+

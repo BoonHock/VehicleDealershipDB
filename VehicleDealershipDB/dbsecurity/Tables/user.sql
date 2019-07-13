@@ -7,12 +7,14 @@
     [is_active]   BIT             CONSTRAINT [DF_user_Is_activated] DEFAULT ((1)) NOT NULL,
     [join_date]   DATE            CONSTRAINT [DF_user_Join_date] DEFAULT (sysdatetime()) NOT NULL,
     [leave_date]  DATE            CONSTRAINT [DF_user_Leave_date] DEFAULT (NULL) NULL,
-    [photo]       VARBINARY (MAX) CONSTRAINT [DF_user_Photo] DEFAULT (NULL) NULL,
+    [image]       VARBINARY (MAX) CONSTRAINT [DF_user_Photo] DEFAULT (NULL) NULL,
     [modifed_by]  INT             NULL,
     [modified_on] DATETIME2 (0)   CONSTRAINT [DF_user_modified_on] DEFAULT (sysdatetime()) NOT NULL,
     CONSTRAINT [PK_user] PRIMARY KEY CLUSTERED ([user] ASC),
     CONSTRAINT [FK_user_user] FOREIGN KEY ([modifed_by]) REFERENCES [dbsecurity].[user] ([user])
 );
+
+
 
 
 GO
@@ -27,7 +29,7 @@ GO
 -- Description:	history
 -- =============================================
 CREATE TRIGGER [dbsecurity].[trig_history_user] 
-   ON  dbsecurity.[user] 
+   ON  [dbsecurity].[user] 
    AFTER INSERT, UPDATE
 AS 
 BEGIN
@@ -46,7 +48,7 @@ INSERT INTO [dbhistory].[user]
 	,[is_active]
 	,[join_date]
 	,[leave_date]
-	,[photo]
+	,[image]
 	,[performed_by]
 	,[performed_on]
 )
@@ -59,9 +61,9 @@ SELECT
 	,[is_active]
 	,[join_date]
 	,[leave_date]
-	,[photo]
+	,[image]
 	,[modifed_by]
-	,SYSDATETIME()
+	,[modified_on]
 FROM inserted
 
 

@@ -11,7 +11,7 @@ CREATE PROCEDURE [dbsecurity].[sp_update_user]
 	@ic_no nvarchar(30),
 	@join_date date,
 	@leave_date date,
-	@photo varbinary(max) = NULL,
+	@img varbinary(max) = NULL,
 	@usergroup nvarchar(20),
 	@modified_by INT
 AS
@@ -24,13 +24,14 @@ BEGIN
 IF @user = 1 
 RETURN -- user 1 is admin. cannot be edited
 
+
 UPDATE [dbsecurity].[user]
 SET [username] = @username,
 	[name] = @name,
 	[ic_no] = @ic_no,
 	[join_date] = @join_date,
 	[leave_date] = @leave_date,
-	[photo] = @photo,
+	[image] = @img,
 	[modifed_by] = @modified_by
 WHERE [user] = @user
 

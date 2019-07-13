@@ -1,5 +1,5 @@
-﻿CREATE TABLE [hr].[salesman] (
-    [salesman]                 INT            IDENTITY (1, 1) NOT NULL,
+﻿CREATE TABLE [hr].[salesperson] (
+    [salesperson]              INT            IDENTITY (1, 1) NOT NULL,
     [person]                   INT            NULL,
     [company]                  INT            NULL,
     [location]                 NVARCHAR (255) CONSTRAINT [DF_salesman_location] DEFAULT ('') NOT NULL,
@@ -30,13 +30,107 @@
     [insurance_renew_target10] FLOAT (53)     CONSTRAINT [DF_salesman_insurance_renew_target_jan2] DEFAULT ((0)) NOT NULL,
     [insurance_renew_target11] FLOAT (53)     CONSTRAINT [DF_salesman_insurance_renew_target_jan111] DEFAULT ((0)) NOT NULL,
     [insurance_renew_target12] FLOAT (53)     CONSTRAINT [DF_salesman_insurance_renew_target_jan12] DEFAULT ((0)) NOT NULL,
-    [created_by]               INT            NOT NULL,
-    [created_datetime]         DATETIME2 (0)  CONSTRAINT [DF_salesman_created_datetime] DEFAULT (sysdatetime()) NOT NULL,
-    CONSTRAINT [PK_salesman] PRIMARY KEY CLUSTERED ([salesman] ASC),
+    [modified_by]              INT            NOT NULL,
+    [modified_on]              DATETIME2 (0)  CONSTRAINT [DF_salesman_modified_on] DEFAULT (sysdatetime()) NOT NULL,
+    CONSTRAINT [PK_salesman] PRIMARY KEY CLUSTERED ([salesperson] ASC),
     CONSTRAINT [CK_salesman] CHECK ([person] IS NULL AND [company] IS NOT NULL OR [person] IS NOT NULL AND [company] IS NULL),
-    CONSTRAINT [FK_salesman_company] FOREIGN KEY ([company]) REFERENCES [hr].[company] ([company]),
+    CONSTRAINT [FK_salesman_company] FOREIGN KEY ([company]) REFERENCES [hr].[organisation] ([organisation]),
     CONSTRAINT [FK_salesman_person] FOREIGN KEY ([person]) REFERENCES [hr].[person] ([person]),
-    CONSTRAINT [FK_salesman_user] FOREIGN KEY ([created_by]) REFERENCES [dbsecurity].[user] ([user]),
+    CONSTRAINT [FK_salesman_user1] FOREIGN KEY ([modified_by]) REFERENCES [dbsecurity].[user] ([user]),
     CONSTRAINT [IX_salesman] UNIQUE NONCLUSTERED ([person] ASC, [company] ASC)
 );
 
+
+GO
+-- =============================================
+-- Author:		hock
+-- Create date: 13.7.2019
+-- Description:	
+-- =============================================
+CREATE TRIGGER [hr].[trig_history_salesperson] 
+   ON  [hr].salesperson
+   AFTER INSERT,UPDATE
+AS 
+BEGIN
+	-- SET NOCOUNT ON added to prevent extra result sets from
+	-- interfering with SELECT statements.
+	SET NOCOUNT ON;
+
+INSERT INTO dbhistory.salesperson
+(
+	[salesperson]
+	,[person]
+	,[company]
+	,[location]
+	,[is_active]
+	,[date_join]
+	,[date_leave]
+	,[sales_target1]
+	,[sales_target2]
+	,[sales_target3]
+	,[sales_target4]
+	,[sales_target5]
+	,[sales_target6]
+	,[sales_target7]
+	,[sales_target8]
+	,[sales_target9]
+	,[sales_target10]
+	,[sales_target11]
+	,[sales_target12]
+	,[insurance_renew_target1]
+	,[insurance_renew_target2]
+	,[insurance_renew_target3]
+	,[insurance_renew_target4]
+	,[insurance_renew_target5]
+	,[insurance_renew_target6]
+	,[insurance_renew_target7]
+	,[insurance_renew_target8]
+	,[insurance_renew_target9]
+	,[insurance_renew_target10]
+	,[insurance_renew_target11]
+	,[insurance_renew_target12]
+	,[modified_by]
+	,[modified_on]
+)
+
+SELECT
+	[salesperson]
+	,[person]
+	,[company]
+	,[location]
+	,[is_active]
+	,[date_join]
+	,[date_leave]
+	,[sales_target1]
+	,[sales_target2]
+	,[sales_target3]
+	,[sales_target4]
+	,[sales_target5]
+	,[sales_target6]
+	,[sales_target7]
+	,[sales_target8]
+	,[sales_target9]
+	,[sales_target10]
+	,[sales_target11]
+	,[sales_target12]
+	,[insurance_renew_target1]
+	,[insurance_renew_target2]
+	,[insurance_renew_target3]
+	,[insurance_renew_target4]
+	,[insurance_renew_target5]
+	,[insurance_renew_target6]
+	,[insurance_renew_target7]
+	,[insurance_renew_target8]
+	,[insurance_renew_target9]
+	,[insurance_renew_target10]
+	,[insurance_renew_target11]
+	,[insurance_renew_target12]
+	,[modified_by]
+	,[modified_on]
+
+FROM inserted
+
+
+    -- Insert statements for trigger here
+
+END

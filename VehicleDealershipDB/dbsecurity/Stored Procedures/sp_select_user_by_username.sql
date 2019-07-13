@@ -20,7 +20,7 @@ SELECT
 	U.[is_active],
 	U.[join_date],
 	U.[leave_date],
-	U.[photo],
+	U.[image],
 	UUG.[usergroup]
 
 FROM [dbsecurity].[user] U

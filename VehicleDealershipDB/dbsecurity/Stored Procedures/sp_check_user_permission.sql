@@ -14,14 +14,7 @@ BEGIN
 	SET NOCOUNT ON;
 
     -- Insert statements for procedure here
-select COUNT(*)
-from [dbsecurity].[user_usergroup] uug
-
-join [dbsecurity].[usergroup_permission] ugp
-	on [uug].[usergroup] = ugp.[usergroup]
-
-where uug.[user] = @user
-	and ugp.[permission] = @permission
+select dbsecurity.svf_check_user_permission(@user,@permission) AS has_permission
 	
 
 END

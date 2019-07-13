@@ -68,11 +68,12 @@
     <Folder Include="dbhistory\Tables\" />
     <Folder Include="dbsecurity\Stored Procedures\" />
     <Folder Include="Security\" />
+    <Folder Include="misc\" />
+    <Folder Include="misc\Tables\" />
+    <Folder Include="dbsecurity\Functions\" />
   </ItemGroup>
   <ItemGroup>
     <Build Include="hr\Tables\country.sql" />
-    <Build Include="hr\Tables\salesman.sql" />
-    <Build Include="hr\Tables\company.sql" />
     <Build Include="hr\Tables\person.sql" />
     <Build Include="dbsecurity\Tables\permission.sql" />
     <Build Include="dbsecurity\Tables\usergroup_permission.sql" />
@@ -102,5 +103,27 @@
     <Build Include="Security\hr.sql" />
     <Build Include="Security\veh.sql" />
     <Build Include="dbsecurity\Stored Procedures\usp_assign_all_permission_to_administrator.sql" />
+    <Build Include="veh\Tables\vehicle_model.sql" />
+    <Build Include="veh\Tables\vehicle_group.sql" />
+    <Build Include="veh\Tables\vehicle_brand.sql" />
+    <Build Include="hr\Tables\salesperson.sql" />
+    <Build Include="hr\Tables\race.sql" />
+    <Build Include="hr\Tables\person_org_type.sql" />
+    <Build Include="hr\Tables\organisation_contact_person.sql" />
+    <Build Include="hr\Tables\organisation.sql" />
+    <Build Include="dbhistory\Tables\vehicle_group.sql" />
+    <Build Include="dbhistory\Tables\vehicle_brand.sql" />
+    <Build Include="dbhistory\Tables\usergroup_permission.sql" />
+    <Build Include="dbhistory\Tables\usergroup.sql" />
+    <Build Include="dbhistory\Tables\user_usergroup.sql" />
+    <Build Include="dbhistory\Tables\salesperson.sql" />
+    <Build Include="dbhistory\Tables\person_org_type.sql" />
+    <Build Include="dbhistory\Tables\person.sql" />
+    <Build Include="dbhistory\Tables\organisation_contact_person.sql" />
+    <Build Include="dbhistory\Tables\organisation.sql" />
+    <Build Include="dbhistory\Tables\color.sql" />
+    <Build Include="misc\Tables\color.sql" />
+    <Build Include="dbsecurity\Functions\svf_check_user_permission.sql" />
+    <Build Include="Security\misc.sql" />
   </ItemGroup>
 </Project>
