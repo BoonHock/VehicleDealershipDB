@@ -8,7 +8,7 @@
     [city]            NVARCHAR (15)  NOT NULL,
     [state]           NVARCHAR (20)  NOT NULL,
     [postcode]        NVARCHAR (10)  NOT NULL,
-    [country]         NVARCHAR (2)   NOT NULL,
+    [country]         SMALLINT       NOT NULL,
     [phone1]          NVARCHAR (20)  NOT NULL,
     [phone2]          NVARCHAR (20)  NOT NULL,
     [phone3]          NVARCHAR (20)  NOT NULL,
@@ -20,13 +20,14 @@
     [fax2]            NVARCHAR (50)  NOT NULL,
     [remarks]         NVARCHAR (255) NOT NULL,
     [modified_by]     INT            NOT NULL,
-    [modified_on]     DATETIME2 (0)  CONSTRAINT [DF_business_created_datetime] DEFAULT (sysdatetime()) NOT NULL,
     CONSTRAINT [PK_business] PRIMARY KEY CLUSTERED ([organisation] ASC),
-    CONSTRAINT [FK_business_country] FOREIGN KEY ([country]) REFERENCES [hr].[country] ([country]),
     CONSTRAINT [FK_business_user] FOREIGN KEY ([modified_by]) REFERENCES [dbsecurity].[user] ([user]),
+    CONSTRAINT [FK_organisation_country] FOREIGN KEY ([country]) REFERENCES [hr].[country] ([country]),
     CONSTRAINT [FK_organisation_person_org_type] FOREIGN KEY ([person_org_type]) REFERENCES [hr].[person_org_type] ([person_org_type]),
     CONSTRAINT [IX_business] UNIQUE NONCLUSTERED ([registration_no] ASC)
 );
+
+
 
 
 GO
@@ -36,7 +37,7 @@ GO
 -- Description:	
 -- =============================================
 CREATE TRIGGER [hr].[trig_history_organisation] 
-   ON  [hr].organisation 
+   ON  [hr].[organisation] 
    AFTER INSERT,UPDATE
 AS 
 BEGIN
@@ -92,7 +93,7 @@ SELECT
 	,[fax2]
 	,[remarks]
 	,[modified_by]
-	,[modified_on]
+	,SYSDATETIME()
 
 FROM inserted
 

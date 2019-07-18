@@ -2,12 +2,13 @@
     [user]        INT           NOT NULL,
     [usergroup]   NVARCHAR (50) NOT NULL,
     [modified_by] INT           NOT NULL,
-    [modified_on] DATETIME2 (0) CONSTRAINT [DF_user_usergroup_modified_on] DEFAULT (sysdatetime()) NOT NULL,
     CONSTRAINT [PK_user_usergroup] PRIMARY KEY CLUSTERED ([user] ASC, [usergroup] ASC),
     CONSTRAINT [FK_user_usergroup_user] FOREIGN KEY ([user]) REFERENCES [dbsecurity].[user] ([user]),
     CONSTRAINT [FK_user_usergroup_user1] FOREIGN KEY ([modified_by]) REFERENCES [dbsecurity].[user] ([user]),
     CONSTRAINT [FK_user_usergroup_usergroup] FOREIGN KEY ([usergroup]) REFERENCES [dbsecurity].[usergroup] ([usergroup]) ON DELETE CASCADE ON UPDATE CASCADE
 );
+
+
 
 
 
@@ -19,7 +20,7 @@ GO
 -- Description:	
 -- =============================================
 CREATE TRIGGER [dbsecurity].[trig_history_user_usergroup] 
-   ON  [dbsecurity].user_usergroup 
+   ON  [dbsecurity].[user_usergroup] 
    AFTER INSERT,UPDATE
 AS 
 BEGIN
@@ -39,7 +40,7 @@ SELECT
 	[user],
 	[usergroup],
 	[modified_by],
-	[modified_on]
+	SYSDATETIME()
 
 FROM inserted
 

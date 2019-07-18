@@ -2,10 +2,13 @@
     [usergroup]      NVARCHAR (50)  NOT NULL,
     [usergroup_desc] NVARCHAR (150) NOT NULL,
     [modified_by]    INT            CONSTRAINT [DF_usergroup_modified_by] DEFAULT ((1)) NOT NULL,
-    [modified_on]    DATETIME2 (0)  CONSTRAINT [DF_usergroup_modified_on] DEFAULT (sysdatetime()) NOT NULL,
     CONSTRAINT [PK_usergroup] PRIMARY KEY CLUSTERED ([usergroup] ASC),
     CONSTRAINT [FK_usergroup_user] FOREIGN KEY ([modified_by]) REFERENCES [dbsecurity].[user] ([user])
 );
+
+
+
+
 
 
 
@@ -21,8 +24,8 @@ GO
 -- Create date: 13.7.2019
 -- Description:	
 -- =============================================
-CREATE TRIGGER dbsecurity.trig_history_usergroup 
-   ON  dbsecurity.usergroup 
+CREATE TRIGGER [dbsecurity].[trig_history_usergroup] 
+   ON  [dbsecurity].[usergroup] 
    AFTER INSERT,UPDATE
 AS 
 BEGIN
@@ -31,7 +34,7 @@ BEGIN
 	SET NOCOUNT ON;
 
     -- Insert statements for trigger here
-INSERT INTO dbsecurity.usergroup
+INSERT INTO dbhistory.usergroup
 (
 	[usergroup],
 	[usergroup_desc],
@@ -42,7 +45,7 @@ SELECT
 	usergroup,
 	usergroup_desc,
 	modified_by,
-	modified_on
+	SYSDATETIME()
 FROM inserted
 
 

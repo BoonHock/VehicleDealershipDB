@@ -71,6 +71,7 @@
     <Folder Include="misc\" />
     <Folder Include="misc\Tables\" />
     <Folder Include="dbsecurity\Functions\" />
+    <Folder Include="veh\Stored Procedures\" />
   </ItemGroup>
   <ItemGroup>
     <Build Include="hr\Tables\country.sql" />
@@ -125,5 +126,13 @@
     <Build Include="misc\Tables\color.sql" />
     <Build Include="dbsecurity\Functions\svf_check_user_permission.sql" />
     <Build Include="Security\misc.sql" />
+    <Build Include="misc\Tables\bulkcopy_table.sql" />
+    <Build Include="dbhistory\Tables\race.sql" />
+    <Build Include="veh\Stored Procedures\sp_update_vehicle_brand.sql" />
+    <Build Include="veh\Stored Procedures\sp_update_insert_vehicle_group.sql" />
+    <Build Include="veh\Stored Procedures\sp_select_vehicle_group_for_edit.sql" />
+    <Build Include="veh\Stored Procedures\sp_select_vehicle_brand_n_group.sql" />
+    <Build Include="veh\Stored Procedures\sp_is_vehicle_brand_name_available.sql" />
+    <Build Include="veh\Stored Procedures\sp_insert_vehicle_brand.sql" />
   </ItemGroup>
 </Project>

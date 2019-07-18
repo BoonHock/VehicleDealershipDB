@@ -3,10 +3,13 @@
     [vehicle_group_name] NVARCHAR (50) NOT NULL,
     [vehicle_brand]      INT           NOT NULL,
     [modified_by]        INT           NOT NULL,
-    [modified_on]        DATETIME2 (0) CONSTRAINT [DF_vehicle_group_modified_on] DEFAULT (sysdatetime()) NOT NULL,
     CONSTRAINT [PK_vehicle_group] PRIMARY KEY CLUSTERED ([vehicle_group] ASC),
-    CONSTRAINT [FK_vehicle_group_vehicle_brand] FOREIGN KEY ([modified_by]) REFERENCES [dbsecurity].[user] ([user])
+    CONSTRAINT [FK_vehicle_group_vehicle_brand] FOREIGN KEY ([modified_by]) REFERENCES [dbsecurity].[user] ([user]),
+    CONSTRAINT [FK_vehicle_group_vehicle_brand1] FOREIGN KEY ([vehicle_brand]) REFERENCES [veh].[vehicle_brand] ([vehicle_brand]),
+    CONSTRAINT [IX_vehicle_group] UNIQUE NONCLUSTERED ([vehicle_group_name] ASC, [vehicle_brand] ASC)
 );
+
+
 
 
 GO
@@ -15,8 +18,8 @@ GO
 -- Create date: 13.7.2019
 -- Description:	
 -- =============================================
-CREATE TRIGGER veh.[trig_history_vehicle_group] 
-   ON  veh.vehicle_group
+CREATE TRIGGER [veh].[trig_history_vehicle_group] 
+   ON  [veh].[vehicle_group]
    AFTER INSERT,UPDATE
 AS 
 BEGIN
@@ -38,7 +41,7 @@ SELECT
 	,[vehicle_group_name]
 	,[vehicle_brand]
 	,[modified_by]
-	,[modified_on]
+	,SYSDATETIME()
 
 FROM inserted
 

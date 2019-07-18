@@ -31,7 +31,6 @@
     [insurance_renew_target11] FLOAT (53)     CONSTRAINT [DF_salesman_insurance_renew_target_jan111] DEFAULT ((0)) NOT NULL,
     [insurance_renew_target12] FLOAT (53)     CONSTRAINT [DF_salesman_insurance_renew_target_jan12] DEFAULT ((0)) NOT NULL,
     [modified_by]              INT            NOT NULL,
-    [modified_on]              DATETIME2 (0)  CONSTRAINT [DF_salesman_modified_on] DEFAULT (sysdatetime()) NOT NULL,
     CONSTRAINT [PK_salesman] PRIMARY KEY CLUSTERED ([salesperson] ASC),
     CONSTRAINT [CK_salesman] CHECK ([person] IS NULL AND [company] IS NOT NULL OR [person] IS NOT NULL AND [company] IS NULL),
     CONSTRAINT [FK_salesman_company] FOREIGN KEY ([company]) REFERENCES [hr].[organisation] ([organisation]),
@@ -41,6 +40,8 @@
 );
 
 
+
+
 GO
 -- =============================================
 -- Author:		hock
@@ -48,7 +49,7 @@ GO
 -- Description:	
 -- =============================================
 CREATE TRIGGER [hr].[trig_history_salesperson] 
-   ON  [hr].salesperson
+   ON  [hr].[salesperson]
    AFTER INSERT,UPDATE
 AS 
 BEGIN
@@ -126,7 +127,7 @@ SELECT
 	,[insurance_renew_target11]
 	,[insurance_renew_target12]
 	,[modified_by]
-	,[modified_on]
+	,SYSDATETIME()
 
 FROM inserted
 

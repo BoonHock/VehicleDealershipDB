@@ -3,11 +3,12 @@
     [color_desc]  NVARCHAR (50)   NOT NULL,
     [img_sample]  VARBINARY (MAX) CONSTRAINT [DF_color_img_sample] DEFAULT (NULL) NULL,
     [modified_by] INT             NOT NULL,
-    [modified_on] DATETIME2 (0)   CONSTRAINT [DF_color_modified_on] DEFAULT (sysdatetime()) NOT NULL,
     CONSTRAINT [PK_color] PRIMARY KEY CLUSTERED ([color] ASC),
     CONSTRAINT [FK_color_user] FOREIGN KEY ([modified_by]) REFERENCES [dbsecurity].[user] ([user]),
     CONSTRAINT [IX_color] UNIQUE NONCLUSTERED ([color_desc] ASC)
 );
+
+
 
 
 GO
@@ -16,8 +17,8 @@ GO
 -- Create date: 13.7.2019
 -- Description:	
 -- =============================================
-CREATE TRIGGER misc.[trig_history_color] 
-   ON  misc.color
+CREATE TRIGGER [misc].[trig_history_color] 
+   ON  [misc].[color]
    AFTER INSERT,UPDATE
 AS 
 BEGIN
@@ -39,7 +40,7 @@ SELECT
 	,[color_desc]
 	,[img_sample]
 	,[modified_by]
-	,[modified_on]
+	,SYSDATETIME()
 
 FROM inserted
 

@@ -7,10 +7,11 @@
     [phone1]                      NVARCHAR (20)  NOT NULL,
     [phone2]                      NVARCHAR (20)  NOT NULL,
     [modified_by]                 INT            NOT NULL,
-    [modified_on]                 DATETIME2 (0)  CONSTRAINT [DF_organisation_contact_person_modified_on] DEFAULT (sysdatetime()) NOT NULL,
     CONSTRAINT [PK_organisation_contact_person] PRIMARY KEY CLUSTERED ([organisation_contact_person] ASC),
     CONSTRAINT [FK_organisation_contact_person_user] FOREIGN KEY ([modified_by]) REFERENCES [dbsecurity].[user] ([user])
 );
+
+
 
 
 GO
@@ -20,7 +21,7 @@ GO
 -- Description:	
 -- =============================================
 CREATE TRIGGER [hr].[trig_history_organisation_contact_person] 
-   ON  [hr].organisation_contact_person 
+   ON  [hr].[organisation_contact_person] 
    AFTER INSERT,UPDATE
 AS 
 BEGIN
@@ -50,7 +51,7 @@ SELECT
 	,[phone1]
 	,[phone2]
 	,[modified_by]
-	,[modified_on]
+	,SYSDATETIME()
 
 FROM inserted
 
