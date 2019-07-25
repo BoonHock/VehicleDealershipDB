@@ -134,5 +134,6 @@
     <Build Include="veh\Stored Procedures\sp_select_vehicle_brand_n_group.sql" />
     <Build Include="veh\Stored Procedures\sp_is_vehicle_brand_name_available.sql" />
     <Build Include="veh\Stored Procedures\sp_insert_vehicle_brand.sql" />
+    <Build Include="veh\Stored Procedures\sp_select_vehicle_group_n_model.sql" />
   </ItemGroup>
 </Project>
