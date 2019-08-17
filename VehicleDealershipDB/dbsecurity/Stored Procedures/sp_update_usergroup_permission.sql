@@ -6,7 +6,8 @@
 CREATE PROCEDURE [dbsecurity].[sp_update_usergroup_permission] 
 	-- Add the parameters for the stored procedure here
 	@usergroup NVARCHAR(50),
-	@arr_perm nvarchar(max)
+	@arr_perm nvarchar(max),
+	@uid INT
 AS
 BEGIN
 	-- SET NOCOUNT ON added to prevent extra result sets from
@@ -34,11 +35,13 @@ WHERE [usergroup] = @usergroup
 INSERT INTO [dbsecurity].[usergroup_permission]
 (
 	[usergroup],
-	[permission]
+	[permission],
+	[modified_by]
 )
 SELECT 
 	@usergroup,
-	[permission]
+	[permission],
+	@uid
 
 FROM @PERM_TABLE PERMTABLE
 WHERE NOT EXISTS (

@@ -73,6 +73,9 @@
     <Folder Include="dbsecurity\Functions\" />
     <Folder Include="veh\Stored Procedures\" />
     <Folder Include="Storage\" />
+    <Folder Include="misc\Stored Procedures\" />
+    <Folder Include="dbo\" />
+    <Folder Include="dbo\Stored Procedures\" />
   </ItemGroup>
   <ItemGroup>
     <Build Include="hr\Tables\country.sql" />
@@ -138,7 +141,6 @@
     <Build Include="veh\Tables\vehicle_model_image.sql" />
     <Build Include="veh\Tables\transmission.sql" />
     <Build Include="veh\Tables\fuel_type.sql" />
-    <Build Include="Storage\VehicleDealershipFilestream.sql" />
     <Build Include="veh\Stored Procedures\sp_update_vehicle_model.sql" />
     <Build Include="veh\Stored Procedures\sp_update_vehicle_group.sql" />
     <Build Include="veh\Stored Procedures\sp_select_vehicle_model_image.sql" />
@@ -148,5 +150,17 @@
     <Build Include="veh\Stored Procedures\sp_is_vehicle_model_name_available.sql" />
     <Build Include="veh\Stored Procedures\sp_is_vehicle_group_name_available.sql" />
     <Build Include="veh\Stored Procedures\sp_insert_vehicle_model.sql" />
+    <Build Include="veh\Stored Procedures\sp_update_vehicle_model_image.sql" />
+    <Build Include="veh\Stored Procedures\sp_update_insert_transmission.sql" />
+    <Build Include="veh\Stored Procedures\sp_update_insert_fuel_type.sql" />
+    <Build Include="veh\Stored Procedures\sp_select_transmission.sql" />
+    <Build Include="veh\Stored Procedures\sp_select_fuel_type.sql" />
+    <Build Include="veh\Stored Procedures\sp_insert_vehicle_model_image.sql" />
+    <Build Include="veh\Stored Procedures\sp_delete_transmission.sql" />
+    <Build Include="veh\Stored Procedures\sp_delete_fuel_type.sql" />
+    <Build Include="misc\Stored Procedures\sp_update_insert_color.sql" />
+    <Build Include="misc\Stored Procedures\sp_select_color.sql" />
+    <Build Include="misc\Stored Procedures\sp_delete_color.sql" />
+    <Build Include="dbo\Stored Procedures\sp_search_stored_proc_contain_string.sql" />
   </ItemGroup>
 </Project>

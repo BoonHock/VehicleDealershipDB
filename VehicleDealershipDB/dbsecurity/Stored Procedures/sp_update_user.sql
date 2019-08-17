@@ -43,8 +43,9 @@ ELSE
 	INSERT INTO [dbsecurity].[user_usergroup]
 	(
 		[user],
-		[usergroup]
+		[usergroup],
+		[modified_by]
 	)
-	VALUES (@user, @usergroup)
+	VALUES (@user, @usergroup, @modified_by)
 
 END
