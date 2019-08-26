@@ -76,6 +76,7 @@
     <Folder Include="misc\Stored Procedures\" />
     <Folder Include="dbo\" />
     <Folder Include="dbo\Stored Procedures\" />
+    <Folder Include="hr\Stored Procedures\" />
   </ItemGroup>
   <ItemGroup>
     <Build Include="hr\Tables\country.sql" />
@@ -113,7 +114,6 @@
     <Build Include="veh\Tables\vehicle_brand.sql" />
     <Build Include="hr\Tables\salesperson.sql" />
     <Build Include="hr\Tables\race.sql" />
-    <Build Include="hr\Tables\person_org_type.sql" />
     <Build Include="hr\Tables\organisation_contact_person.sql" />
     <Build Include="hr\Tables\organisation.sql" />
     <Build Include="dbhistory\Tables\vehicle_group.sql" />
@@ -122,8 +122,6 @@
     <Build Include="dbhistory\Tables\usergroup.sql" />
     <Build Include="dbhistory\Tables\user_usergroup.sql" />
     <Build Include="dbhistory\Tables\salesperson.sql" />
-    <Build Include="dbhistory\Tables\person_org_type.sql" />
-    <Build Include="dbhistory\Tables\person.sql" />
     <Build Include="dbhistory\Tables\organisation_contact_person.sql" />
     <Build Include="dbhistory\Tables\organisation.sql" />
     <Build Include="dbhistory\Tables\color.sql" />
@@ -131,7 +129,6 @@
     <Build Include="dbsecurity\Functions\svf_check_user_permission.sql" />
     <Build Include="Security\misc.sql" />
     <Build Include="misc\Tables\bulkcopy_table.sql" />
-    <Build Include="dbhistory\Tables\race.sql" />
     <Build Include="veh\Stored Procedures\sp_update_vehicle_brand.sql" />
     <Build Include="veh\Stored Procedures\sp_update_insert_vehicle_group.sql" />
     <Build Include="veh\Stored Procedures\sp_select_vehicle_group_for_edit.sql" />
@@ -162,5 +159,23 @@
     <Build Include="misc\Stored Procedures\sp_select_color.sql" />
     <Build Include="misc\Stored Procedures\sp_delete_color.sql" />
     <Build Include="dbo\Stored Procedures\sp_search_stored_proc_contain_string.sql" />
+    <Build Include="hr\Tables\salestarget_1.sql" />
+    <Build Include="hr\Tables\person_type_1.sql" />
+    <Build Include="hr\Tables\person_contact_info_1.sql" />
+    <Build Include="hr\Tables\organisation_type_1.sql" />
+    <Build Include="hr\Tables\finance_1.sql" />
+    <Build Include="hr\Stored Procedures\sp_update_insert_person_contact_info_1.sql" />
+    <Build Include="hr\Stored Procedures\sp_select_salestarget_1.sql" />
+    <Build Include="hr\Stored Procedures\sp_select_salesperson_1.sql" />
+    <Build Include="hr\Stored Procedures\sp_select_race_1.sql" />
+    <Build Include="hr\Stored Procedures\sp_select_person1_1.sql" />
+    <Build Include="hr\Stored Procedures\sp_select_person_type_1.sql" />
+    <Build Include="hr\Stored Procedures\sp_select_person_not_salesperson_1.sql" />
+    <Build Include="hr\Stored Procedures\sp_select_person_contact_info_1.sql" />
+    <Build Include="hr\Stored Procedures\sp_select_person_1.sql" />
+    <Build Include="hr\Stored Procedures\sp_select_organisation1_1.sql" />
+    <Build Include="hr\Stored Procedures\sp_select_organisation_type_1.sql" />
+    <Build Include="hr\Stored Procedures\sp_select_organisation_not_salesperson_1.sql" />
+    <Build Include="hr\Stored Procedures\sp_insert_person_1.sql" />
   </ItemGroup>
 </Project>
