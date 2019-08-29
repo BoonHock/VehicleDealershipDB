@@ -86,7 +86,6 @@
     <Build Include="dbsecurity\Tables\user_usergroup.sql" />
     <Build Include="dbsecurity\Tables\usergroup.sql" />
     <Build Include="veh\Tables\vehicle.sql" />
-    <Build Include="dbhistory\Tables\user.sql" />
     <Build Include="dbsecurity\Tables\user.sql" />
     <Build Include="dbsecurity\Stored Procedures\sp_update_usergroup_permission.sql" />
     <Build Include="dbsecurity\Stored Procedures\sp_delete_usergroup.sql" />
@@ -116,15 +115,6 @@
     <Build Include="hr\Tables\race.sql" />
     <Build Include="hr\Tables\organisation_contact_person.sql" />
     <Build Include="hr\Tables\organisation.sql" />
-    <Build Include="dbhistory\Tables\vehicle_group.sql" />
-    <Build Include="dbhistory\Tables\vehicle_brand.sql" />
-    <Build Include="dbhistory\Tables\usergroup_permission.sql" />
-    <Build Include="dbhistory\Tables\usergroup.sql" />
-    <Build Include="dbhistory\Tables\user_usergroup.sql" />
-    <Build Include="dbhistory\Tables\salesperson.sql" />
-    <Build Include="dbhistory\Tables\organisation_contact_person.sql" />
-    <Build Include="dbhistory\Tables\organisation.sql" />
-    <Build Include="dbhistory\Tables\color.sql" />
     <Build Include="misc\Tables\color.sql" />
     <Build Include="dbsecurity\Functions\svf_check_user_permission.sql" />
     <Build Include="Security\misc.sql" />
@@ -177,5 +167,7 @@
     <Build Include="hr\Stored Procedures\sp_select_organisation_type_1.sql" />
     <Build Include="hr\Stored Procedures\sp_select_organisation_not_salesperson_1.sql" />
     <Build Include="hr\Stored Procedures\sp_insert_person_1.sql" />
+    <Build Include="hr\Stored Procedures\sp_update_person.sql" />
+    <Build Include="hr\Stored Procedures\sp_select_country.sql" />
   </ItemGroup>
 </Project>

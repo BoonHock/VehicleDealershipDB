@@ -13,38 +13,6 @@
 
 
 
+
+
 GO
--- =============================================
--- Author:		hock
--- Create date: 13.7.2019
--- Description:	
--- =============================================
-CREATE TRIGGER [dbsecurity].[trig_history_usergroup_permission] 
-   ON  [dbsecurity].[usergroup_permission] 
-   AFTER INSERT,UPDATE
-AS 
-BEGIN
-	-- SET NOCOUNT ON added to prevent extra result sets from
-	-- interfering with SELECT statements.
-	SET NOCOUNT ON;
-
-INSERT INTO dbhistory.usergroup_permission
-(
-	[usergroup],
-	[permission],
-	[modified_by],
-	[modified_on]
-)
-
-SELECT
-	[usergroup],
-	[permission],
-	[modified_by],
-	SYSDATETIME()
-
-FROM inserted
-
-
-    -- Insert statements for trigger here
-
-END

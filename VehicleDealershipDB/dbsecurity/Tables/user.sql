@@ -18,54 +18,12 @@
 
 
 
+
+
 GO
 CREATE UNIQUE NONCLUSTERED INDEX [IX_user]
     ON [dbsecurity].[user]([username] ASC);
 
 
 GO
--- =============================================
--- Author:		hock
--- Create date: 12.6.2019
--- Description:	history
--- =============================================
-CREATE TRIGGER [dbsecurity].[trig_history_user] 
-   ON  [dbsecurity].[user] 
-   AFTER INSERT, UPDATE
-AS 
-BEGIN
-	-- SET NOCOUNT ON added to prevent extra result sets from
-	-- interfering with SELECT statements.
-	SET NOCOUNT ON;
 
-    -- Insert statements for trigger here
-INSERT INTO [dbhistory].[user]
-(
-	[user]
-	,[username]
-	,[name]
-	,[password]
-	,[ic_no]
-	,[is_active]
-	,[join_date]
-	,[leave_date]
-	,[image]
-	,[performed_by]
-	,[performed_on]
-)
-SELECT 
-	[user]
-	,[username]
-	,[name]
-	,[password]
-	,[ic_no]
-	,[is_active]
-	,[join_date]
-	,[leave_date]
-	,[image]
-	,[modifed_by]
-	,SYSDATETIME()
-FROM inserted
-
-
-END

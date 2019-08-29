@@ -11,38 +11,6 @@
 
 
 
+
+
 GO
--- =============================================
--- Author:		hock
--- Create date: 13.7.2019
--- Description:	
--- =============================================
-CREATE TRIGGER [veh].[trig_history_vehicle_brand] 
-   ON  [veh].[vehicle_brand]
-   AFTER INSERT,UPDATE
-AS 
-BEGIN
-	-- SET NOCOUNT ON added to prevent extra result sets from
-	-- interfering with SELECT statements.
-	SET NOCOUNT ON;
-
-INSERT INTO dbhistory.vehicle_brand
-(
-	[vehicle_brand]
-	,[vehicle_brand_name]
-	,[modified_by]
-	,[modified_on]
-)
-
-SELECT
-	[vehicle_brand]
-	,[vehicle_brand_name]
-	,[modified_by]
-	,SYSDATETIME()
-
-FROM inserted
-
-
-    -- Insert statements for trigger here
-
-END
