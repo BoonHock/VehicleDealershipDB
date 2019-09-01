@@ -1,7 +1,7 @@
 ﻿CREATE TABLE [hr].[person] (
     [person]          INT             IDENTITY (1, 1) NOT NULL,
     [name]            NVARCHAR (100)  NOT NULL,
-    [ic_no]           NVARCHAR (50)   NOT NULL,
+    [ic_no]           NVARCHAR (20)   NOT NULL,
     [image]           VARBINARY (MAX) CONSTRAINT [DF_person_image] DEFAULT (NULL) NULL,
     [person_type]     INT             NOT NULL,
     [driving_license] NVARCHAR (15)   NOT NULL,
@@ -13,7 +13,7 @@
     [postcode]        NVARCHAR (10)   NOT NULL,
     [country]         SMALLINT        NOT NULL,
     [occupation]      NVARCHAR (50)   NOT NULL,
-    [company]         NVARCHAR (150)  NOT NULL,
+    [company]         NVARCHAR (100)  NOT NULL,
     [modified_by]     INT             NOT NULL,
     CONSTRAINT [PK_people] PRIMARY KEY CLUSTERED ([person] ASC),
     CONSTRAINT [FK_person_country] FOREIGN KEY ([country]) REFERENCES [hr].[country] ([country]),
@@ -22,6 +22,8 @@
     CONSTRAINT [FK_person_user] FOREIGN KEY ([modified_by]) REFERENCES [dbsecurity].[user] ([user]),
     CONSTRAINT [IX_people] UNIQUE NONCLUSTERED ([ic_no] ASC)
 );
+
+
 
 
 

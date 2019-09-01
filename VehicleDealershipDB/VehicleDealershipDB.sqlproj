@@ -113,7 +113,6 @@
     <Build Include="veh\Tables\vehicle_brand.sql" />
     <Build Include="hr\Tables\salesperson.sql" />
     <Build Include="hr\Tables\race.sql" />
-    <Build Include="hr\Tables\organisation_contact_person.sql" />
     <Build Include="hr\Tables\organisation.sql" />
     <Build Include="misc\Tables\color.sql" />
     <Build Include="dbsecurity\Functions\svf_check_user_permission.sql" />
@@ -151,23 +150,27 @@
     <Build Include="dbo\Stored Procedures\sp_search_stored_proc_contain_string.sql" />
     <Build Include="hr\Tables\salestarget_1.sql" />
     <Build Include="hr\Tables\person_type_1.sql" />
-    <Build Include="hr\Tables\person_contact_info_1.sql" />
     <Build Include="hr\Tables\organisation_type_1.sql" />
     <Build Include="hr\Tables\finance_1.sql" />
-    <Build Include="hr\Stored Procedures\sp_update_insert_person_contact_info_1.sql" />
     <Build Include="hr\Stored Procedures\sp_select_salestarget_1.sql" />
     <Build Include="hr\Stored Procedures\sp_select_salesperson_1.sql" />
     <Build Include="hr\Stored Procedures\sp_select_race_1.sql" />
-    <Build Include="hr\Stored Procedures\sp_select_person1_1.sql" />
     <Build Include="hr\Stored Procedures\sp_select_person_type_1.sql" />
     <Build Include="hr\Stored Procedures\sp_select_person_not_salesperson_1.sql" />
-    <Build Include="hr\Stored Procedures\sp_select_person_contact_info_1.sql" />
     <Build Include="hr\Stored Procedures\sp_select_person_1.sql" />
-    <Build Include="hr\Stored Procedures\sp_select_organisation1_1.sql" />
     <Build Include="hr\Stored Procedures\sp_select_organisation_type_1.sql" />
     <Build Include="hr\Stored Procedures\sp_select_organisation_not_salesperson_1.sql" />
     <Build Include="hr\Stored Procedures\sp_insert_person_1.sql" />
     <Build Include="hr\Stored Procedures\sp_update_person.sql" />
     <Build Include="hr\Stored Procedures\sp_select_country.sql" />
+    <Build Include="hr\Tables\person_contact.sql" />
+    <Build Include="hr\Tables\organisation_contact.sql" />
+    <Build Include="hr\Stored Procedures\sp_update_organisation.sql" />
+    <Build Include="hr\Stored Procedures\sp_update_insert_person_contact.sql" />
+    <Build Include="hr\Stored Procedures\sp_update_insert_organisation_contact.sql" />
+    <Build Include="hr\Stored Procedures\sp_select_person_contact.sql" />
+    <Build Include="hr\Stored Procedures\sp_select_organisation_contact.sql" />
+    <Build Include="hr\Stored Procedures\sp_select_organisation.sql" />
+    <Build Include="hr\Stored Procedures\sp_insert_organisation.sql" />
   </ItemGroup>
 </Project>

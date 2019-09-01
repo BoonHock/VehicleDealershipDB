@@ -3,7 +3,7 @@
 -- Create date: 27.8.2019
 -- Description:	select organisation not salesperson
 -- =============================================
-create PROCEDURE [hr].[sp_select_organisation_not_salesperson] 
+CREATE PROCEDURE [hr].[sp_select_organisation_not_salesperson] 
 	-- Add the parameters for the stored procedure here
 AS
 BEGIN
@@ -15,7 +15,8 @@ BEGIN
 SELECT 
 	[organisation],
 	[name],
-	[registration_no]
+	[registration_no],
+	[url]
 
 FROM [VehicleDealership].[hr].[organisation]
 

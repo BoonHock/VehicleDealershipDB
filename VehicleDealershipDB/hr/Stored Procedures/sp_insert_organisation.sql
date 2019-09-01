@@ -1,24 +1,21 @@
 ﻿-- =============================================
 -- Author:		hock
--- Create date: 26.8.2019
--- Description:	insert new person
+-- Create date: 1.9.2019
+-- Description:	insert organisation
 -- =============================================
-CREATE PROCEDURE [hr].[sp_insert_person] 
+create PROCEDURE [hr].[sp_insert_organisation] 
 	-- Add the parameters for the stored procedure here
+
 	@name nvarchar(100),
-	@ic_no nvarchar(20),
-	@image varbinary(max) = NULL,
-	@person_type int,
-	@driving_license nvarchar(15),
-	@gender bit,
-	@race int,
+	@registration_no nvarchar(20),
+	@org_type int,
+	@branch nvarchar(20),
 	@address nvarchar(200),
 	@city nvarchar(15),
 	@state nvarchar(15),
 	@postcode nvarchar(10),
 	@country smallint,
-	@occupation nvarchar(50),
-	@company nvarchar(150),
+	@url nvarchar(2083),
 	@modified_by int
 
 AS
@@ -28,40 +25,34 @@ BEGIN
 	SET NOCOUNT ON;
 
     -- Insert statements for procedure here
-INSERT INTO [hr].[person]
+
+
+INSERT INTO [VehicleDealership].[hr].[organisation]
 (
 	[name]
-	,[ic_no]
-	,[image]
-	,[person_type]
-	,[driving_license]
-	,[gender]
-	,[race]
+	,[registration_no]
+	,[organisation_type]
+	,[branch]
 	,[address]
 	,[city]
 	,[state]
 	,[postcode]
 	,[country]
-	,[occupation]
-	,[company]
+	,[url]
 	,[modified_by]
 )
 VALUES 
 (
 	@name,
-	@ic_no,
-	@image,
-	@person_type,
-	@driving_license,
-	@gender,
-	@race,
+	@registration_no,
+	@org_type,
+	@branch,
 	@address,
 	@city,
 	@state,
 	@postcode,
 	@country,
-	@occupation,
-	@company,
+	@url,
 	@modified_by
 )
 

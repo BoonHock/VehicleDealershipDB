@@ -1,10 +1,11 @@
 ﻿-- =============================================
--- Author:		HOCK
--- Create date: 26.8.2019
--- Description:	select person simplified
+-- Author:		hock
+-- Create date: 1.9.2019
+-- Description:	select contact
 -- =============================================
-CREATE PROCEDURE hr.sp_select_person1 
+CREATE PROCEDURE [hr].[sp_select_organisation_contact] 
 	-- Add the parameters for the stored procedure here
+	@org INT
 AS
 BEGIN
 	-- SET NOCOUNT ON added to prevent extra result sets from
@@ -12,13 +13,12 @@ BEGIN
 	SET NOCOUNT ON;
 
     -- Insert statements for procedure here
-SELECT 
-	[person],
-	[name],
-	[ic_no]
+SELECT
+	[contact],
+	[remark]
 
-FROM [VehicleDealership].[hr].[person] PERSON
+FROM [hr].[organisation_contact]
 
-ORDER BY [name]
+WHERE [organisation] = @org
 
 END

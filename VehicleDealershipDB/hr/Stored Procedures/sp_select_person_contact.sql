@@ -1,9 +1,9 @@
 ﻿-- =============================================
 -- Author:		hock
--- Create date: 25.8.2019
--- Description:	select person contact info
+-- Create date: 30.8.2019
+-- Description:	select person contact
 -- =============================================
-CREATE PROCEDURE [hr].[sp_select_person_contact_info] 
+CREATE PROCEDURE [hr].[sp_select_person_contact] 
 	-- Add the parameters for the stored procedure here
 	@person INT
 AS
@@ -13,12 +13,11 @@ BEGIN
 	SET NOCOUNT ON;
 
     -- Insert statements for procedure here
-SELECT
-	[person_contact_info],
+SELECT 
 	[contact],
 	[remark]
 
-FROM [hr].[person_contact_info]
+FROM [hr].[person_contact]
 
 WHERE [person] = @person
 
