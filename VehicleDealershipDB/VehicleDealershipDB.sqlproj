@@ -152,7 +152,6 @@
     <Build Include="hr\Tables\person_type_1.sql" />
     <Build Include="hr\Tables\organisation_type_1.sql" />
     <Build Include="hr\Tables\finance_1.sql" />
-    <Build Include="hr\Stored Procedures\sp_select_salestarget_1.sql" />
     <Build Include="hr\Stored Procedures\sp_select_salesperson_1.sql" />
     <Build Include="hr\Stored Procedures\sp_select_race_1.sql" />
     <Build Include="hr\Stored Procedures\sp_select_person_type_1.sql" />
@@ -172,5 +171,8 @@
     <Build Include="hr\Stored Procedures\sp_select_organisation_contact.sql" />
     <Build Include="hr\Stored Procedures\sp_select_organisation.sql" />
     <Build Include="hr\Stored Procedures\sp_insert_organisation.sql" />
+    <Build Include="hr\Tables\salestarget_type.sql" />
+    <Build Include="hr\Stored Procedures\sp_update_salesperson.sql" />
+    <Build Include="hr\Stored Procedures\sp_insert_salesperson.sql" />
   </ItemGroup>
 </Project>

@@ -3,7 +3,7 @@
 -- Create date: 29.8.2019
 -- Description:	update person
 -- =============================================
-CREATE PROCEDURE hr.sp_update_person 
+CREATE PROCEDURE [hr].[sp_update_person] 
 	-- Add the parameters for the stored procedure here
 	@person int,
 	@name nvarchar(100),
@@ -20,6 +20,7 @@ CREATE PROCEDURE hr.sp_update_person
 	@country smallint,
 	@occupation nvarchar(50),
 	@company nvarchar(150),
+	@url nvarchar(2083),
 	@modified_by int
 
 AS
@@ -44,6 +45,7 @@ SET [name] = @name,
 	[country] = @country,
 	[occupation] = @occupation,
 	[company] = @company,
+	[url] = @url,
 	[modified_by] = @modified_by
 
 WHERE [person] = @person

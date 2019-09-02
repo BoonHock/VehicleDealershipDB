@@ -26,6 +26,7 @@ SELECT
 	HRORG.[state],
 	HRORG.[postcode],
 	HRORG.[country],
+	HRCOUNTRY.[country_name],
 	HRORG.[url]
 	
 

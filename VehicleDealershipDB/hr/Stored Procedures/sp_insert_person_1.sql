@@ -19,6 +19,7 @@ CREATE PROCEDURE [hr].[sp_insert_person]
 	@country smallint,
 	@occupation nvarchar(50),
 	@company nvarchar(150),
+	@url nvarchar(2083),
 	@modified_by int
 
 AS
@@ -44,6 +45,7 @@ INSERT INTO [hr].[person]
 	,[country]
 	,[occupation]
 	,[company]
+	,[url]
 	,[modified_by]
 )
 VALUES 
@@ -62,6 +64,7 @@ VALUES
 	@country,
 	@occupation,
 	@company,
+	@url,
 	@modified_by
 )
 

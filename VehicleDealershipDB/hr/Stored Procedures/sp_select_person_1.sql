@@ -32,7 +32,8 @@ SELECT
 	HRPERSON.[country],
 	HRCOUNTRY.[country_name],
 	HRPERSON.[occupation],
-	HRPERSON.[company]
+	HRPERSON.[company],
+	HRPERSON.[url]
 
 FROM [hr].[person] HRPERSON
 

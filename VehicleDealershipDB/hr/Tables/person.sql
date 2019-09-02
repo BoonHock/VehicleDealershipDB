@@ -14,6 +14,7 @@
     [country]         SMALLINT        NOT NULL,
     [occupation]      NVARCHAR (50)   NOT NULL,
     [company]         NVARCHAR (100)  NOT NULL,
+    [url]             NVARCHAR (2083) CONSTRAINT [DF_person_url] DEFAULT ('') NOT NULL,
     [modified_by]     INT             NOT NULL,
     CONSTRAINT [PK_people] PRIMARY KEY CLUSTERED ([person] ASC),
     CONSTRAINT [FK_person_country] FOREIGN KEY ([country]) REFERENCES [hr].[country] ([country]),
@@ -22,6 +23,8 @@
     CONSTRAINT [FK_person_user] FOREIGN KEY ([modified_by]) REFERENCES [dbsecurity].[user] ([user]),
     CONSTRAINT [IX_people] UNIQUE NONCLUSTERED ([ic_no] ASC)
 );
+
+
 
 
 

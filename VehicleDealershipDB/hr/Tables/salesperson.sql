@@ -2,9 +2,10 @@
     [salesperson]  INT            IDENTITY (1, 1) NOT NULL,
     [person]       INT            NULL,
     [organisation] INT            NULL,
-    [location]     NVARCHAR (255) CONSTRAINT [DF_salesman_location] DEFAULT ('') NOT NULL,
+    [location]     NVARCHAR (50)  CONSTRAINT [DF_salesman_location] DEFAULT ('') NOT NULL,
     [date_join]    DATE           CONSTRAINT [DF_salesman_date_join] DEFAULT (sysdatetime()) NOT NULL,
     [date_leave]   DATE           CONSTRAINT [DF_salesman_date_leave] DEFAULT (NULL) NULL,
+    [remark]       NVARCHAR (255) CONSTRAINT [DF_salesperson_remark] DEFAULT ('') NOT NULL,
     [modified_by]  INT            NOT NULL,
     CONSTRAINT [PK_salesman] PRIMARY KEY CLUSTERED ([salesperson] ASC),
     CONSTRAINT [CK_salesperson] CHECK ([person] IS NULL AND [organisation] IS NOT NULL OR [person] IS NOT NULL AND [organisation] IS NULL),
@@ -13,6 +14,8 @@
     CONSTRAINT [FK_salesman_user1] FOREIGN KEY ([modified_by]) REFERENCES [dbsecurity].[user] ([user]),
     CONSTRAINT [IX_salesman] UNIQUE NONCLUSTERED ([person] ASC, [organisation] ASC)
 );
+
+
 
 
 

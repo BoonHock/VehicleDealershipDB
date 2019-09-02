@@ -22,8 +22,9 @@ FROM [VehicleDealership].[hr].[organisation]
 
 WHERE [organisation] NOT IN 
 (
-	SELECT [salesperson].[person]
+	SELECT [salesperson].[organisation]
 	FROM [hr].[salesperson]
+	WHERE [salesperson].[organisation] IS NOT NULL
 )
 
 ORDER BY [name]
