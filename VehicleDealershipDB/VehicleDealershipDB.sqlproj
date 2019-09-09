@@ -77,6 +77,8 @@
     <Folder Include="dbo\" />
     <Folder Include="dbo\Stored Procedures\" />
     <Folder Include="hr\Stored Procedures\" />
+    <Folder Include="fin\" />
+    <Folder Include="fin\Tables\" />
   </ItemGroup>
   <ItemGroup>
     <Build Include="hr\Tables\country.sql" />
@@ -174,5 +176,22 @@
     <Build Include="hr\Tables\salestarget_type.sql" />
     <Build Include="hr\Stored Procedures\sp_update_salesperson.sql" />
     <Build Include="hr\Stored Procedures\sp_insert_salesperson.sql" />
+    <Build Include="veh\Tables\vehicle_image.sql" />
+    <Build Include="veh\Tables\chassis.sql" />
+    <Build Include="misc\Tables\location.sql" />
+    <Build Include="fin\Tables\vehicle_payment.sql" />
+    <Build Include="fin\Tables\payment_method.sql" />
+    <Build Include="fin\Tables\vehicle_share.sql" />
+    <Build Include="fin\Tables\vehicle_return.sql" />
+    <Build Include="fin\Tables\payment_cheque.sql" />
+    <Build Include="fin\Tables\vehicle_sale.sql" />
+    <Build Include="fin\Tables\payment.sql" />
+    <Build Include="fin\Tables\vehicle_expenses.sql" />
+    <Build Include="fin\Tables\credit_card.sql" />
+    <Build Include="veh\Stored Procedures\sp_select_vehicle.sql" />
+    <Build Include="hr\Stored Procedures\sp_update_insert_finance.sql" />
+    <Build Include="hr\Stored Procedures\sp_select_organisation_not_finance.sql" />
+    <Build Include="hr\Stored Procedures\sp_select_finance.sql" />
+    <Build Include="Security\fin.sql" />
   </ItemGroup>
 </Project>

@@ -1,12 +1,10 @@
 ﻿-- =============================================
 -- Author:		hock
--- Create date: 16.6.2019
--- Description:	delete usergroup
+-- Create date: 7.9.2019
+-- Description:	select organisation not finance
 -- =============================================
-CREATE PROCEDURE [dbsecurity].[sp_delete_usergroup] 
+CREATE PROCEDURE hr.sp_select_organisation_not_finance 
 	-- Add the parameters for the stored procedure here
-	@user INT,
-	@usergroup nvarchar(20)
 AS
 BEGIN
 	-- SET NOCOUNT ON added to prevent extra result sets from
@@ -14,8 +12,21 @@ BEGIN
 	SET NOCOUNT ON;
 
     -- Insert statements for procedure here
+SELECT 
+	[organisation],
+	[name],
+	[registration_no],
+	[url]
 
-DELETE FROM [dbsecurity].[usergroup]
-WHERE [usergroup] = @usergroup
+FROM [VehicleDealership].[hr].[organisation]
+
+WHERE [organisation] NOT IN 
+(
+	SELECT [finance]
+	FROM [hr].[finance]
+)
+
+ORDER BY [name]
+
 
 END
