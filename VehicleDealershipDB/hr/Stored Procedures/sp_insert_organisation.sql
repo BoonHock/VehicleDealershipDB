@@ -3,17 +3,12 @@
 -- Create date: 1.9.2019
 -- Description:	insert organisation
 -- =============================================
-create PROCEDURE [hr].[sp_insert_organisation] 
+CREATE PROCEDURE [hr].[sp_insert_organisation] 
 	-- Add the parameters for the stored procedure here
 
 	@name nvarchar(100),
 	@registration_no nvarchar(20),
 	@org_type int,
-	@branch nvarchar(20),
-	@address nvarchar(200),
-	@city nvarchar(15),
-	@state nvarchar(15),
-	@postcode nvarchar(10),
 	@country smallint,
 	@url nvarchar(2083),
 	@modified_by int
@@ -32,11 +27,6 @@ INSERT INTO [VehicleDealership].[hr].[organisation]
 	[name]
 	,[registration_no]
 	,[organisation_type]
-	,[branch]
-	,[address]
-	,[city]
-	,[state]
-	,[postcode]
 	,[country]
 	,[url]
 	,[modified_by]
@@ -46,11 +36,6 @@ VALUES
 	@name,
 	@registration_no,
 	@org_type,
-	@branch,
-	@address,
-	@city,
-	@state,
-	@postcode,
 	@country,
 	@url,
 	@modified_by

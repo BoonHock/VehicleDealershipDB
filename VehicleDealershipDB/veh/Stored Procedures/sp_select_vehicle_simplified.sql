@@ -3,7 +3,7 @@
 -- Create date: 9.9.2019
 -- Description:	select vehicle
 -- =============================================
-CREATE PROCEDURE [veh].[sp_select_vehicle] 
+CREATE PROCEDURE [veh].[sp_select_vehicle_simplified] 
 	-- Add the parameters for the stored procedure here
 AS
 BEGIN
@@ -15,7 +15,7 @@ BEGIN
 SELECT
 	VEHICLE.[vehicle],
 	VEHICLE.[registration_no],
-	ISNULL(HRPERSON.[name], HRORG.[name]) AS [Seller_name],
+	ISNULL(HRPERSON.[name], HRORG.[name]) AS [seller_name],
 	VEHMODEL.[vehicle_model_name] AS [vehicle_model],
 	VEHICLE.[purchase_date],
 	MISCLOCATION.[location_description] AS [location],

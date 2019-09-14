@@ -18,6 +18,8 @@ SELECT
 	SALESPERSON.[salesperson],
 	SALESPERSON.[person],
 	SALESPERSON.[organisation],
+	SALESPERSON.[organisation_branch],
+	'' AS [branch_name],
 	HRPERSON.[name],
 	HRPERSON.[ic_no] AS [registration_no],
 	SALESPERSON.[location],
@@ -40,6 +42,8 @@ SELECT
 	SALESPERSON.[salesperson],
 	SALESPERSON.[person],
 	SALESPERSON.[organisation],
+	SALESPERSON.[organisation_branch],
+	ORGBRANCH.[branch_name],
 	HRORG.[name],
 	HRORG.[registration_no],
 	SALESPERSON.[location],
@@ -51,6 +55,9 @@ FROM [hr].[salesperson] SALESPERSON
 
 JOIN [hr].[organisation] HRORG
 	ON HRORG.[organisation] = SALESPERSON.[organisation]
+
+LEFT JOIN [hr].[organisation_branch] ORGBRANCH
+	ON ORGBRANCH.[organisation_branch] = SALESPERSON.[organisation_branch]
 
 WHERE SALESPERSON.[organisation] IS NOT NULL
 	AND (@salesperson = -1 

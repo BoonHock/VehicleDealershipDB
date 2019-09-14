@@ -20,11 +20,6 @@ SELECT
 	HRORG.[registration_no],
 	HRORG.[organisation_type],
 	ORGTYPE.[organisation_type_description],
-	HRORG.[branch],
-	HRORG.[address],
-	HRORG.[city],
-	HRORG.[state],
-	HRORG.[postcode],
 	HRORG.[country],
 	HRCOUNTRY.[country_name],
 	HRORG.[url]

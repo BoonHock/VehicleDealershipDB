@@ -7,12 +7,10 @@
     [purchase_date]        DATE            NOT NULL,
     [invoice_no]           NVARCHAR (50)   NOT NULL,
     [checked_by]           INT             NOT NULL,
-    [finance]              INT             NULL,
     [purchase_price]       DECIMAL (18, 4) CONSTRAINT [DF_vehicle_purchase_price] DEFAULT ((0)) NOT NULL,
     [overtrade]            DECIMAL (18, 4) CONSTRAINT [DF_vehicle_purchase_price1] DEFAULT ((0)) NOT NULL,
     [list_price]           DECIMAL (18, 4) CONSTRAINT [DF_vehicle_list_price] DEFAULT ((0)) NOT NULL,
     [loan_balance]         DECIMAL (18, 4) CONSTRAINT [DF_Table_1_list_price1] DEFAULT ((0)) NOT NULL,
-    [installment_amount]   DECIMAL (18, 4) CONSTRAINT [DF_Table_1_loan_balance1] DEFAULT ((0)) NOT NULL,
     [engine_no]            NVARCHAR (20)   NOT NULL,
     [registration_no]      NVARCHAR (10)   NOT NULL,
     [road_tax]             DECIMAL (18, 4) CONSTRAINT [DF_vehicle_loan_balance1] DEFAULT ((0)) NOT NULL,
@@ -22,7 +20,7 @@
     [is_new]               BIT             NOT NULL,
     [engine_cc]            FLOAT (53)      NOT NULL,
     [mileage]              INT             NOT NULL,
-    [remarks]              NVARCHAR (255)  NOT NULL,
+    [remark]               NVARCHAR (255)  NOT NULL,
     [vehicle_sale]         INT             NULL,
     [consignment_mortgage] BIT             CONSTRAINT [DF_vehicle_consignment_mortgage] DEFAULT (NULL) NULL,
     [modified_by]          INT             NOT NULL,
@@ -33,13 +31,14 @@
     CONSTRAINT [CK_vehicle_1] CHECK ([vehicle_sale] IS NULL OR [consignment_mortgage] IS NULL),
     CONSTRAINT [FK_vehicle_chassis] FOREIGN KEY ([chassis]) REFERENCES [veh].[chassis] ([chassis]),
     CONSTRAINT [FK_vehicle_color] FOREIGN KEY ([color]) REFERENCES [misc].[color] ([color]),
-    CONSTRAINT [FK_vehicle_finance] FOREIGN KEY ([finance]) REFERENCES [hr].[finance] ([finance]),
     CONSTRAINT [FK_vehicle_location] FOREIGN KEY ([location]) REFERENCES [misc].[location] ([location]),
     CONSTRAINT [FK_vehicle_organisation] FOREIGN KEY ([seller_organisation]) REFERENCES [hr].[organisation] ([organisation]),
     CONSTRAINT [FK_vehicle_person] FOREIGN KEY ([seller_person]) REFERENCES [hr].[person] ([person]),
     CONSTRAINT [FK_vehicle_user] FOREIGN KEY ([checked_by]) REFERENCES [dbsecurity].[user] ([user]),
     CONSTRAINT [FK_vehicle_user1] FOREIGN KEY ([modified_by]) REFERENCES [dbsecurity].[user] ([user])
 );
+
+
 
 
 

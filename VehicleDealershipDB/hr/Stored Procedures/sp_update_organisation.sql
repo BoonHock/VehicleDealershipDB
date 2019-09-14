@@ -9,11 +9,6 @@ CREATE PROCEDURE [hr].[sp_update_organisation]
 	@name nvarchar(100),
 	@registration_no nvarchar(20),
 	@org_type int,
-	@branch nvarchar(20),
-	@address nvarchar(200),
-	@city nvarchar(15),
-	@state nvarchar(15),
-	@postcode nvarchar(10),
 	@country smallint,
 	@url nvarchar(2083),
 	@modified_by int
@@ -29,11 +24,6 @@ UPDATE [hr].[organisation]
 SET [name] = @name,
 	[registration_no] = @registration_no,
 	[organisation_type] = @org_type,
-	[branch] = @branch,
-	[address] = @address,
-	[city] = @city,
-	[state] = @state,
-	[postcode] = @postcode,
 	[country] = @country,
 	[url] = @url,
 	[modified_by] = @modified_by

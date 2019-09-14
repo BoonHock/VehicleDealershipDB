@@ -188,10 +188,14 @@
     <Build Include="fin\Tables\payment.sql" />
     <Build Include="fin\Tables\vehicle_expenses.sql" />
     <Build Include="fin\Tables\credit_card.sql" />
-    <Build Include="veh\Stored Procedures\sp_select_vehicle.sql" />
     <Build Include="hr\Stored Procedures\sp_update_insert_finance.sql" />
     <Build Include="hr\Stored Procedures\sp_select_organisation_not_finance.sql" />
     <Build Include="hr\Stored Procedures\sp_select_finance.sql" />
     <Build Include="Security\fin.sql" />
+    <Build Include="hr\Tables\organisation_branch.sql" />
+    <Build Include="fin\Tables\vehicle_loan.sql" />
+    <Build Include="veh\Stored Procedures\sp_select_vehicle_simplified.sql" />
+    <Build Include="hr\Stored Procedures\sp_update_insert_organisation_branch.sql" />
+    <Build Include="hr\Stored Procedures\sp_select_organisation_branch.sql" />
   </ItemGroup>
 </Project>
