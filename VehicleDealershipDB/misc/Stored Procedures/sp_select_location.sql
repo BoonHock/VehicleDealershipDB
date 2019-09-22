@@ -1,11 +1,10 @@
 ﻿-- =============================================
--- Author:		HOCK
--- Create date: 16.8.2019
--- Description:	select color
+-- Author:		hock
+-- Create date: 19.9.2019
+-- Description:	select location
 -- =============================================
-CREATE PROCEDURE [misc].[sp_select_color] 
+CREATE PROCEDURE [misc].[sp_select_location] 
 	-- Add the parameters for the stored procedure here
-
 AS
 BEGIN
 	-- SET NOCOUNT ON added to prevent extra result sets from
@@ -14,16 +13,10 @@ BEGIN
 
     -- Insert statements for procedure here
 SELECT
-	COLOR.[color],
-	COLOR.[color_name],
-	DBUSER.[name] AS [modified_by]
+	[location],
+	[location_name],
+	[modified_by]
 
-FROM [misc].[color] COLOR
-
-JOIN [dbsecurity].[user] DBUSER
-	ON COLOR.[modified_by] = DBUSER.[user]
-
-ORDER BY [COLOR].[color_name]
-
+FROM [misc].[location]
 
 END

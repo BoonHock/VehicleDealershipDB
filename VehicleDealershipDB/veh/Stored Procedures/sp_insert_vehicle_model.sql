@@ -7,6 +7,7 @@ CREATE PROCEDURE [veh].[sp_insert_vehicle_model]
 	-- Add the parameters for the stored procedure here
 	@vmodel_name nvarchar(50),
 	@vgroup int,
+	@year_make smallint,
 	@engine_capacity smallint,
 	@no_of_door tinyint,
 	@seat_capacity tinyint,
@@ -26,6 +27,7 @@ INSERT INTO [veh].[vehicle_model]
 (
 	[vehicle_model_name],
 	[vehicle_group],
+	[year_make],
 	[engine_capacity],
 	[no_of_door],
 	[seat_capacity],
@@ -38,6 +40,7 @@ VALUES
 (
 	@vmodel_name,
 	@vgroup,
+	@year_make,
 	@engine_capacity,
 	@no_of_door,
 	@seat_capacity,

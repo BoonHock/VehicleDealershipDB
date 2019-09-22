@@ -1,10 +1,12 @@
 ﻿-- =============================================
 -- Author:		hock
--- Create date: 27.8.2019
--- Description:	select organisation not salesperson
+-- Create date: 16.9.2019
+-- Description:	select org branch
 -- =============================================
-CREATE PROCEDURE [hr].[sp_select_organisation_not_salesperson] 
+CREATE PROCEDURE hr.sp_select_organisation_branch_with_org_details
 	-- Add the parameters for the stored procedure here
+	@orgbranch int
+
 AS
 BEGIN
 	-- SET NOCOUNT ON added to prevent extra result sets from
@@ -12,12 +14,21 @@ BEGIN
 	SET NOCOUNT ON;
 
     -- Insert statements for procedure here
+
 SELECT
 	ORGBRANCH.[organisation_branch],
 	ORGBRANCH.[organisation],
 	HRORG.[name],
-	ORGBRANCH.[branch_name],
 	HRORG.[registration_no],
+	ORGBRANCH.[branch_name],
+	ORGBRANCH.[address],
+	ORGBRANCH.[city],
+	ORGBRANCH.[state],
+	ORGBRANCH.[postcode],
+	ORGBRANCH.[country],
+	HRCOUNTRY.[country_name],
+	HRORG.[organisation_type],
+	ORGTYPE.[organisation_type_description],
 	HRORG.[url]
 
 FROM [hr].[organisation_branch] ORGBRANCH
@@ -25,15 +36,13 @@ FROM [hr].[organisation_branch] ORGBRANCH
 JOIN [hr].[organisation] HRORG
 	ON HRORG.[organisation] = ORGBRANCH.[organisation]
 
-WHERE ORGBRANCH.[organisation_branch] NOT IN
-(
-	SELECT [salesperson].[organisation_branch]
-	FROM [hr].[salesperson]
-	WHERE [salesperson].[organisation_branch] IS NOT NULL
-)
+JOIN [hr].[organisation_type] ORGTYPE
+	ON ORGTYPE.[organisation_type] = HRORG.[organisation_type]
 
-ORDER BY 
-	HRORG.[name],
-	ORGBRANCH.[branch_name]
+JOIN [hr].[country] HRCOUNTRY
+	ON HRCOUNTRY.[country] = ORGBRANCH.[country]
+
+WHERE [organisation_branch] = @orgbranch
+
 
 END

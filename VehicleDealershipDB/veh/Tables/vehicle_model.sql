@@ -2,6 +2,7 @@
     [vehicle_model]      INT           IDENTITY (1, 1) NOT NULL,
     [vehicle_model_name] NVARCHAR (50) NOT NULL,
     [vehicle_group]      INT           NOT NULL,
+    [year_make]          SMALLINT      NOT NULL,
     [engine_capacity]    SMALLINT      NOT NULL,
     [no_of_door]         TINYINT       NOT NULL,
     [seat_capacity]      TINYINT       NOT NULL,
@@ -16,6 +17,8 @@
     CONSTRAINT [FK_vehicle_model_vehicle_group] FOREIGN KEY ([vehicle_group]) REFERENCES [veh].[vehicle_group] ([vehicle_group]),
     CONSTRAINT [IX_vehicle_model] UNIQUE NONCLUSTERED ([vehicle_group] ASC, [vehicle_model_name] ASC)
 );
+
+
 
 
 

@@ -3,9 +3,9 @@
 -- Create date: 7.9.2019
 -- Description:	insert/update finance
 -- =============================================
-CREATE PROCEDURE hr.sp_update_insert_finance 
+CREATE PROCEDURE [hr].[sp_update_insert_finance] 
 	-- Add the parameters for the stored procedure here
-	@org_id int,
+	@orgbranch_id int,
 	@remark nvarchar(255),
 	@modified_by int
 
@@ -17,7 +17,7 @@ BEGIN
 
     -- Insert statements for procedure here
 
-DECLARE @has_record int = (SELECT COUNT(*) FROM [hr].[finance] WHERE [finance] = @org_id )
+DECLARE @has_record int = (SELECT COUNT(*) FROM [hr].[finance] WHERE [finance] = @orgbranch_id  )
 
 IF @has_record = 0
 	-- INSERT
@@ -29,7 +29,7 @@ IF @has_record = 0
 	)
 	VALUES 
 	(
-		@org_id,
+		@orgbranch_id ,
 		@remark,
 		@modified_by
 	)
@@ -38,7 +38,7 @@ ELSE
 	SET [remark] = @remark,
 		[modified_by] = @modified_by
 
-	WHERE [finance] = @org_id
+	WHERE [finance] = @orgbranch_id 
 
 
 END

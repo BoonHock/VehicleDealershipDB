@@ -3,7 +3,7 @@
 -- Create date: 14.9.2019
 -- Description:	select organisation branch
 -- =============================================
-CREATE PROCEDURE hr.sp_select_organisation_branch 
+CREATE PROCEDURE hr.[sp_select_organisation_branch_by_org] 
 	-- Add the parameters for the stored procedure here
 	@org int
 AS

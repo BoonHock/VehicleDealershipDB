@@ -1,6 +1,6 @@
 ﻿CREATE TABLE [fin].[credit_card] (
     [credit_card]    INT           IDENTITY (1, 1) NOT NULL,
-    [credit_card_no] NVARCHAR (16) NOT NULL,
+    [credit_card_no] NVARCHAR (20) NOT NULL,
     [finance]        INT           NOT NULL,
     [expiry_date]    DATE          NOT NULL,
     [person]         INT           NULL,
@@ -13,6 +13,8 @@
     CONSTRAINT [FK_credit_card_person] FOREIGN KEY ([person]) REFERENCES [hr].[person] ([person]),
     CONSTRAINT [FK_credit_card_user] FOREIGN KEY ([modified_by]) REFERENCES [dbsecurity].[user] ([user])
 );
+
+
 
 
 

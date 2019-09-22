@@ -3,7 +3,7 @@
 -- Create date: 14.9.2019
 -- Description:	update and insert org branch
 -- =============================================
-CREATE PROCEDURE hr.sp_update_insert_organisation_branch 
+CREATE PROCEDURE [hr].[sp_update_insert_organisation_branch] 
 	-- Add the parameters for the stored procedure here
 	@org int,
 	@uid int
@@ -15,6 +15,26 @@ BEGIN
 
     -- Insert statements for procedure here
 
+-- delete branch which is not in incoming data
+DELETE FROM [hr].[organisation_branch]
+WHERE [organisation_branch] NOT IN 
+(
+	SELECT [int1]
+	FROM [misc].[bulkcopy_table]
+	WHERE [created_by] = @uid
+)
+
+-- trim incoming contact and remark first
+UPDATE [misc].[bulkcopy_table]
+SET [nvarchar1] = RTRIM(LTRIM(ISNULL([nvarchar1],''))),
+	[nvarchar2] = RTRIM(LTRIM(ISNULL([nvarchar2],''))),
+	[nvarchar3] = RTRIM(LTRIM(ISNULL([nvarchar3],''))),
+	[nvarchar4] = RTRIM(LTRIM(ISNULL([nvarchar4],''))),
+	[nvarchar5] = RTRIM(LTRIM(ISNULL([nvarchar5],'')))
+
+WHERE [created_by] = @uid
+
+-- update existing branch from incoming
 UPDATE ORGBRANCH
 SET [branch_name] = BULKCOPY.[nvarchar1],
 	[address] = BULKCOPY.[nvarchar2],
@@ -32,7 +52,7 @@ JOIN [misc].[bulkcopy_table] BULKCOPY
 WHERE [ORGBRANCH].[organisation] = @org
 	AND [BULKCOPY].[created_by] = @uid
 
-
+-- insert new branch from incoming data
 INSERT INTO [hr].[organisation_branch]
 (
 	[branch_name],

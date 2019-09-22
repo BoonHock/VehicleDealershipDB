@@ -17,10 +17,9 @@ BEGIN
 SELECT 
 	SALESPERSON.[salesperson],
 	SALESPERSON.[person],
-	SALESPERSON.[organisation],
 	SALESPERSON.[organisation_branch],
-	'' AS [branch_name],
 	HRPERSON.[name],
+	'' AS [branch_name],
 	HRPERSON.[ic_no] AS [registration_no],
 	SALESPERSON.[location],
 	SALESPERSON.[date_join],
@@ -41,10 +40,9 @@ UNION
 SELECT 
 	SALESPERSON.[salesperson],
 	SALESPERSON.[person],
-	SALESPERSON.[organisation],
 	SALESPERSON.[organisation_branch],
-	ORGBRANCH.[branch_name],
 	HRORG.[name],
+	ORGBRANCH.[branch_name],
 	HRORG.[registration_no],
 	SALESPERSON.[location],
 	SALESPERSON.[date_join],
@@ -53,13 +51,13 @@ SELECT
 
 FROM [hr].[salesperson] SALESPERSON
 
-JOIN [hr].[organisation] HRORG
-	ON HRORG.[organisation] = SALESPERSON.[organisation]
-
-LEFT JOIN [hr].[organisation_branch] ORGBRANCH
+JOIN [hr].[organisation_branch] ORGBRANCH
 	ON ORGBRANCH.[organisation_branch] = SALESPERSON.[organisation_branch]
 
-WHERE SALESPERSON.[organisation] IS NOT NULL
+JOIN [hr].[organisation] HRORG
+	ON HRORG.[organisation] = ORGBRANCH.[organisation]
+
+WHERE SALESPERSON.[organisation_branch] IS NOT NULL
 	AND (@salesperson = -1 
 		OR SALESPERSON.[salesperson] = @salesperson)
 

@@ -6,7 +6,7 @@
     [installment_amount] DECIMAL (18, 4) NOT NULL,
     [installment_day]    TINYINT         NOT NULL,
     [settlement_date]    DATE            NOT NULL,
-    [loan_agreement_no]  NVARCHAR (50)   NOT NULL,
+    [loan_agreement_no]  NVARCHAR (30)   NOT NULL,
     [modified_by]        INT             NOT NULL,
     CONSTRAINT [PK_vehicle_loan] PRIMARY KEY CLUSTERED ([vehicle_loan] ASC),
     CONSTRAINT [FK_vehicle_loan_finance] FOREIGN KEY ([finance]) REFERENCES [hr].[finance] ([finance]),
@@ -14,4 +14,6 @@
     CONSTRAINT [FK_vehicle_loan_user] FOREIGN KEY ([modified_by]) REFERENCES [dbsecurity].[user] ([user]),
     CONSTRAINT [FK_vehicle_loan_vehicle] FOREIGN KEY ([vehicle]) REFERENCES [veh].[vehicle] ([vehicle])
 );
+
+
 

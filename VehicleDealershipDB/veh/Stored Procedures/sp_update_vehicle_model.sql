@@ -3,10 +3,11 @@
 -- Create date: 3.8.2019
 -- Description:	update vehicle model
 -- =============================================
-CREATE PROCEDURE veh.sp_update_vehicle_model 
+CREATE PROCEDURE [veh].[sp_update_vehicle_model] 
 	-- Add the parameters for the stored procedure here
 	@vmodel_name nvarchar(50),
 	@vgroup int,
+	@year_make smallint,
 	@engine_capacity smallint,
 	@no_of_door tinyint,
 	@seat_capacity tinyint = 1,
@@ -27,6 +28,7 @@ BEGIN
 UPDATE [veh].[vehicle_model]
 SET [vehicle_model_name] = @vmodel_name,
 	[vehicle_group] = @vgroup,
+	[year_make] = @year_make,
 	[engine_capacity] = @engine_capacity,
 	[no_of_door] = @no_of_door,
 	[seat_capacity] = @seat_capacity,

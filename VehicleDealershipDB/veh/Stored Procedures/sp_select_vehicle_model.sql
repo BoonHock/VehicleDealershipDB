@@ -21,6 +21,7 @@ BEGIN
 SELECT
 	VMODEL.[vehicle_model],
 	VMODEL.[vehicle_model_name],
+	VMODEL.[year_make],
 	VMODEL.[engine_capacity],
 	VMODEL.[no_of_door],
 	VMODEL.[seat_capacity],
@@ -29,7 +30,7 @@ SELECT
 	VMODEL.[transmission],
 	TRANSMISSION.[transmission_name],
 	VMODEL.[remarks],
-	VGROUP.[vehicle_group],
+	VMODEL.[vehicle_group],
 	VGROUP.[vehicle_group_name],
 	VGROUP.[vehicle_brand],
 	VBRAND.[vehicle_brand_name],

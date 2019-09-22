@@ -1,9 +1,9 @@
 ﻿-- =============================================
 -- Author:		hock
--- Create date: 17.8.2019
--- Description:	DELETE color
+-- Create date: 19.9.2019
+-- Description:	DELETE location
 -- =============================================
-CREATE PROCEDURE [misc].[sp_delete_color] 
+CREATE PROCEDURE [misc].[sp_delete_location] 
 	-- Add the parameters for the stored procedure here
 	@uid INT = 1
 
@@ -17,9 +17,9 @@ BEGIN
 
 DELETE
 
-FROM [misc].[color]
+FROM [misc].[location]
 
-WHERE [color] NOT IN (
+WHERE [location] NOT IN (
 	SELECT [int1]
 	FROM [VehicleDealership].[misc].[bulkcopy_table]
 	WHERE [bulkcopy_table].[created_by] = @uid

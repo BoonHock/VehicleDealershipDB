@@ -1,9 +1,9 @@
 ﻿-- =============================================
 -- Author:		hock
--- Create date: 27.8.2019
--- Description:	select organisation not salesperson
+-- Create date: 20.9.2019
+-- Description:	select organisation 
 -- =============================================
-CREATE PROCEDURE [hr].[sp_select_organisation_not_salesperson] 
+CREATE PROCEDURE [hr].[sp_select_organisation_simplified] 
 	-- Add the parameters for the stored procedure here
 AS
 BEGIN
@@ -24,13 +24,6 @@ FROM [hr].[organisation_branch] ORGBRANCH
 
 JOIN [hr].[organisation] HRORG
 	ON HRORG.[organisation] = ORGBRANCH.[organisation]
-
-WHERE ORGBRANCH.[organisation_branch] NOT IN
-(
-	SELECT [salesperson].[organisation_branch]
-	FROM [hr].[salesperson]
-	WHERE [salesperson].[organisation_branch] IS NOT NULL
-)
 
 ORDER BY 
 	HRORG.[name],

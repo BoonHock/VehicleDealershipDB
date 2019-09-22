@@ -79,6 +79,7 @@
     <Folder Include="hr\Stored Procedures\" />
     <Folder Include="fin\" />
     <Folder Include="fin\Tables\" />
+    <Folder Include="fin\Stored Procedures\" />
   </ItemGroup>
   <ItemGroup>
     <Build Include="hr\Tables\country.sql" />
@@ -96,7 +97,6 @@
     <Build Include="dbsecurity\Stored Procedures\sp_check_user_permission.sql" />
     <Build Include="dbsecurity\Stored Procedures\sp_check_username_available.sql" />
     <Build Include="dbsecurity\Stored Procedures\sp_insert_user.sql" />
-    <Build Include="dbsecurity\Stored Procedures\sp_search_user.sql" />
     <Build Include="dbsecurity\Stored Procedures\sp_select_user.sql" />
     <Build Include="dbsecurity\Stored Procedures\sp_user_login.sql" />
     <Build Include="dbsecurity\Stored Procedures\sp_select_user_by_username.sql" />
@@ -116,7 +116,6 @@
     <Build Include="hr\Tables\salesperson.sql" />
     <Build Include="hr\Tables\race.sql" />
     <Build Include="hr\Tables\organisation.sql" />
-    <Build Include="misc\Tables\color.sql" />
     <Build Include="dbsecurity\Functions\svf_check_user_permission.sql" />
     <Build Include="Security\misc.sql" />
     <Build Include="misc\Tables\bulkcopy_table.sql" />
@@ -146,9 +145,6 @@
     <Build Include="veh\Stored Procedures\sp_insert_vehicle_model_image.sql" />
     <Build Include="veh\Stored Procedures\sp_delete_transmission.sql" />
     <Build Include="veh\Stored Procedures\sp_delete_fuel_type.sql" />
-    <Build Include="misc\Stored Procedures\sp_update_insert_color.sql" />
-    <Build Include="misc\Stored Procedures\sp_select_color.sql" />
-    <Build Include="misc\Stored Procedures\sp_delete_color.sql" />
     <Build Include="dbo\Stored Procedures\sp_search_stored_proc_contain_string.sql" />
     <Build Include="hr\Tables\salestarget_1.sql" />
     <Build Include="hr\Tables\person_type_1.sql" />
@@ -181,9 +177,7 @@
     <Build Include="misc\Tables\location.sql" />
     <Build Include="fin\Tables\vehicle_payment.sql" />
     <Build Include="fin\Tables\payment_method.sql" />
-    <Build Include="fin\Tables\vehicle_share.sql" />
     <Build Include="fin\Tables\vehicle_return.sql" />
-    <Build Include="fin\Tables\payment_cheque.sql" />
     <Build Include="fin\Tables\vehicle_sale.sql" />
     <Build Include="fin\Tables\payment.sql" />
     <Build Include="fin\Tables\vehicle_expenses.sql" />
@@ -196,6 +190,21 @@
     <Build Include="fin\Tables\vehicle_loan.sql" />
     <Build Include="veh\Stored Procedures\sp_select_vehicle_simplified.sql" />
     <Build Include="hr\Stored Procedures\sp_update_insert_organisation_branch.sql" />
-    <Build Include="hr\Stored Procedures\sp_select_organisation_branch.sql" />
+    <Build Include="hr\Stored Procedures\sp_select_organisation_branch_with_org_details.sql" />
+    <Build Include="hr\Stored Procedures\sp_select_organisation_branch_by_org.sql" />
+    <Build Include="misc\Tables\colour.sql" />
+    <Build Include="fin\Tables\cheque.sql" />
+    <Build Include="veh\Stored Procedures\sp_select_vehicle.sql" />
+    <Build Include="veh\Stored Procedures\sp_select_chassis.sql" />
+    <Build Include="misc\Stored Procedures\sp_update_insert_location.sql" />
+    <Build Include="misc\Stored Procedures\sp_update_insert_colour.sql" />
+    <Build Include="misc\Stored Procedures\sp_select_location.sql" />
+    <Build Include="misc\Stored Procedures\sp_select_colour.sql" />
+    <Build Include="misc\Stored Procedures\sp_delete_location.sql" />
+    <Build Include="misc\Stored Procedures\sp_delete_colour.sql" />
+    <Build Include="hr\Stored Procedures\sp_select_person_simplified.sql" />
+    <Build Include="hr\Stored Procedures\sp_select_organisation_simplified.sql" />
+    <Build Include="fin\Stored Procedures\sp_select_payment_method.sql" />
+    <Build Include="dbsecurity\Stored Procedures\sp_select_user_all.sql" />
   </ItemGroup>
 </Project>

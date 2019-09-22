@@ -3,10 +3,8 @@
 -- Create date: 14.04.2019
 -- Description:	select user
 -- =============================================
-CREATE PROCEDURE [dbsecurity].[sp_search_user] 
+CREATE PROCEDURE [dbsecurity].[sp_select_user_all] 
 	-- Add the parameters for the stored procedure here
-	@search nvarchar(200) = '', -- 'ALL' to select all
-	@is_active bit = 0
 AS
 BEGIN
 	-- SET NOCOUNT ON added to prevent extra result sets from
@@ -17,9 +15,9 @@ SELECT
 	U.[user],
 	U.[username],
 	U.[name],
-	UG.[usergroup],
+	UUG.[usergroup],
 	U.[ic_no],
-	U.[is_active],
+	CASE WHEN U.[is_active] = 1 THEN 'ACTIVE' ELSE 'INACTIVE' END AS [is_active],
 	U.[join_date],
 	U.[leave_date]
 
@@ -30,10 +28,5 @@ LEFT JOIN [dbsecurity].[user_usergroup] UUG
 
 LEFT JOIN [dbsecurity].[usergroup] UG
 	ON UUG.[usergroup] = UG.[usergroup]
-
-WHERE (U.[username] LIKE '%' + @search + '%'
-		OR U.[name] LIKE '%' + @search + '%'
-		OR U.[ic_no] LIKE '%' + @search + '%')
-	AND (@is_active IS NULL OR U.[is_active] = @is_active)
 
 END

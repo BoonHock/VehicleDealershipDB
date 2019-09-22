@@ -16,9 +16,10 @@ SELECT
 	VEHICLE.[vehicle],
 	VEHICLE.[registration_no],
 	ISNULL(HRPERSON.[name], HRORG.[name]) AS [seller_name],
+	ORGBRANCH.[branch_name],
 	VEHMODEL.[vehicle_model_name] AS [vehicle_model],
 	VEHICLE.[purchase_date],
-	MISCLOCATION.[location_description] AS [location],
+	MISCLOCATION.[location_name] AS [location],
 	VEHCHASSIS.[chassis_no],
 	VEHICLE.[engine_no],
 	VEHCHASSIS.[year_make],
@@ -56,11 +57,11 @@ JOIN [misc].[location] MISCLOCATION
 LEFT JOIN [hr].[person] HRPERSON
 	ON HRPERSON.[person] = VEHICLE.[seller_person]
 
-LEFT JOIN [hr].[organisation] HRORG
-	ON HRORG.[organisation] = VEHICLE.[seller_organisation]
+LEFT JOIN [hr].[organisation_branch] ORGBRANCH
+	ON ORGBRANCH.[organisation_branch] = VEHICLE.[seller_organisation_branch]
 
-JOIN [misc].[color] MISCCOLOR
-	ON MISCCOLOR.[color] = VEHICLE.[color]
+LEFT JOIN [hr].[organisation] HRORG
+	ON HRORG.[organisation] = ORGBRANCH.[organisation]
 
 JOIN [veh].[chassis] VEHCHASSIS
 	ON VEHCHASSIS.[chassis] = VEHICLE.[chassis]

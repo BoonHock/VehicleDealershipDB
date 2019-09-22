@@ -1,9 +1,9 @@
 ﻿-- =============================================
 -- Author:		HOCK
 -- Create date: 17.8.2019
--- Description:	update and insert color
+-- Description:	update and insert colour
 -- =============================================
-CREATE PROCEDURE misc.[sp_update_insert_color] 
+CREATE PROCEDURE [misc].[sp_update_insert_colour] 
 	-- Add the parameters for the stored procedure here
 	@uid INT = 1
 
@@ -14,24 +14,24 @@ BEGIN
 	SET NOCOUNT ON;
 
     -- Insert statements for procedure here
-UPDATE COLOR
+UPDATE COLOUR
 
-SET [color_name] = BULKCOPY.[nvarchar1],
+SET [colour_name] = BULKCOPY.[nvarchar1],
 	[modified_by] = @uid
 
 FROM [VehicleDealership].[misc].[bulkcopy_table] BULKCOPY
 
-JOIN [VehicleDealership].[misc].[color] COLOR
-	ON COLOR.[color] = BULKCOPY.[int1]
+JOIN [misc].[colour] COLOUR
+	ON COLOUR.[colour] = BULKCOPY.[int1]
 
 WHERE BULKCOPY.[created_by] = @uid
-	AND BULKCOPY.[nvarchar1] <> COLOR.[color_name]
+	AND BULKCOPY.[nvarchar1] <> COLOUR.[colour_name]
 
 	COLLATE Latin1_General_CS_AI -- CS stands for case sensitive
 
-INSERT INTO [misc].[color]
+INSERT INTO [misc].[colour]
 (
-	[color_name],
+	[colour_name],
 	[modified_by]
 )
 
@@ -42,8 +42,8 @@ SELECT DISTINCT
 FROM [misc].[bulkcopy_table]
 
 WHERE [int1] NOT IN (
-	SELECT [color]
-	FROM [misc].[color]
+	SELECT [colour]
+	FROM [misc].[colour]
 )
 	AND [int1] IS NOT NULL
 	AND [nvarchar1] IS NOT NULL

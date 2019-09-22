@@ -3,9 +3,9 @@
 -- Create date: 2.9.2019
 -- Description:	insert new salesperson
 -- =============================================
-CREATE PROCEDURE hr.sp_insert_salesperson 
+CREATE PROCEDURE [hr].[sp_insert_salesperson] 
 	-- Add the parameters for the stored procedure here
-	@person_org int,
+	@person_orgbranch int,
 	@is_person bit,
 	@location nvarchar(50),
 	@date_join date,
@@ -23,7 +23,7 @@ BEGIN
 INSERT INTO [hr].[salesperson]
 (
 	[person],
-	[organisation],
+	[organisation_branch],
 	[location],
 	[date_join],
 	[date_leave],
@@ -32,8 +32,8 @@ INSERT INTO [hr].[salesperson]
 )
 VALUES 
 (
-	CASE WHEN @is_person = 1 THEN @person_org ELSE NULL END,
-	CASE WHEN @is_person = 0 THEN @person_org ELSE NULL END,
+	CASE WHEN @is_person = 1 THEN @person_orgbranch ELSE NULL END,
+	CASE WHEN @is_person = 0 THEN @person_orgbranch ELSE NULL END,
 	@location,
 	@date_join,
 	@date_leave,

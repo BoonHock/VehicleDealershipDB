@@ -3,7 +3,7 @@
 -- Create date: 7.9.2019
 -- Description:	select organisation not finance
 -- =============================================
-CREATE PROCEDURE hr.sp_select_organisation_not_finance 
+CREATE PROCEDURE [hr].[sp_select_organisation_not_finance] 
 	-- Add the parameters for the stored procedure here
 AS
 BEGIN
@@ -13,20 +13,27 @@ BEGIN
 
     -- Insert statements for procedure here
 SELECT 
-	[organisation],
-	[name],
-	[registration_no],
-	[url]
+	ORGBRANCH.[organisation_branch],
+	ORGBRANCH.[organisation],
+	HRORG.[name],
+	ORGBRANCH.[branch_name],
+	HRORG.[registration_no],
+	HRORG.[url]
 
-FROM [VehicleDealership].[hr].[organisation]
+FROM [hr].[organisation_branch] ORGBRANCH
 
-WHERE [organisation] NOT IN 
+JOIN [hr].[organisation] HRORG
+	ON HRORG.[organisation] = ORGBRANCH.[organisation]
+
+WHERE ORGBRANCH.[organisation_branch] NOT IN 
 (
 	SELECT [finance]
 	FROM [hr].[finance]
 )
 
-ORDER BY [name]
+ORDER BY 
+	HRORG.[name],
+	ORGBRANCH.[branch_name]
 
 
 END
