@@ -1,14 +1,14 @@
 ﻿CREATE TABLE [veh].[vehicle] (
     [vehicle]                    INT             IDENTITY (1, 1) NOT NULL,
-    [order_no]                   NVARCHAR (15)   NOT NULL,
+    [order_no_prefix]            NVARCHAR (5)    CONSTRAINT [DF_vehicle_order_no_prefix] DEFAULT ('') NOT NULL,
+    [order_no]                   AS              ([order_no_prefix]+CONVERT([nvarchar],[vehicle])),
     [seller_person]              INT             NULL,
     [seller_organisation_branch] INT             NULL,
     [registration_no]            NVARCHAR (10)   NOT NULL,
     [chassis]                    INT             NOT NULL,
     [colour]                     INT             NOT NULL,
     [is_new]                     BIT             NOT NULL,
-    [year_registered]            SMALLINT        NOT NULL,
-    [location]                   INT             NOT NULL,
+    [location]                   INT             CONSTRAINT [DF_vehicle_location] DEFAULT (NULL) NULL,
     [engine_no]                  NVARCHAR (20)   NOT NULL,
     [engine_cc]                  FLOAT (53)      NOT NULL,
     [mileage]                    INT             NOT NULL,
@@ -39,6 +39,8 @@
     CONSTRAINT [FK_vehicle_user] FOREIGN KEY ([checked_by]) REFERENCES [dbsecurity].[user] ([user]),
     CONSTRAINT [FK_vehicle_user1] FOREIGN KEY ([modified_by]) REFERENCES [dbsecurity].[user] ([user])
 );
+
+
 
 
 

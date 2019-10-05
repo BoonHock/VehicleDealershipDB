@@ -22,7 +22,6 @@ SELECT
 	VGROUP.[vehicle_group_name],
 	VGROUP.[vehicle_brand],
 	VBRAND.[vehicle_brand_name],
-	CHASSIS.[year_make],
 	CHASSIS.[registration_date],
 	CHASSIS.[modified_by] AS [modified_by_id],
 	SECURITYUSER.[name] AS [modified_by]

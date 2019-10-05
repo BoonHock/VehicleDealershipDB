@@ -1,12 +1,14 @@
 ﻿CREATE TABLE [fin].[payment] (
     [payment]             INT             IDENTITY (1, 1) NOT NULL,
+    [payment_no_prefix]   NVARCHAR (5)    CONSTRAINT [DF_payment_payment_no_prefix] DEFAULT ('') NOT NULL,
+    [payment_no]          AS              ([payment_no_prefix]+CONVERT([nvarchar],[payment])),
     [payment_description] NVARCHAR (50)   NOT NULL,
     [payment_date]        DATE            NOT NULL,
     [amount]              DECIMAL (18, 4) NOT NULL,
     [cheque]              INT             NULL,
     [credit_card]         INT             NULL,
     [payment_method]      INT             CONSTRAINT [DF_payment_payment_method] DEFAULT (NULL) NULL,
-    [payment_made]        BIT             CONSTRAINT [DF_payment_payment_made] DEFAULT ((1)) NOT NULL,
+    [is_paid]             BIT             CONSTRAINT [DF_payment_payment_made] DEFAULT ((1)) NOT NULL,
     [pay_to_person]       INT             NULL,
     [pay_to_organisation] INT             NULL,
     [remark]              NVARCHAR (255)  CONSTRAINT [DF_payment_remark] DEFAULT ('') NOT NULL,
@@ -19,8 +21,11 @@
     CONSTRAINT [FK_payment_organisation] FOREIGN KEY ([pay_to_organisation]) REFERENCES [hr].[organisation] ([organisation]),
     CONSTRAINT [FK_payment_payment_method] FOREIGN KEY ([payment_method]) REFERENCES [fin].[payment_method] ([payment_method]),
     CONSTRAINT [FK_payment_person] FOREIGN KEY ([pay_to_person]) REFERENCES [hr].[person] ([person]),
-    CONSTRAINT [FK_payment_user1] FOREIGN KEY ([modified_by]) REFERENCES [dbsecurity].[user] ([user])
+    CONSTRAINT [FK_payment_user1] FOREIGN KEY ([modified_by]) REFERENCES [dbsecurity].[user] ([user]),
+    CONSTRAINT [IX_payment] UNIQUE NONCLUSTERED ([payment_no] ASC)
 );
+
+
 
 
 

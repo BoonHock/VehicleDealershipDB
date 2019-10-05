@@ -206,5 +206,25 @@
     <Build Include="hr\Stored Procedures\sp_select_organisation_simplified.sql" />
     <Build Include="fin\Stored Procedures\sp_select_payment_method.sql" />
     <Build Include="dbsecurity\Stored Procedures\sp_select_user_all.sql" />
+    <Build Include="veh\Tables\vehicle_attachment.sql" />
+    <Build Include="fin\Tables\document_prefix.sql" />
+    <Build Include="fin\Tables\credit_card_type.sql" />
+    <Build Include="dbsecurity\Tables\filepath.sql" />
+    <Build Include="veh\Stored Procedures\sp_update_chassis.sql" />
+    <Build Include="veh\Stored Procedures\sp_select_vehicle_image.sql" />
+    <Build Include="veh\Stored Procedures\sp_select_vehicle_attachment.sql" />
+    <Build Include="veh\Stored Procedures\sp_insert_vehicle.sql" />
+    <Build Include="veh\Stored Procedures\sp_insert_chassis.sql" />
+    <Build Include="fin\Stored Procedures\sp_update_vehicle_payment.sql" />
+    <Build Include="fin\Stored Procedures\sp_update_vehicle_expenses.sql" />
+    <Build Include="fin\Stored Procedures\sp_update_payment.sql" />
+    <Build Include="fin\Stored Procedures\sp_update_insert_credit_card.sql" />
+    <Build Include="fin\Stored Procedures\sp_update_insert_cheque.sql" />
+    <Build Include="fin\Stored Procedures\sp_select_vehicle_payment.sql" />
+    <Build Include="fin\Stored Procedures\sp_select_vehicle_expenses.sql" />
+    <Build Include="fin\Stored Procedures\sp_select_credit_card_type.sql" />
+    <Build Include="fin\Stored Procedures\sp_select_credit_card.sql" />
+    <Build Include="fin\Stored Procedures\sp_select_cheque.sql" />
+    <Build Include="fin\Stored Procedures\sp_insert_payment.sql" />
   </ItemGroup>
 </Project>

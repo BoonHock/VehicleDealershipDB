@@ -5,9 +5,9 @@
 -- =============================================
 CREATE PROCEDURE [veh].[sp_select_vehicle] 
 	-- Add the parameters for the stored procedure here
-	@vehicle int ,
-	@reg_no nvarchar(10),
-	@chassis_no nvarchar(20)
+	@vehicle int = -1,
+	@reg_no nvarchar(10) = '',
+	@chassis_no nvarchar(20) = ''
 
 AS
 BEGIN
@@ -19,8 +19,9 @@ BEGIN
 
 SELECT 
 	VEHICLE.[vehicle],
-	VEHICLE.[purchase_date],
+	VEHICLE.[order_no_prefix],
 	VEHICLE.[order_no],
+	VEHICLE.[purchase_date],
 	VEHICLE.[seller_person],
 	VEHICLE.[seller_organisation_branch],
 	HRPERSON.[name] AS [person_name],
@@ -39,10 +40,10 @@ SELECT
 	VEHICLE.[colour],
 	COLOUR.[colour_name],
 	VEHICLE.[is_new],
-	CHASSIS.[year_make],
-	VEHICLE.[year_registered],
+	VEHMODEL.[year_make],
+	CHASSIS.[registration_date],
 	VEHICLE.[location],
-	MISCLOCATION.[location_name],
+	ISNULL(MISCLOCATION.[location_name], '') AS [location_name],
 
 	VEHICLE.[engine_no],
 	VEHICLE.[engine_cc],

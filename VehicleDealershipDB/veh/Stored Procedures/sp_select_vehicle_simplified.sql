@@ -17,12 +17,12 @@ SELECT
 	VEHICLE.[registration_no],
 	ISNULL(HRPERSON.[name], HRORG.[name]) AS [seller_name],
 	ORGBRANCH.[branch_name],
-	VEHMODEL.[vehicle_model_name] AS [vehicle_model],
+	ISNULL(VEHMODEL.[vehicle_model_name], '') AS [vehicle_model],
 	VEHICLE.[purchase_date],
 	MISCLOCATION.[location_name] AS [location],
 	VEHCHASSIS.[chassis_no],
 	VEHICLE.[engine_no],
-	VEHCHASSIS.[year_make],
+	VEHMODEL.[year_make],
 	CASE WHEN VEHICLE.[vehicle_sale] IS NULL THEN 
 		CASE WHEN VEHICLE.[consignment_mortgage] IS NULL THEN 
 			'PURCHASE'
@@ -51,7 +51,7 @@ SELECT
 
 FROM [veh].[vehicle] VEHICLE
 
-JOIN [misc].[location] MISCLOCATION
+LEFT JOIN [misc].[location] MISCLOCATION
 	ON MISCLOCATION.[location] = VEHICLE.[location]
 
 LEFT JOIN [hr].[person] HRPERSON
