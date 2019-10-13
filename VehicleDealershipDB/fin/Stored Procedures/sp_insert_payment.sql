@@ -5,6 +5,7 @@
 -- =============================================
 CREATE PROCEDURE [fin].[sp_insert_payment] 
 	-- Add the parameters for the stored procedure here
+	@payment_prefix nvarchar(20),
 	@payment_desc nvarchar(50),
 	@payment_date date,
 	@amount decimal(18, 4),
@@ -27,6 +28,7 @@ BEGIN
 
 INSERT INTO [fin].[payment]
 (
+	[payment_no_prefix],
 	[payment_description],
 	[payment_date],
 	[amount],
@@ -41,6 +43,7 @@ INSERT INTO [fin].[payment]
 )
 VALUES 
 (
+	@payment_prefix,
 	@payment_desc,
 	@payment_date,
 	@amount,

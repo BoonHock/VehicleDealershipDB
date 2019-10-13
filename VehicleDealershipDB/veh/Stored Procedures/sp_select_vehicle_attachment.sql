@@ -17,8 +17,9 @@ BEGIN
 
 SELECT
 	[vehicle_attachment],
-	[filename],
-	CAST('' AS nvarchar(max)) AS [full_pathfilename] -- for front end
+	-- get file name only. for example: "C:\Users\John\Downloads\AnyDesk.exe" will yield "AnyDesk.exe". for showing to user. no need show full path
+	SUBSTRING( [filename] , LEN([filename]) -  CHARINDEX('\',REVERSE([filename])) + 2  , LEN([filename]) ) AS [filename],
+	[filename] AS [full_pathfilename]
 
 FROM [veh].[vehicle_attachment]
 

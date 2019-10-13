@@ -1,11 +1,13 @@
 ﻿-- =============================================
 -- Author:		hock
--- Create date: 28.9.2019
--- Description:	select vehicle image
+-- Create date: 12.10.2019
+-- Description:	insert vehicle attachment
 -- =============================================
-CREATE PROCEDURE [veh].[sp_select_vehicle_image] 
+CREATE PROCEDURE veh.sp_insert_vehicle_attachment 
 	-- Add the parameters for the stored procedure here
-	@vehicle int = 1
+	@vehicle int,
+	@filename nvarchar(max),
+	@modified_by int
 
 AS
 BEGIN
@@ -15,17 +17,19 @@ BEGIN
 
     -- Insert statements for procedure here
 
-SELECT
-	[vehicle_image],
-	CAST(NULL AS varbinary(MAX)) AS [image], -- for front end side to use
+INSERT INTO [veh].[vehicle_attachment]
+(
+	[vehicle],
 	[filename],
-	[description]
+	[modified_by]
+)
+VALUES 
+(
+	@vehicle,
+	@filename,
+	@modified_by
+)
 
-FROM [veh].[vehicle_image] VIMAGE
-
-WHERE @vehicle = -1 
-	OR [vehicle] = @vehicle
-
-
+SELECT SCOPE_IDENTITY();
 
 END

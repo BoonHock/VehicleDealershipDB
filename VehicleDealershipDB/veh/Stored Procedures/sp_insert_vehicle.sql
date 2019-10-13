@@ -28,6 +28,11 @@ CREATE PROCEDURE [veh].[sp_insert_vehicle]
 	@overtrade decimal(18,4),
 	@list_price decimal(18,4),
 	@loan_balance decimal(18,4),
+	@loan_installment_amount decimal(18,4),
+	@loan_finance int,
+	@loan_installment_day_of_month tinyint,
+	@loan_settlement_date date,
+	@loan_agreement_no nvarchar(30),
 	@remark nvarchar(255),
 	@checked_by int,
 	@modified_by int
@@ -39,7 +44,7 @@ BEGIN
 	SET NOCOUNT ON;
 
     -- Insert statements for procedure here
-DECLARE @order_no nvarchar(15)= ISNULL((
+DECLARE @ref_no_prefix nvarchar(15)= ISNULL((
 	SELECT [document_prefix_text]
 	FROM [fin].[document_prefix]
 
@@ -47,44 +52,51 @@ DECLARE @order_no nvarchar(15)= ISNULL((
 
 INSERT INTO [veh].[vehicle]
 (
-	[order_no_prefix]
-	,[seller_person]
-	,[seller_organisation_branch]
-	,[registration_no]
-	,[chassis]
-	,[colour]
-	,[is_new]
-	,[location]
-	,[engine_no]
-	,[engine_cc]
-	,[mileage]
-	,[vehicle_sale]
-	,[consignment_mortgage]
-	,[door_key]
-	,[ignition_key]
-	,[purchase_date]
-	,[date_received]
-	,[invoice_no]
-	,[road_tax]
-	,[road_tax_expiry_date]
-	,[purchase_price]
-	,[overtrade]
-	,[list_price]
-	,[loan_balance]
-	,[remark]
-	,[checked_by]
-	,[modified_by]
+	[reference_no_prefix], 
+	[seller_person], 
+	[seller_organisation_branch], 
+	[registration_no], 
+	[chassis], 
+	[colour], 
+	[is_new], 
+	[location], 
+	[engine_no], 
+	[engine_cc], 
+	[mileage], 
+	[vehicle_sale], 
+	[consignment_mortgage], 
+	[door_key], 
+	[ignition_key], 
+	[purchase_date], 
+	[date_received], 
+	[invoice_no], 
+	[road_tax], 
+	[road_tax_expiry_date], 
+	[purchase_price], 
+	[overtrade], 
+	[list_price], 
+	[loan_balance], 
+	[loan_installment_amount], 
+
+	[loan_finance], 
+	[loan_installment_day_of_month], 
+	[loan_settlement_date], 
+	[loan_agreement_no], 
+
+	[remark], 
+	[checked_by], 
+	[modified_by]
 )
 VALUES
 (
-	@order_no, 
+	@ref_no_prefix, 
 	CASE WHEN @seller_is_person = 1 THEN @seller_person_org ELSE NULL END,
 	CASE WHEN @seller_is_person = 0 THEN @seller_person_org ELSE NULL END,
 	@registration_no,
 	@chassis,
 	@colour,
 	@is_new,
-	CASE WHEN @location = 0 THEN NULL ELSE @location END,
+	@location,
 	@engine_no,
 	@engine_cc,
 	@mileage,
@@ -101,6 +113,11 @@ VALUES
 	@overtrade,
 	@list_price,
 	@loan_balance,
+	@loan_installment_amount,
+	@loan_finance,
+	@loan_installment_day_of_month,
+	@loan_settlement_date,
+	@loan_agreement_no,
 	@remark,
 	@checked_by,
 	@modified_by

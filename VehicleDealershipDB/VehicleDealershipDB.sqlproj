@@ -226,5 +226,12 @@
     <Build Include="fin\Stored Procedures\sp_select_credit_card.sql" />
     <Build Include="fin\Stored Procedures\sp_select_cheque.sql" />
     <Build Include="fin\Stored Procedures\sp_insert_payment.sql" />
+    <Build Include="veh\Stored Procedures\sp_update_vehicle.sql" />
+    <Build Include="veh\Stored Procedures\sp_insert_vehicle_image.sql" />
+    <Build Include="veh\Stored Procedures\sp_insert_vehicle_attachment.sql" />
+    <Build Include="veh\Stored Procedures\sp_delete_vehicle_image.sql" />
+    <Build Include="veh\Stored Procedures\sp_delete_vehicle_attachment.sql" />
+    <Build Include="fin\Stored Procedures\sp_select_document_prefix.sql" />
+    <Build Include="dbsecurity\Stored Procedures\sp_select_filepath.sql" />
   </ItemGroup>
 </Project>

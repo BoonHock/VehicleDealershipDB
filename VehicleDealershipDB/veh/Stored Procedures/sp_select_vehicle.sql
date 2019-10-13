@@ -16,17 +16,16 @@ BEGIN
 	SET NOCOUNT ON;
 
     -- Insert statements for procedure here
-
 SELECT 
 	VEHICLE.[vehicle],
-	VEHICLE.[order_no_prefix],
-	VEHICLE.[order_no],
+	VEHICLE.[reference_no_prefix],
+	VEHICLE.[reference_no],
 	VEHICLE.[purchase_date],
 	VEHICLE.[seller_person],
 	VEHICLE.[seller_organisation_branch],
-	HRPERSON.[name] AS [person_name],
-	HRORG.[name] AS [organisation_name],
-	ORGBRANCH.[branch_name],
+	SELLERPERSON.[name] AS [seller_person_name],
+	SELLERORG.[name] AS [seller_org_name],
+	SELLERORGBRANCH.[branch_name] AS [seller_branch_name],
 
 	VEHICLE.[registration_no],
 	VEHICLE.[chassis],
@@ -72,6 +71,7 @@ SELECT
 	END AS [vehicle_status],
 
 	VEHICLE.[vehicle_sale],
+	VEHSALE.[vehicle_sale_no],
 	VEHICLE.[consignment_mortgage],
 
 	VEHICLE.[door_key],
@@ -85,26 +85,42 @@ SELECT
 	VEHICLE.[purchase_price],
 	VEHICLE.[overtrade],
 	VEHICLE.[list_price],
+	
 	VEHICLE.[loan_balance],
+	VEHICLE.[loan_installment_amount],
+	VEHICLE.[loan_finance],
+	LOANORGBRANCH.[branch_name] AS [loan_branch_name],
+	LOANORG.[name] AS [loan_org_name],
+	VEHICLE.[loan_installment_day_of_month],
+	VEHICLE.[loan_settlement_date],
+	VEHICLE.[loan_agreement_no],
+
 	VEHICLE.[remark],
 
+	VEHICLE.[checked_by] AS [checked_by_id],
 	CHECKER.[name] AS [checked_by],
 	MODIFIEDBY.[name] AS [modified_by],
 	GETDATE() AS [last_modified_on]
 
 FROM [veh].[vehicle] VEHICLE
 
-LEFT JOIN [hr].[person] HRPERSON
-	ON HRPERSON.[person] = VEHICLE.[seller_person]
+LEFT JOIN [hr].[person] SELLERPERSON
+	ON SELLERPERSON.[person] = VEHICLE.[seller_person]
 
-LEFT JOIN [hr].[organisation_branch] ORGBRANCH
-	ON ORGBRANCH.[organisation_branch] = VEHICLE.[seller_organisation_branch]
+LEFT JOIN [hr].[organisation_branch] SELLERORGBRANCH
+	ON SELLERORGBRANCH.[organisation_branch] = VEHICLE.[seller_organisation_branch]
 
-LEFT JOIN [hr].[organisation] HRORG
-	ON HRORG.[organisation] = ORGBRANCH.[organisation]
+LEFT JOIN [hr].[organisation] SELLERORG
+	ON SELLERORG.[organisation] = SELLERORGBRANCH.[organisation]
 
 LEFT JOIN [misc].[location] MISCLOCATION
 	ON MISCLOCATION.[location] = VEHICLE.[location]
+
+LEFT JOIN [hr].[organisation_branch] LOANORGBRANCH
+	ON LOANORGBRANCH.[organisation_branch] = VEHICLE.[loan_finance]
+
+LEFT JOIN [hr].[organisation] LOANORG
+	ON LOANORG.[organisation] = LOANORGBRANCH.[organisation]
 
 LEFT JOIN [dbsecurity].[user] CHECKER
 	ON CHECKER.[user] = VEHICLE.[checked_by]

@@ -1,6 +1,6 @@
 ﻿CREATE TABLE [fin].[payment] (
     [payment]             INT             IDENTITY (1, 1) NOT NULL,
-    [payment_no_prefix]   NVARCHAR (5)    CONSTRAINT [DF_payment_payment_no_prefix] DEFAULT ('') NOT NULL,
+    [payment_no_prefix]   NVARCHAR (5)    NOT NULL,
     [payment_no]          AS              ([payment_no_prefix]+CONVERT([nvarchar],[payment])),
     [payment_description] NVARCHAR (50)   NOT NULL,
     [payment_date]        DATE            NOT NULL,
@@ -24,6 +24,8 @@
     CONSTRAINT [FK_payment_user1] FOREIGN KEY ([modified_by]) REFERENCES [dbsecurity].[user] ([user]),
     CONSTRAINT [IX_payment] UNIQUE NONCLUSTERED ([payment_no] ASC)
 );
+
+
 
 
 

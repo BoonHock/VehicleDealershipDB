@@ -1,11 +1,12 @@
 ﻿-- =============================================
 -- Author:		hock
--- Create date: 28.9.2019
--- Description:	select vehicle image
+-- Create date: 13.10.2019
+-- Description:	delete vehicle image
 -- =============================================
-CREATE PROCEDURE [veh].[sp_select_vehicle_image] 
+CREATE PROCEDURE [veh].[sp_delete_vehicle_image] 
 	-- Add the parameters for the stored procedure here
-	@vehicle int = 1
+	@vimage_id int,
+	@vehicle int
 
 AS
 BEGIN
@@ -15,17 +16,8 @@ BEGIN
 
     -- Insert statements for procedure here
 
-SELECT
-	[vehicle_image],
-	CAST(NULL AS varbinary(MAX)) AS [image], -- for front end side to use
-	[filename],
-	[description]
-
-FROM [veh].[vehicle_image] VIMAGE
-
-WHERE @vehicle = -1 
-	OR [vehicle] = @vehicle
-
-
+DELETE FROM [veh].[vehicle_image]
+WHERE [vehicle] = @vehicle
+	AND [vehicle_image] = @vimage_id 
 
 END

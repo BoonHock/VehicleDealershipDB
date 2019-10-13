@@ -1,11 +1,11 @@
 ﻿-- =============================================
 -- Author:		hock
--- Create date: 28.9.2019
--- Description:	select vehicle image
+-- Create date: 14.10.2019
+-- Description:	select document prefix
 -- =============================================
-CREATE PROCEDURE [veh].[sp_select_vehicle_image] 
+CREATE PROCEDURE fin.sp_select_document_prefix 
 	-- Add the parameters for the stored procedure here
-	@vehicle int = 1
+	@doc_prefix nvarchar(20)
 
 AS
 BEGIN
@@ -15,17 +15,13 @@ BEGIN
 
     -- Insert statements for procedure here
 
-SELECT
-	[vehicle_image],
-	CAST(NULL AS varbinary(MAX)) AS [image], -- for front end side to use
-	[filename],
-	[description]
+SELECT 
+	[document_prefix], 
+	[document_prefix_text], 
+	[modified_by], 
+	[modified_on]
+FROM [VehicleDealership].[fin].[document_prefix]
 
-FROM [veh].[vehicle_image] VIMAGE
-
-WHERE @vehicle = -1 
-	OR [vehicle] = @vehicle
-
-
+WHERE [document_prefix] = 'VEHICLE_EXPENSES'
 
 END
