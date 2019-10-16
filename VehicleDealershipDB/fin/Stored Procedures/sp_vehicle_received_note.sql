@@ -1,13 +1,11 @@
 ﻿-- =============================================
 -- Author:		hock
--- Create date: 17.9.2019
--- Description:	select vehicle
+-- Create date: 15.10.2019
+-- Description:	select for vehicle received note
 -- =============================================
-CREATE PROCEDURE [veh].[sp_select_vehicle] 
+create PROCEDURE fin.[sp_vehicle_received_note] 
 	-- Add the parameters for the stored procedure here
-	@vehicle int = -1,
-	@reg_no nvarchar(10) = '',
-	@chassis_no nvarchar(20) = ''
+	@vehicle INT = 1
 
 AS
 BEGIN
@@ -18,35 +16,29 @@ BEGIN
     -- Insert statements for procedure here
 SELECT 
 	VEHICLE.[vehicle],
-	VEHICLE.[reference_no_prefix],
+	SECURITYCOMPANY.[company_name],
+	SECURITYCOMPANY.[registration_no] AS [company_registration_no],
 	VEHICLE.[reference_no],
-	VEHICLE.[purchase_date],
-	VEHICLE.[seller_person],
-	VEHICLE.[seller_organisation_branch],
-	SELLERPERSON.[name] AS [seller_person_name],
-	SELLERORG.[name] AS [seller_org_name],
-	SELLERORGBRANCH.[branch_name] AS [seller_branch_name],
-
-	VEHICLE.[registration_no],
-	VEHICLE.[chassis],
+	CASE WHEN VEHICLE.[seller_person] IS NULL THEN SELLERORG.[name] + CHAR(13)+CHAR(10) + 
+		SELLERORGBRANCH.[branch_name] ELSE SELLERPERSON.[name] END AS [customer_name],
+	CASE WHEN VEHICLE.[seller_person] IS NULL THEN SELLERORG.[registration_no] ELSE SELLERPERSON.[ic_no] END AS [customer_registration_no],
+	CASE WHEN VEHICLE.[seller_person] IS NULL THEN SELLERORGBRANCH.[address] ELSE SELLERPERSON.[address] END AS [customer_address],
 	CHASSIS.[chassis_no],
-	CHASSIS.[vehicle_model],
-	VEHMODEL.[vehicle_model_name],
-	VEHMODEL.[vehicle_group],
-	VEHGROUP.[vehicle_group_name],
-	VEHGROUP.[vehicle_brand],
-	VEHBRAND.[vehicle_brand_name],
-	VEHICLE.[colour],
+	VEHBRAND.[vehicle_brand_name] + ' ' + VEHGROUP.[vehicle_group_name] + 
+		' ' + VEHMODEL.[vehicle_model_name] AS [vehicle_name],
 	COLOUR.[colour_name],
-	VEHICLE.[is_new],
 	VEHMODEL.[year_make],
 	CHASSIS.[registration_date],
-	VEHICLE.[location],
-	ISNULL(MISCLOCATION.[location_name], '') AS [location_name],
+
+	VEHICLE.[registration_no],
+	VEHICLE.[invoice_no],
+
+	VEHICLE.[purchase_date],
+	VEHICLE.[date_received],
 
 	VEHICLE.[engine_no],
 	VEHICLE.[engine_cc],
-	VEHICLE.[mileage],
+
 	CASE WHEN VEHICLE.[vehicle_sale] IS NULL THEN 
 		CASE WHEN VEHICLE.[consignment_mortgage] IS NULL THEN
 			'PURCHASE'
@@ -60,36 +52,21 @@ SELECT
 	ELSE 
 		'TRADE-IN'
 	END AS [acquire_method],
-	CASE WHEN VEHSALE.[vehicle] IS NULL THEN 
-		CASE WHEN VEHRETURN.[vehicle] IS NULL THEN 
-			'UNSOLD'
-		ELSE 
-			'RETURNED' 
-		END
-	ELSE 
-		'SOLD'
-	END AS [vehicle_status],
 
-	VEHICLE.[vehicle_sale],
-	VEHSALE.[vehicle_sale_no],
-	VEHICLE.[consignment_mortgage],
-
-	VEHICLE.[door_key],
-	VEHICLE.[ignition_key],
-
-	VEHICLE.[date_received],
-	VEHICLE.[invoice_no],
 	VEHICLE.[road_tax],
 	VEHICLE.[road_tax_expiry_date],
 
 	VEHICLE.[purchase_price],
 	VEHICLE.[overtrade],
-	VEHICLE.[list_price],
 	VEHICLE.[max_can_loan],
-	
+
+	VEHICLE.[purchase_price] - VEHICLE.[overtrade] AS [purchase_cost],
+	ISNULL(VEXP.[amount],0) AS [total_expenses],
+
+	VEHICLE.[purchase_price] - VEHICLE.[overtrade] + ISNULL(VEXP.[amount],0) AS [total_cost],
+
 	VEHICLE.[loan_balance],
 	VEHICLE.[loan_installment_amount],
-	VEHICLE.[loan_finance],
 	LOANORGBRANCH.[branch_name] AS [loan_branch_name],
 	LOANORG.[name] AS [loan_org_name],
 	VEHICLE.[loan_installment_day_of_month],
@@ -98,10 +75,7 @@ SELECT
 
 	VEHICLE.[remark],
 
-	VEHICLE.[checked_by] AS [checked_by_id],
-	CHECKER.[name] AS [checked_by],
-	MODIFIEDBY.[name] AS [modified_by],
-	GETDATE() AS [last_modified_on] -- @TODO: temporary
+	CHECKER.[name] AS [checked_by]
 
 FROM [veh].[vehicle] VEHICLE
 
@@ -113,9 +87,6 @@ LEFT JOIN [hr].[organisation_branch] SELLERORGBRANCH
 
 LEFT JOIN [hr].[organisation] SELLERORG
 	ON SELLERORG.[organisation] = SELLERORGBRANCH.[organisation]
-
-LEFT JOIN [misc].[location] MISCLOCATION
-	ON MISCLOCATION.[location] = VEHICLE.[location]
 
 LEFT JOIN [hr].[organisation_branch] LOANORGBRANCH
 	ON LOANORGBRANCH.[organisation_branch] = VEHICLE.[loan_finance]
@@ -150,9 +121,23 @@ LEFT JOIN [fin].[vehicle_sale] VEHSALE
 LEFT JOIN [fin].[vehicle_return] VEHRETURN
 	ON VEHRETURN.[vehicle] = VEHICLE.[vehicle]
 
-WHERE (VEHICLE.[vehicle] = @vehicle OR @vehicle = -1)
-	AND (VEHICLE.[registration_no] = @reg_no OR @reg_no = '')
-	AND (CHASSIS.[chassis_no] = @chassis_no OR @chassis_no = '')
+JOIN [dbsecurity].[company] SECURITYCOMPANY
+	ON 1 = 1
 
+LEFT JOIN (
+	SELECT
+		VEXP.[vehicle],
+		SUM(PAYMENT.[amount]) AS [amount]
+
+	FROM [fin].[vehicle_expenses] VEXP
+
+	JOIN [fin].[payment] PAYMENT
+		ON PAYMENT.[payment] = VEXP.[payment]
+
+	GROUP BY VEXP.[vehicle]
+) VEXP
+	ON VEXP.[vehicle] = VEHICLE.[vehicle]
+
+WHERE VEHICLE.[vehicle] = @vehicle
 
 END

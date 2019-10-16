@@ -6,8 +6,10 @@
     [modified_by]   INT            NOT NULL,
     CONSTRAINT [PK_vehicle_image] PRIMARY KEY CLUSTERED ([vehicle_image] ASC),
     CONSTRAINT [FK_vehicle_image_user] FOREIGN KEY ([modified_by]) REFERENCES [dbsecurity].[user] ([user]),
-    CONSTRAINT [FK_vehicle_image_vehicle] FOREIGN KEY ([vehicle]) REFERENCES [veh].[vehicle] ([vehicle])
+    CONSTRAINT [FK_vehicle_image_vehicle] FOREIGN KEY ([vehicle]) REFERENCES [veh].[vehicle] ([vehicle]) ON DELETE CASCADE
 );
+
+
 
 
 

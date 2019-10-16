@@ -24,6 +24,7 @@
     [purchase_price]                DECIMAL (18, 4) CONSTRAINT [DF_vehicle_purchase_price] DEFAULT ((0)) NOT NULL,
     [overtrade]                     DECIMAL (18, 4) CONSTRAINT [DF_vehicle_purchase_price1] DEFAULT ((0)) NOT NULL,
     [list_price]                    DECIMAL (18, 4) CONSTRAINT [DF_vehicle_list_price] DEFAULT ((0)) NOT NULL,
+    [max_can_loan]                  DECIMAL (18, 4) CONSTRAINT [DF_vehicle_list_price1] DEFAULT ((0)) NOT NULL,
     [loan_balance]                  DECIMAL (18, 4) CONSTRAINT [DF_Table_1_list_price1] DEFAULT ((0)) NOT NULL,
     [loan_installment_amount]       DECIMAL (18, 4) CONSTRAINT [DF_vehicle_installment_amount] DEFAULT ((0)) NOT NULL,
     [loan_finance]                  INT             NULL,
@@ -46,6 +47,8 @@
     CONSTRAINT [FK_vehicle_user1] FOREIGN KEY ([modified_by]) REFERENCES [dbsecurity].[user] ([user]),
     CONSTRAINT [FK_vehicle_vehicle_sale] FOREIGN KEY ([vehicle_sale]) REFERENCES [fin].[vehicle_sale] ([vehicle])
 );
+
+
 
 
 

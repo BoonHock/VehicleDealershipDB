@@ -3,7 +3,7 @@
 -- Create date: 9.10.2019
 -- Description:	update vehicle
 -- =============================================
-CREATE PROCEDURE veh.sp_update_vehicle 
+CREATE PROCEDURE [veh].[sp_update_vehicle] 
 	-- Add the parameters for the stored procedure here
 	@vehicle int,
 	@seller_person_org int,
@@ -28,6 +28,7 @@ CREATE PROCEDURE veh.sp_update_vehicle
 	@purchase_price decimal(18,4),
 	@overtrade decimal(18,4),
 	@list_price decimal(18,4),
+	@max_can_loan decimal(18,4),
 	@loan_balance decimal(18,4),
 	@loan_installment_amount decimal(18,4),
 	@loan_finance int,
@@ -69,6 +70,7 @@ SET [seller_person] = CASE WHEN @seller_is_person = 1 THEN @seller_person_org EL
 	[purchase_price] = @purchase_price,
 	[overtrade] = @overtrade,
 	[list_price] = @list_price,
+	[max_can_loan] = @max_can_loan,
 	[loan_balance] = @loan_balance,
 	[loan_installment_amount] = @loan_installment_amount,
 

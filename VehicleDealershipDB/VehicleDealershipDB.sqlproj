@@ -187,7 +187,6 @@
     <Build Include="hr\Stored Procedures\sp_select_finance.sql" />
     <Build Include="Security\fin.sql" />
     <Build Include="hr\Tables\organisation_branch.sql" />
-    <Build Include="fin\Tables\vehicle_loan.sql" />
     <Build Include="veh\Stored Procedures\sp_select_vehicle_simplified.sql" />
     <Build Include="hr\Stored Procedures\sp_update_insert_organisation_branch.sql" />
     <Build Include="hr\Stored Procedures\sp_select_organisation_branch_with_org_details.sql" />
@@ -233,5 +232,9 @@
     <Build Include="veh\Stored Procedures\sp_delete_vehicle_attachment.sql" />
     <Build Include="fin\Stored Procedures\sp_select_document_prefix.sql" />
     <Build Include="dbsecurity\Stored Procedures\sp_select_filepath.sql" />
+    <Build Include="dbsecurity\Tables\company.sql" />
+    <Build Include="veh\Stored Procedures\sp_delete_vehicle.sql" />
+    <Build Include="fin\Stored Procedures\sp_vehicle_received_note.sql" />
+    <Build Include="fin\Stored Procedures\sp_evidence_of_purchase.sql" />
   </ItemGroup>
 </Project>
