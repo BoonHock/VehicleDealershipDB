@@ -1,9 +1,9 @@
 ﻿-- =============================================
 -- Author:		hock
--- Create date: 15.10.2019
+-- Create date: 20.10.2019
 -- Description:	select for vehicle received note
 -- =============================================
-create PROCEDURE fin.[sp_vehicle_received_note] 
+CREATE PROCEDURE [fin].[sp_vehicle_incoming_doc] 
 	-- Add the parameters for the stored procedure here
 	@vehicle INT = 1
 
@@ -15,17 +15,26 @@ BEGIN
 
     -- Insert statements for procedure here
 SELECT 
-	VEHICLE.[vehicle],
 	SECURITYCOMPANY.[company_name],
 	SECURITYCOMPANY.[registration_no] AS [company_registration_no],
+	SECURITYCOMPANY.[address] AS [company_address],
+	SECURITYCOMPANY.[tel_no] AS [company_tel_no],
+	SECURITYCOMPANY.[fax_no] AS [company_fax_no],
+	SECURITYCOMPANY.[email] AS [company_email],
 	VEHICLE.[reference_no],
+
+	ISNULL(SELLERORG.[name], SELLERPERSON.[name]) AS [customer_name_short],
 	CASE WHEN VEHICLE.[seller_person] IS NULL THEN SELLERORG.[name] + CHAR(13)+CHAR(10) + 
-		SELLERORGBRANCH.[branch_name] ELSE SELLERPERSON.[name] END AS [customer_name],
+		SELLERORGBRANCH.[branch_name] ELSE SELLERPERSON.[name] END AS [customer_name_long],
 	CASE WHEN VEHICLE.[seller_person] IS NULL THEN SELLERORG.[registration_no] ELSE SELLERPERSON.[ic_no] END AS [customer_registration_no],
+	CASE WHEN VEHICLE.[seller_person] IS NULL THEN 'Reg. no. :' + SELLERORG.[registration_no] ELSE 'IC no. :' + SELLERPERSON.[ic_no] END AS [customer_registration_no_with_text],
 	CASE WHEN VEHICLE.[seller_person] IS NULL THEN SELLERORGBRANCH.[address] ELSE SELLERPERSON.[address] END AS [customer_address],
 	CHASSIS.[chassis_no],
-	VEHBRAND.[vehicle_brand_name] + ' ' + VEHGROUP.[vehicle_group_name] + 
-		' ' + VEHMODEL.[vehicle_model_name] AS [vehicle_name],
+
+	VEHBRAND.[vehicle_brand_name],
+	VEHGROUP.[vehicle_group_name],
+	VEHMODEL.[vehicle_model_name],
+
 	COLOUR.[colour_name],
 	VEHMODEL.[year_make],
 	CHASSIS.[registration_date],
@@ -35,47 +44,40 @@ SELECT
 
 	VEHICLE.[purchase_date],
 	VEHICLE.[date_received],
+	VEHICLE.[settlement_date],
 
 	VEHICLE.[engine_no],
 	VEHICLE.[engine_cc],
-
-	CASE WHEN VEHICLE.[vehicle_sale] IS NULL THEN 
-		CASE WHEN VEHICLE.[consignment_mortgage] IS NULL THEN
-			'PURCHASE'
-		ELSE 
-			CASE WHEN VEHICLE.[consignment_mortgage] = 1 THEN
-				'CONSIGNMENT'
-			ELSE 
-				'MORTGAGE'
-			END
-		END
-	ELSE 
-		'TRADE-IN'
-	END AS [acquire_method],
 
 	VEHICLE.[road_tax],
 	VEHICLE.[road_tax_expiry_date],
 
 	VEHICLE.[purchase_price],
 	VEHICLE.[overtrade],
+
+	VEHICLE.[purchase_price] - VEHICLE.[overtrade] AS [net_purchase],
+	ISNULL(VEXP.[amount],0) AS [total_expenses],
+	VEHICLE.[purchase_price] - VEHICLE.[overtrade] + ISNULL(VEXP.[amount],0) AS [total_cost],
+	VEHICLE.[purchase_price] - VEHICLE.[overtrade] - VEHICLE.[loan_balance] AS [balance_to_pay],
 	VEHICLE.[max_can_loan],
 
-	VEHICLE.[purchase_price] - VEHICLE.[overtrade] AS [purchase_cost],
-	ISNULL(VEXP.[amount],0) AS [total_expenses],
-
-	VEHICLE.[purchase_price] - VEHICLE.[overtrade] + ISNULL(VEXP.[amount],0) AS [total_cost],
+	CASE WHEN LOANORG.[organisation] IS NOT NULL THEN 
+		'I further confirm that my hire purchase account of '+ VEHICLE.[registration_no] + ' with '+ LOANORG.[name] +
+			' is to be settled by the Purchase on or before ' + CONVERT(VARCHAR(11), VEHICLE.[loan_settlement_date], 106) + '.'
+	ELSE 
+		'' 
+	END AS [loan_sentence],
 
 	VEHICLE.[loan_balance],
 	VEHICLE.[loan_installment_amount],
+
 	LOANORGBRANCH.[branch_name] AS [loan_branch_name],
 	LOANORG.[name] AS [loan_org_name],
+	LOANORGBRANCH.[address] AS [loan_address],
+
 	VEHICLE.[loan_installment_day_of_month],
 	VEHICLE.[loan_settlement_date],
-	VEHICLE.[loan_agreement_no],
-
-	VEHICLE.[remark],
-
-	CHECKER.[name] AS [checked_by]
+	VEHICLE.[loan_agreement_no]
 
 FROM [veh].[vehicle] VEHICLE
 

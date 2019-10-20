@@ -234,7 +234,7 @@
     <Build Include="dbsecurity\Stored Procedures\sp_select_filepath.sql" />
     <Build Include="dbsecurity\Tables\company.sql" />
     <Build Include="veh\Stored Procedures\sp_delete_vehicle.sql" />
-    <Build Include="fin\Stored Procedures\sp_vehicle_received_note.sql" />
-    <Build Include="fin\Stored Procedures\sp_evidence_of_purchase.sql" />
+    <Build Include="fin\Tables\payment_in.sql" />
+    <Build Include="fin\Stored Procedures\sp_vehicle_incoming_doc.sql" />
   </ItemGroup>
 </Project>

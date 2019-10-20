@@ -78,6 +78,8 @@ SELECT
 	VEHICLE.[ignition_key],
 
 	VEHICLE.[date_received],
+	VEHICLE.[settlement_date],
+
 	VEHICLE.[invoice_no],
 	VEHICLE.[road_tax],
 	VEHICLE.[road_tax_expiry_date],

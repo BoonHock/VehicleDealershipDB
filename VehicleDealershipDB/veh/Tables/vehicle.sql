@@ -18,6 +18,7 @@
     [ignition_key]                  NVARCHAR (20)   NOT NULL,
     [purchase_date]                 DATE            NOT NULL,
     [date_received]                 DATE            NOT NULL,
+    [settlement_date]               DATE            CONSTRAINT [DF_vehicle_settlement_date] DEFAULT (getdate()) NOT NULL,
     [invoice_no]                    NVARCHAR (20)   NOT NULL,
     [road_tax]                      DECIMAL (18, 4) CONSTRAINT [DF_vehicle_loan_balance1] DEFAULT ((0)) NOT NULL,
     [road_tax_expiry_date]          DATE            CONSTRAINT [DF_vehicle_road_tax_expiry_date] DEFAULT (NULL) NULL,
@@ -47,6 +48,8 @@
     CONSTRAINT [FK_vehicle_user1] FOREIGN KEY ([modified_by]) REFERENCES [dbsecurity].[user] ([user]),
     CONSTRAINT [FK_vehicle_vehicle_sale] FOREIGN KEY ([vehicle_sale]) REFERENCES [fin].[vehicle_sale] ([vehicle])
 );
+
+
 
 
 

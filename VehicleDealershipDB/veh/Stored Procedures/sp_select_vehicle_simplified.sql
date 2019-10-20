@@ -13,16 +13,16 @@ BEGIN
 
     -- Insert statements for procedure here
 SELECT
-	VEHICLE.[vehicle],
-	VEHICLE.[registration_no],
-	ISNULL(HRPERSON.[name], HRORG.[name]) AS [seller_name],
-	ORGBRANCH.[branch_name],
-	ISNULL(VEHMODEL.[vehicle_model_name], '') AS [vehicle_model],
-	VEHICLE.[purchase_date],
-	MISCLOCATION.[location_name] AS [location],
-	VEHCHASSIS.[chassis_no],
-	VEHICLE.[engine_no],
-	VEHMODEL.[year_make],
+	CASE WHEN VEHSALE.[vehicle] IS NULL THEN 
+		CASE WHEN VEHRETURN.[vehicle] IS NULL THEN 
+			'UNSOLD'
+		ELSE 
+			'RETURNED' 
+		END
+	ELSE 
+		'SOLD'
+	END AS [vehicle_status],
+
 	CASE WHEN VEHICLE.[vehicle_sale] IS NULL THEN 
 		CASE WHEN VEHICLE.[consignment_mortgage] IS NULL THEN 
 			'PURCHASE'
@@ -37,15 +37,17 @@ SELECT
 		'TRADE-IN'
 	END AS [acquire_method],
 
-	CASE WHEN VEHSALE.[vehicle] IS NULL THEN 
-		CASE WHEN VEHRETURN.[vehicle] IS NULL THEN 
-			'UNSOLD'
-		ELSE 
-			'RETURNED' 
-		END
-	ELSE 
-		'SOLD'
-	END AS [vehicle_status],
+	VEHICLE.[vehicle],
+	VEHICLE.[registration_no],
+	ISNULL(HRPERSON.[name], HRORG.[name]) AS [seller_name],
+	ORGBRANCH.[branch_name],
+	ISNULL(VEHMODEL.[vehicle_model_name], '') AS [vehicle_model],
+	VEHICLE.[purchase_date],
+	MISCLOCATION.[location_name] AS [location],
+	VEHCHASSIS.[chassis_no],
+	VEHICLE.[engine_no],
+	VEHMODEL.[year_make],
+
 	SECURITYUSER.[name] AS [modified_by]
 
 
