@@ -1,12 +1,13 @@
 ﻿-- =============================================
 -- Author:		hock
--- Create date: 18.11.2019
--- Description:	select vehicle payment
+-- Create date: 8.11.2019
+-- Description:	select vehicle sale payment
 -- =============================================
-CREATE PROCEDURE fin.sp_select_vehicle_payment 
+CREATE PROCEDURE [fin].[sp_select_vehicle_sale_payment] 
 	-- Add the parameters for the stored procedure here
-	@vehicle int = 0,
-	@pay_function int = 2
+	@vehicle int,
+	@payment_function int
+
 AS
 BEGIN
 	-- SET NOCOUNT ON added to prevent extra result sets from
@@ -17,10 +18,8 @@ BEGIN
 
 SELECT 
 	PAYMENT.[payment],
-	VPAYMENT.[charge_to_customer],
 	PAYMENT.[payment_no],
 	PAYMENT.[payment_description],
-	ISNULL(PAYMENT.[pay_to_person],PAYMENT.[pay_to_organisation]) AS [pay_to_id],
 	CASE WHEN PAYMENT.[pay_to_person] IS NOT NULL THEN PAYTOPERSON.[name] ELSE [PAYTOORG].[name] END as [pay_to],
 	CASE WHEN PAYMENT.[pay_to_person] IS NOT NULL THEN 'PERSON' ELSE 'ORGANISATION' END as [pay_to_type],
 	PAYMENT.[amount],
@@ -37,21 +36,18 @@ SELECT
 		END
 	END AS [payment_method_type],
 	ISNULL(PAYMENTMETHOD.[payment_method_description], '') AS [payment_method],
-	PAYMENT.[payment_method] AS [payment_method_id],
 	CHEQUE.[cheque_no],
 	CREDITCARD.[credit_card_no],
-	CREDITCARD.[credit_card_type] AS [credit_card_type_id],
 	CREDITCARDTYPE.[type_name] AS [credit_card_type],
-	ISNULL(CHEQUE.[finance],CREDITCARD.[finance]) AS [finance_id],
 	FINANCEORG.[name] AS [finance],
 	ISNULL(CHEQUE.[cheque_date], CREDITCARD.[expiry_date]) AS [payment_method_date],
 	PAYMENT.[remark],
 	SECURITYUSER.[name] AS [modified_by]
 
-FROM [fin].[vehicle_payment] VPAYMENT
+FROM [fin].[vehicle_sale_payment] VSALEPAYMENT
 
 JOIN [fin].[payment] PAYMENT
-	ON PAYMENT.[payment] = VPAYMENT.[payment]
+	ON PAYMENT.[payment] = VSALEPAYMENT.[payment]
 
 LEFT JOIN [fin].[payment_method] PAYMENTMETHOD
 	ON PAYMENTMETHOD.[payment_method] = PAYMENT.[payment_method]
@@ -83,8 +79,8 @@ LEFT JOIN [hr].[organisation] FINANCEORG
 JOIN [dbsecurity].[user] SECURITYUSER
 	ON SECURITYUSER.[user] = PAYMENT.[modified_by]
 
-WHERE VPAYMENT.[vehicle] = @vehicle
-	AND VPAYMENT.[payment_function] = @pay_function
+WHERE VSALEPAYMENT.[vehicle] = @vehicle
+	AND VSALEPAYMENT.[payment_function] = @payment_function
 
 
 

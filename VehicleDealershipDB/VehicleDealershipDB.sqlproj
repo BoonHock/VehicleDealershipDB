@@ -80,6 +80,8 @@
     <Folder Include="fin\" />
     <Folder Include="fin\Tables\" />
     <Folder Include="fin\Stored Procedures\" />
+    <Folder Include="veh\Views\" />
+    <Folder Include="fin\Functions\" />
   </ItemGroup>
   <ItemGroup>
     <Build Include="hr\Tables\country.sql" />
@@ -234,7 +236,34 @@
     <Build Include="dbsecurity\Stored Procedures\sp_select_filepath.sql" />
     <Build Include="dbsecurity\Tables\company.sql" />
     <Build Include="veh\Stored Procedures\sp_delete_vehicle.sql" />
-    <Build Include="fin\Tables\payment_in.sql" />
     <Build Include="fin\Stored Procedures\sp_vehicle_incoming_doc.sql" />
+    <Build Include="hr\Tables\loan.sql" />
+    <Build Include="hr\Tables\insurance.sql" />
+    <Build Include="fin\Tables\vehicle_sale_payment.sql" />
+    <Build Include="fin\Tables\vehicle_sale_charges.sql" />
+    <Build Include="fin\Tables\vehicle_payment_DELETE.sql" />
+    <Build Include="fin\Tables\payment_function.sql" />
+    <Build Include="fin\Tables\insurance_type.sql" />
+    <Build Include="fin\Tables\insurance_misc_charges.sql" />
+    <Build Include="fin\Tables\insurance_driver.sql" />
+    <Build Include="fin\Tables\insurance_category.sql" />
+    <Build Include="veh\Views\Vw_veh_model_group_brand.sql" />
+    <Build Include="fin\Functions\svf_vehicle_cost.sql" />
+    <Build Include="veh\Stored Procedures\sp_select_vehicle_unsold.sql" />
+    <Build Include="veh\Stored Procedures\sp_select_vehicle_trade_in.sql" />
+    <Build Include="hr\Stored Procedures\sp_update_insert_insurance.sql" />
+    <Build Include="hr\Stored Procedures\sp_select_organisation_not_insurance.sql" />
+    <Build Include="fin\Stored Procedures\sp_update_vehicle_return.sql" />
+    <Build Include="fin\Stored Procedures\sp_select_vehicle_sale_simplified.sql" />
+    <Build Include="fin\Stored Procedures\sp_select_vehicle_sale_payment.sql" />
+    <Build Include="fin\Stored Procedures\sp_select_vehicle_sale_charges.sql" />
+    <Build Include="fin\Stored Procedures\sp_select_vehicle_sale.sql" />
+    <Build Include="fin\Stored Procedures\sp_select_vehicle_return.sql" />
+    <Build Include="fin\Stored Procedures\sp_select_vehicle_payment_DELETE.sql" />
+    <Build Include="fin\Stored Procedures\sp_select_insurance_misc_charges.sql" />
+    <Build Include="fin\Stored Procedures\sp_select_insurance_driver.sql" />
+    <Build Include="fin\Stored Procedures\sp_select_insurance.sql" />
+    <Build Include="fin\Stored Procedures\sp_insert_vehicle_return.sql" />
+    <Build Include="fin\Stored Procedures\sp_delete_vehicle_return.sql" />
   </ItemGroup>
 </Project>

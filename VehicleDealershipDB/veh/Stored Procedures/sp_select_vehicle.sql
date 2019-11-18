@@ -71,7 +71,7 @@ SELECT
 	END AS [vehicle_status],
 
 	VEHICLE.[vehicle_sale],
-	VEHSALE.[vehicle_sale_no],
+	VEHSALE.[reference_no] AS [sale_ref_no],
 	VEHICLE.[consignment_mortgage],
 
 	VEHICLE.[door_key],
@@ -81,6 +81,8 @@ SELECT
 	VEHICLE.[settlement_date],
 
 	VEHICLE.[invoice_no],
+	VEHICLE.[jpj_serial_no],
+
 	VEHICLE.[road_tax],
 	VEHICLE.[road_tax_expiry_date],
 

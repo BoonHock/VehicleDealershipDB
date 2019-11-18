@@ -23,6 +23,7 @@ WHERE [organisation_branch] NOT IN
 	FROM [misc].[bulkcopy_table]
 	WHERE [created_by] = @uid
 )
+	AND [organisation] = @org
 
 -- trim incoming contact and remark first
 UPDATE [misc].[bulkcopy_table]

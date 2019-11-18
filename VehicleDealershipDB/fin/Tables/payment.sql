@@ -14,7 +14,7 @@
     [remark]              NVARCHAR (255)  CONSTRAINT [DF_payment_remark] DEFAULT ('') NOT NULL,
     [modified_by]         INT             NOT NULL,
     CONSTRAINT [PK_payment] PRIMARY KEY CLUSTERED ([payment] ASC),
-    CONSTRAINT [CK_payment] CHECK ([pay_to_person] IS NULL AND [pay_to_organisation] IS NOT NULL OR [pay_to_person] IS NOT NULL AND [pay_to_organisation] IS NULL),
+    CONSTRAINT [CK_payment] CHECK ([pay_to_person] IS NULL OR [pay_to_organisation] IS NULL),
     CONSTRAINT [CK_payment_1] CHECK ([cheque] IS NULL AND [credit_card] IS NULL AND [payment_method] IS NOT NULL OR [cheque] IS NULL AND [credit_card] IS NOT NULL AND [payment_method] IS NULL OR [cheque] IS NOT NULL AND [credit_card] IS NULL AND [payment_method] IS NULL),
     CONSTRAINT [FK_payment_cheque] FOREIGN KEY ([cheque]) REFERENCES [fin].[cheque] ([cheque]),
     CONSTRAINT [FK_payment_credit_card] FOREIGN KEY ([credit_card]) REFERENCES [fin].[credit_card] ([credit_card]),
@@ -32,4 +32,17 @@
 
 
 
+
+
+
+
+GO
+EXECUTE sp_addextendedproperty @name = N'MS_Description', @value = N'scenario 1
+pay to person is null and pay to org is not null - payment to org
+
+scenario 2
+pay to person is not null and pay to org is null - payment to person
+
+scenario 3
+pay to person and pay to org are null - payment received', @level0type = N'SCHEMA', @level0name = N'fin', @level1type = N'TABLE', @level1name = N'payment', @level2type = N'CONSTRAINT', @level2name = N'CK_payment';
 

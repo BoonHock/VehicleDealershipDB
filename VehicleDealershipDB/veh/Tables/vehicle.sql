@@ -20,6 +20,7 @@
     [date_received]                 DATE            NOT NULL,
     [settlement_date]               DATE            CONSTRAINT [DF_vehicle_settlement_date] DEFAULT (getdate()) NOT NULL,
     [invoice_no]                    NVARCHAR (20)   NOT NULL,
+    [jpj_serial_no]                 NVARCHAR (20)   CONSTRAINT [DF_vehicle_jpj_serial_no] DEFAULT ('') NOT NULL,
     [road_tax]                      DECIMAL (18, 4) CONSTRAINT [DF_vehicle_loan_balance1] DEFAULT ((0)) NOT NULL,
     [road_tax_expiry_date]          DATE            CONSTRAINT [DF_vehicle_road_tax_expiry_date] DEFAULT (NULL) NULL,
     [purchase_price]                DECIMAL (18, 4) CONSTRAINT [DF_vehicle_purchase_price] DEFAULT ((0)) NOT NULL,
@@ -38,6 +39,7 @@
     CONSTRAINT [PK_vehicle] PRIMARY KEY CLUSTERED ([vehicle] ASC),
     CONSTRAINT [CK_vehicle] CHECK ([seller_person] IS NULL AND [seller_organisation_branch] IS NOT NULL OR [seller_person] IS NOT NULL AND [seller_organisation_branch] IS NULL),
     CONSTRAINT [CK_vehicle_1] CHECK ([vehicle_sale] IS NULL OR [consignment_mortgage] IS NULL),
+    CONSTRAINT [CK_vehicle_2] CHECK ([vehicle_sale]<>[vehicle]),
     CONSTRAINT [FK_vehicle_chassis] FOREIGN KEY ([chassis]) REFERENCES [veh].[chassis] ([chassis]),
     CONSTRAINT [FK_vehicle_color] FOREIGN KEY ([colour]) REFERENCES [misc].[colour] ([colour]),
     CONSTRAINT [FK_vehicle_finance] FOREIGN KEY ([loan_finance]) REFERENCES [hr].[finance] ([finance]),
@@ -48,6 +50,8 @@
     CONSTRAINT [FK_vehicle_user1] FOREIGN KEY ([modified_by]) REFERENCES [dbsecurity].[user] ([user]),
     CONSTRAINT [FK_vehicle_vehicle_sale] FOREIGN KEY ([vehicle_sale]) REFERENCES [fin].[vehicle_sale] ([vehicle])
 );
+
+
 
 
 
@@ -80,4 +84,8 @@ EXECUTE sp_addextendedproperty @name = N'MS_Description', @value = N'in kilomete
 
 GO
 EXECUTE sp_addextendedproperty @name = N'MS_Description', @value = N'1 - consignment; 0 - mortgage', @level0type = N'SCHEMA', @level0name = N'veh', @level1type = N'TABLE', @level1name = N'vehicle', @level2type = N'COLUMN', @level2name = N'consignment_mortgage';
+
+
+GO
+EXECUTE sp_addextendedproperty @name = N'MS_Description', @value = N'cannot self trade-in right?', @level0type = N'SCHEMA', @level0name = N'veh', @level1type = N'TABLE', @level1name = N'vehicle', @level2type = N'CONSTRAINT', @level2name = N'CK_vehicle_2';
 

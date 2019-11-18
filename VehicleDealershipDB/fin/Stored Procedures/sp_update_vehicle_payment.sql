@@ -6,7 +6,10 @@
 CREATE PROCEDURE [fin].[sp_update_vehicle_payment] 
 	-- Add the parameters for the stored procedure here
 	@vehicle int,
-	@payment_combine nvarchar(max) = ''
+	@payment_combine nvarchar(max),
+	@payment_function int,
+	-- contains payment id to charge to customer. if not here, then not charging to customer
+	@charge_to_customer nvarchar(max)
 
 AS
 BEGIN
@@ -31,15 +34,28 @@ WHERE [payment] IN
 	FROM [fin].[vehicle_payment]
 	WHERE [payment] NOT IN (SELECT * FROM @payment_table)
 		AND [vehicle] = @vehicle
+		AND [payment_function] = @payment_function
 )
 
 -- no duplicate payment_id allowed
 INSERT INTO [fin].[vehicle_payment]
+(
+	[vehicle],
+	[payment],
+	[payment_function],
+	[charge_to_customer]
+)
 SELECT 
 	@vehicle,
-	[payment]
+	[payment],
+	@payment_function,
+	CASE WHEN CHARGETOCUSTOMER.[value] IS NULL THEN 0 ELSE 1 END
 
-FROM [fin].[payment]
+FROM [fin].[payment] PAYMENT
+
+LEFT JOIN string_split(@payment_combine,',') CHARGETOCUSTOMER
+	ON CHARGETOCUSTOMER.[value] = PAYMENT.[payment]
+
 WHERE [payment] IN (SELECT * FROM @payment_table)
 	AND [payment] NOT IN (SELECT [payment] FROM [fin].[vehicle_payment])
 

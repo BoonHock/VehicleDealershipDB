@@ -36,7 +36,7 @@ SELECT
 	ELSE 
 		'TRADE-IN'
 	END AS [acquire_method],
-
+	VEHICLE.[reference_no],
 	VEHICLE.[vehicle],
 	VEHICLE.[registration_no],
 	ISNULL(HRPERSON.[name], HRORG.[name]) AS [seller_name],
