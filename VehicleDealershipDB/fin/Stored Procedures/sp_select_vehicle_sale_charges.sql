@@ -19,7 +19,6 @@ SELECT
 	VSALECHARGES.[vehicle_sale_charges],
 	VSALECHARGES.[description],
 	VSALECHARGES.[amount],
-	VSALECHARGES.[is_add],
 	DBUSER.[name] AS [modified_by]
 
 FROM [fin].[vehicle_sale_charges] VSALECHARGES

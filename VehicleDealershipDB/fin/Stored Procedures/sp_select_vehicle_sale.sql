@@ -34,8 +34,6 @@ SELECT
 	VSALE.[road_tax_amount],
 	VSALE.[road_tax_month],
 
-	FIN.[svf_vehicle_cost](VSALE.[vehicle]) AS [vehicle_cost],
-
 	-- LOAN
 	VSALE.[loan],
 	LOANORG.[name] AS [loan_org_name],
@@ -46,7 +44,6 @@ SELECT
 	VSALE.[loan_monthly_installment],
 	VSALE.[loan_ref_no],
 	VSALE.[loan_approval_date],
-	VSALE.[loan_commission],
 	VSALE.[loan_ownership_claim_no],
 
 	-- INSURANCE

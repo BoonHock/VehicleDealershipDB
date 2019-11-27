@@ -5,7 +5,9 @@
 -- =============================================
 CREATE PROCEDURE [veh].[sp_select_vehicle_trade_in] 
 	-- Add the parameters for the stored procedure here
-	@vsale int
+	@vsale int = 1,
+	-- vehicle that is added as trade in but not saved yet. need to select them to show in form
+	@vid_combine nvarchar(max) = '1'
 
 AS
 BEGIN
@@ -32,6 +34,6 @@ JOIN [veh].[Vw_veh_model_group_brand] VMGB
 	ON VMGB.[vehicle_model] = CHASSIS.[vehicle_model]
 
 WHERE VEHICLE.[vehicle_sale] = @vsale
-
+	OR VEHICLE.[vehicle] IN (SELECT * FROM string_split(@vid_combine,','))
 
 END

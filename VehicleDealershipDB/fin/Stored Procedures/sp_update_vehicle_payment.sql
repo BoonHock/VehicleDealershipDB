@@ -9,7 +9,8 @@ CREATE PROCEDURE [fin].[sp_update_vehicle_payment]
 	@payment_combine nvarchar(max),
 	@payment_function int,
 	-- contains payment id to charge to customer. if not here, then not charging to customer
-	@charge_to_customer nvarchar(max)
+	@charge_to_customer nvarchar(max),
+	@uid int
 
 AS
 BEGIN
@@ -37,23 +38,39 @@ WHERE [payment] IN
 		AND [payment_function] = @payment_function
 )
 
+
+UPDATE VPAYMENT
+SET VPAYMENT.[charge_to_customer] = CASE WHEN CHARGETOCUSTOMER.[value] IS NULL THEN 0 ELSE 1 END,
+	VPAYMENT.[modified_by] = @uid
+
+FROM [fin].[vehicle_payment] VPAYMENT
+
+LEFT JOIN string_split(@charge_to_customer,',') CHARGETOCUSTOMER
+	ON CHARGETOCUSTOMER.[value] = VPAYMENT.[payment]
+
+WHERE VPAYMENT.[vehicle] = @vehicle
+	AND VPAYMENT.[payment_function] = @payment_function
+	AND [payment] IN (SELECT * FROM @payment_table)
+
 -- no duplicate payment_id allowed
 INSERT INTO [fin].[vehicle_payment]
 (
 	[vehicle],
 	[payment],
 	[payment_function],
-	[charge_to_customer]
+	[charge_to_customer],
+	[modified_by]
 )
 SELECT 
 	@vehicle,
 	[payment],
 	@payment_function,
-	CASE WHEN CHARGETOCUSTOMER.[value] IS NULL THEN 0 ELSE 1 END
+	CASE WHEN CHARGETOCUSTOMER.[value] IS NULL THEN 0 ELSE 1 END,
+	@uid
 
 FROM [fin].[payment] PAYMENT
 
-LEFT JOIN string_split(@payment_combine,',') CHARGETOCUSTOMER
+LEFT JOIN string_split(@charge_to_customer,',') CHARGETOCUSTOMER
 	ON CHARGETOCUSTOMER.[value] = PAYMENT.[payment]
 
 WHERE [payment] IN (SELECT * FROM @payment_table)

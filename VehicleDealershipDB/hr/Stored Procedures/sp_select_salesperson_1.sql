@@ -5,8 +5,8 @@
 -- =============================================
 CREATE PROCEDURE [hr].[sp_select_salesperson] 
 	-- Add the parameters for the stored procedure here
-	@salesperson int -- -1 to select all salesperson
-
+	@salesperson int, -- -1 to select all salesperson
+	@is_active INT -- -1 to select all, 1 to select active, 0 to select inactive
 AS
 BEGIN
 	-- SET NOCOUNT ON added to prevent extra result sets from
@@ -34,6 +34,9 @@ JOIN [hr].[person] HRPERSON
 WHERE SALESPERSON.[person] IS NOT NULL
 	AND (@salesperson = -1 
 		OR SALESPERSON.[salesperson] = @salesperson)
+	AND (@is_active = -1 
+		OR (@is_active = 1 AND (SALESPERSON.[date_leave] IS NULL OR SALESPERSON.[date_leave] > GETDATE()))
+		OR (@is_active = 0 AND SALESPERSON.[date_leave] IS NOT NULL AND SALESPERSON.[date_leave] <= GETDATE()))
 
 UNION
 
@@ -60,6 +63,9 @@ JOIN [hr].[organisation] HRORG
 WHERE SALESPERSON.[organisation_branch] IS NOT NULL
 	AND (@salesperson = -1 
 		OR SALESPERSON.[salesperson] = @salesperson)
+	AND (@is_active = -1 
+		OR (@is_active = 1 AND (SALESPERSON.[date_leave] IS NULL OR SALESPERSON.[date_leave] > GETDATE()))
+		OR (@is_active = 0 AND SALESPERSON.[date_leave] IS NOT NULL AND SALESPERSON.[date_leave] <= GETDATE()))
 
 
 END

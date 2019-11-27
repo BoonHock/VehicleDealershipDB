@@ -1,11 +1,11 @@
 ﻿-- =============================================
 -- Author:		hock
--- Create date: 3.9.2019
--- Description:	select finance
+-- Create date: 19.11.2019
+-- Description:	select loan
 -- =============================================
-CREATE PROCEDURE [hr].[sp_select_finance] 
+CREATE PROCEDURE [hr].[sp_select_loan] 
 	-- Add the parameters for the stored procedure here
-	@finance int = -1
+	@loan int = -1
 
 AS
 BEGIN
@@ -16,7 +16,7 @@ BEGIN
     -- Insert statements for procedure here
 
 SELECT
-	HRFINANCE.[finance],
+	HRLOAN.[loan],
 	ORGBRANCH.[organisation],
 	HRORG.[name],
 	ORGBRANCH.[branch_name],
@@ -27,12 +27,12 @@ SELECT
 	ORGBRANCH.[postcode],
 	HRCOUNTRY.[country_name],
 	HRORG.[url],
-	HRFINANCE.[remark]
+	HRLOAN.[remark]
 
-FROM [hr].[finance] HRFINANCE
+FROM [hr].[loan] HRLOAN
 
 JOIN [hr].[organisation_branch] ORGBRANCH
-	ON ORGBRANCH.[organisation_branch] = HRFINANCE.[finance]
+	ON ORGBRANCH.[organisation_branch] = HRLOAN.[loan]
 
 JOIN [hr].[organisation] HRORG
 	ON HRORG.[organisation] = ORGBRANCH.[organisation]
@@ -40,8 +40,8 @@ JOIN [hr].[organisation] HRORG
 JOIN [hr].[country] HRCOUNTRY
 	ON HRCOUNTRY.[country] = ORGBRANCH.[country]
 
-WHERE @finance = -1
-	OR HRFINANCE.[finance] = @finance
+WHERE @loan = -1
+	OR HRLOAN.[loan] = @loan
 
 ORDER BY
 	HRORG.[name],

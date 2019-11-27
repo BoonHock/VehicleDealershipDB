@@ -4,6 +4,7 @@
     [reference_no]                  AS              ([reference_no_prefix]+CONVERT([nvarchar],[vehicle])),
     [seller_person]                 INT             NULL,
     [seller_organisation_branch]    INT             NULL,
+    [prev_registration_no]          NVARCHAR (10)   CONSTRAINT [DF_vehicle_prev_registration_no] DEFAULT ('') NOT NULL,
     [registration_no]               NVARCHAR (10)   NOT NULL,
     [chassis]                       INT             NOT NULL,
     [colour]                        INT             NOT NULL,
@@ -50,6 +51,8 @@
     CONSTRAINT [FK_vehicle_user1] FOREIGN KEY ([modified_by]) REFERENCES [dbsecurity].[user] ([user]),
     CONSTRAINT [FK_vehicle_vehicle_sale] FOREIGN KEY ([vehicle_sale]) REFERENCES [fin].[vehicle_sale] ([vehicle])
 );
+
+
 
 
 

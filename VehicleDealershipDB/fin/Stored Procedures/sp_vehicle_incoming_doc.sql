@@ -131,10 +131,12 @@ LEFT JOIN (
 		VEXP.[vehicle],
 		SUM(PAYMENT.[amount]) AS [amount]
 
-	FROM [fin].[vehicle_expenses] VEXP
+	FROM [fin].[vehicle_payment] VEXP
 
 	JOIN [fin].[payment] PAYMENT
 		ON PAYMENT.[payment] = VEXP.[payment]
+
+	WHERE VEXP.[payment_function] = 2 -- VEHICLE EXPENSES
 
 	GROUP BY VEXP.[vehicle]
 ) VEXP

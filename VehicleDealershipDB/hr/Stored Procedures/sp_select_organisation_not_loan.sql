@@ -1,12 +1,10 @@
 ﻿-- =============================================
 -- Author:		hock
--- Create date: 3.9.2019
--- Description:	select finance
+-- Create date: 19.11.2019
+-- Description:	select organisation not loan
 -- =============================================
-CREATE PROCEDURE [hr].[sp_select_finance] 
+CREATE PROCEDURE hr.sp_select_organisation_not_loan 
 	-- Add the parameters for the stored procedure here
-	@finance int = -1
-
 AS
 BEGIN
 	-- SET NOCOUNT ON added to prevent extra result sets from
@@ -14,37 +12,28 @@ BEGIN
 	SET NOCOUNT ON;
 
     -- Insert statements for procedure here
-
-SELECT
-	HRFINANCE.[finance],
+SELECT 
+	ORGBRANCH.[organisation_branch],
 	ORGBRANCH.[organisation],
 	HRORG.[name],
 	ORGBRANCH.[branch_name],
 	HRORG.[registration_no],
-	ORGBRANCH.[address],
-	ORGBRANCH.[city],
-	ORGBRANCH.[state],
-	ORGBRANCH.[postcode],
-	HRCOUNTRY.[country_name],
-	HRORG.[url],
-	HRFINANCE.[remark]
+	HRORG.[url]
 
-FROM [hr].[finance] HRFINANCE
-
-JOIN [hr].[organisation_branch] ORGBRANCH
-	ON ORGBRANCH.[organisation_branch] = HRFINANCE.[finance]
+FROM [hr].[organisation_branch] ORGBRANCH
 
 JOIN [hr].[organisation] HRORG
 	ON HRORG.[organisation] = ORGBRANCH.[organisation]
 
-JOIN [hr].[country] HRCOUNTRY
-	ON HRCOUNTRY.[country] = ORGBRANCH.[country]
+WHERE ORGBRANCH.[organisation_branch] NOT IN 
+(
+	SELECT [loan]
+	FROM [hr].[loan]
+)
 
-WHERE @finance = -1
-	OR HRFINANCE.[finance] = @finance
-
-ORDER BY
+ORDER BY 
 	HRORG.[name],
 	ORGBRANCH.[branch_name]
+
 
 END

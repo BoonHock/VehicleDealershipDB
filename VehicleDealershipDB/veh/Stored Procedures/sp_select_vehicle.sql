@@ -28,6 +28,7 @@ SELECT
 	SELLERORGBRANCH.[branch_name] AS [seller_branch_name],
 
 	VEHICLE.[registration_no],
+	VEHICLE.[prev_registration_no],
 	VEHICLE.[chassis],
 	CHASSIS.[chassis_no],
 	CHASSIS.[vehicle_model],
