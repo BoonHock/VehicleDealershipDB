@@ -39,7 +39,7 @@ SELECT
 	LOANORG.[name] AS [loan_org_name],
 	LOANORG.[registration_no] AS [loan_org_reg_no],
 	VSALE.[loan_amount],
-	VSALE.[loan_month_term],
+	VSALE.[loan_month],
 	VSALE.[loan_interest_percentage],
 	VSALE.[loan_monthly_installment],
 	VSALE.[loan_ref_no],

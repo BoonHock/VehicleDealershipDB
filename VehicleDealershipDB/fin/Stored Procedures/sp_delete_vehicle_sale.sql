@@ -1,10 +1,13 @@
 ﻿-- =============================================
--- Author:		hock
--- Create date: 19.9.2019
--- Description:	select location
+-- Author:		HOCK
+-- Create date: 3.12.2019
+-- Description:	delete vehicle sale
 -- =============================================
-CREATE PROCEDURE [misc].[sp_select_location] 
+CREATE PROCEDURE [fin].[sp_delete_vehicle_sale] 
 	-- Add the parameters for the stored procedure here
+	@vehicle int,
+	@uid int
+
 AS
 BEGIN
 	-- SET NOCOUNT ON added to prevent extra result sets from
@@ -12,12 +15,8 @@ BEGIN
 	SET NOCOUNT ON;
 
     -- Insert statements for procedure here
-SELECT
-	[location],
-	[location_name]
 
-FROM [misc].[location]
-
-ORDER BY [location_name]
+DELETE FROM [fin].[vehicle_sale]
+WHERE [vehicle] = @vehicle
 
 END

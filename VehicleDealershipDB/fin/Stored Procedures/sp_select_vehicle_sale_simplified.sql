@@ -69,7 +69,7 @@ LEFT JOIN [hr].[person] SALESPERSONPERSON
 	ON SALESPERSONPERSON.[person] = SALESPERSON.[person]
 
 LEFT JOIN [hr].[organisation_branch] SALESPERSONORGBRANCH
-	ON SALESPERSONORGBRANCH.[organisation] = SALESPERSON.[organisation_branch]
+	ON SALESPERSONORGBRANCH.[organisation_branch] = SALESPERSON.[organisation_branch]
 
 LEFT JOIN [hr].[organisation] SALESPERSONORG
 	ON SALESPERSONORG.[organisation] = SALESPERSONORGBRANCH.[organisation]

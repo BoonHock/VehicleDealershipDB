@@ -14,13 +14,9 @@ BEGIN
     -- Insert statements for procedure here
 SELECT
 	[transmission],
-	[transmission_name],
-	DBUSER.[name] AS [modified_by]
+	[transmission_name]
 
-FROM [VehicleDealership].[veh].[transmission] TRANSMISSION
-
-JOIN [dbsecurity].[user] DBUSER
-	ON TRANSMISSION.[modified_by] = DBUSER.[user]
+FROM [VehicleDealership].[veh].[transmission]
 
 ORDER BY [transmission_name]
 

@@ -1,13 +1,12 @@
 ﻿-- =============================================
 -- Author:		hock
--- Create date: 5.10.2019
--- Description:	update vehicle payment
+-- Create date: 9.12.2019
+-- Description:	update vehicle expenses
 -- =============================================
-CREATE PROCEDURE [fin].[sp_update_vehicle_payment] 
+CREATE PROCEDURE fin.sp_update_vehicle_expenses 
 	-- Add the parameters for the stored procedure here
 	@vehicle int,
 	@payment_combine nvarchar(max),
-	@payment_function int,
 	-- contains payment id to charge to customer. if not here, then not charging to customer
 	@charge_to_customer nvarchar(max),
 	@uid int
@@ -19,6 +18,7 @@ BEGIN
 	SET NOCOUNT ON;
 
     -- Insert statements for procedure here
+
 declare @payment_table table (
 	[payment_id] int not null
 )
@@ -29,42 +29,38 @@ WHERE ISNUMERIC([value]) = 1
 
 -- if incoming data does not provide a payment id associated with this vehicle, user deleted it already
 DELETE FROM [fin].[payment]
-WHERE [payment] IN 
+WHERE [payment] IN
 (
 	SELECT [payment]
-	FROM [fin].[vehicle_payment]
-	WHERE [payment] NOT IN (SELECT * FROM @payment_table)
-		AND [vehicle] = @vehicle
-		AND [payment_function] = @payment_function
+	FROM [fin].[vehicle_expenses]
+	WHERE [vehicle] = @vehicle
+		AND [payment] NOT IN (SELECT * FROM @payment_table)
 )
 
+UPDATE VEXP
+SET VEXP.[charge_to_customer] = CASE WHEN CHARGETOCUSTOMER.[value] IS NULL THEN 0 ELSE 1 END,
+	VEXP.[modified_by] = @uid
 
-UPDATE VPAYMENT
-SET VPAYMENT.[charge_to_customer] = CASE WHEN CHARGETOCUSTOMER.[value] IS NULL THEN 0 ELSE 1 END,
-	VPAYMENT.[modified_by] = @uid
-
-FROM [fin].[vehicle_payment] VPAYMENT
+FROM [fin].[vehicle_expenses] VEXP
 
 LEFT JOIN string_split(@charge_to_customer,',') CHARGETOCUSTOMER
-	ON CHARGETOCUSTOMER.[value] = VPAYMENT.[payment]
+	ON CHARGETOCUSTOMER.[value] = VEXP.[payment]
 
-WHERE VPAYMENT.[vehicle] = @vehicle
-	AND VPAYMENT.[payment_function] = @payment_function
+WHERE VEXP.[vehicle] = @vehicle
 	AND [payment] IN (SELECT * FROM @payment_table)
 
+
 -- no duplicate payment_id allowed
-INSERT INTO [fin].[vehicle_payment]
+INSERT INTO [fin].[vehicle_expenses]
 (
 	[vehicle],
 	[payment],
-	[payment_function],
 	[charge_to_customer],
 	[modified_by]
 )
 SELECT 
 	@vehicle,
 	[payment],
-	@payment_function,
 	CASE WHEN CHARGETOCUSTOMER.[value] IS NULL THEN 0 ELSE 1 END,
 	@uid
 
@@ -74,7 +70,7 @@ LEFT JOIN string_split(@charge_to_customer,',') CHARGETOCUSTOMER
 	ON CHARGETOCUSTOMER.[value] = PAYMENT.[payment]
 
 WHERE [payment] IN (SELECT * FROM @payment_table)
-	AND [payment] NOT IN (SELECT [payment] FROM [fin].[vehicle_payment])
+	AND [payment] NOT IN (SELECT [payment] FROM [fin].[vehicle_expenses])
 
 
 END

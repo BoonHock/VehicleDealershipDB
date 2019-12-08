@@ -1,9 +1,9 @@
 ﻿-- =============================================
 -- Author:		hock
--- Create date: 19.9.2019
--- Description:	select location
+-- Create date: 1.12.2019
+-- Description:	select insurance category
 -- =============================================
-CREATE PROCEDURE [misc].[sp_select_location] 
+CREATE PROCEDURE fin.sp_select_insurance_category 
 	-- Add the parameters for the stored procedure here
 AS
 BEGIN
@@ -13,11 +13,9 @@ BEGIN
 
     -- Insert statements for procedure here
 SELECT
-	[location],
-	[location_name]
+	[insurance_category],
+	[description]
 
-FROM [misc].[location]
-
-ORDER BY [location_name]
+FROM [fin].[insurance_category]
 
 END

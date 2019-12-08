@@ -3,7 +3,7 @@
 -- Create date: 26.11.2019
 -- Description:	update vehicle sale
 -- =============================================
-CREATE PROCEDURE fin.sp_update_vehicle_sale 
+CREATE PROCEDURE [fin].[sp_update_vehicle_sale] 
 	-- Add the parameters for the stored procedure here
 	@vehicle int,
 	@customer_person int,
@@ -14,7 +14,7 @@ CREATE PROCEDURE fin.sp_update_vehicle_sale
 	@road_tax_month tinyint,
 	@loan int,
 	@loan_amount decimal(18,4),
-	@loan_month_term tinyint,
+	@loan_month int,
 	@loan_interest_percentage decimal(5,2),
 	@loan_monthly_installment decimal(18,4),
 	@loan_ref_no nvarchar(50),
@@ -56,7 +56,7 @@ SET	[customer_person] = @customer_person,
 	[road_tax_month] = @road_tax_month, 
 	[loan] = @loan, 
 	[loan_amount] = @loan_amount, 
-	[loan_month_term] = @loan_month_term, 
+	[loan_month] = @loan_month, 
 	[loan_interest_percentage] = @loan_interest_percentage, 
 	[loan_monthly_installment] = @loan_monthly_installment, 
 	[loan_ref_no] = @loan_ref_no, 

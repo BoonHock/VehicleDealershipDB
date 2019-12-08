@@ -1,5 +1,5 @@
 ﻿CREATE TABLE [fin].[vehicle_sale] (
-    [vehicle]                          INT             IDENTITY (1, 1) NOT NULL,
+    [vehicle]                          INT             NOT NULL,
     [reference_no_prefix]              NVARCHAR (5)    CONSTRAINT [DF_vehicle_sale_reference_no_prefix] DEFAULT ('') NOT NULL,
     [reference_no]                     AS              ([reference_no_prefix]+CONVERT([nvarchar],[vehicle])),
     [customer_person]                  INT             NULL,
@@ -10,7 +10,7 @@
     [road_tax_month]                   TINYINT         NULL,
     [loan]                             INT             NULL,
     [loan_amount]                      DECIMAL (18, 4) NOT NULL,
-    [loan_month_term]                  TINYINT         NOT NULL,
+    [loan_month]                       INT             NOT NULL,
     [loan_interest_percentage]         DECIMAL (5, 2)  NOT NULL,
     [loan_monthly_installment]         DECIMAL (18, 4) NOT NULL,
     [loan_ref_no]                      NVARCHAR (50)   NOT NULL,
@@ -22,8 +22,8 @@
     [insurance_endorsement_no]         NVARCHAR (50)   NOT NULL,
     [insurance_policy_no]              NVARCHAR (50)   NOT NULL,
     [insurance_date]                   DATE            NOT NULL,
-    [insurance_category]               INT             NOT NULL,
-    [insurance_type]                   INT             NOT NULL,
+    [insurance_category]               INT             NULL,
+    [insurance_type]                   INT             NULL,
     [insurance_sum_insured]            DECIMAL (18, 4) NOT NULL,
     [insurance_premium]                DECIMAL (18, 4) NOT NULL,
     [insurance_stamp_duty]             DECIMAL (18, 4) NOT NULL,
@@ -45,6 +45,8 @@
     CONSTRAINT [FK_vehicle_sale_salesperson] FOREIGN KEY ([salesperson]) REFERENCES [hr].[salesperson] ([salesperson]),
     CONSTRAINT [FK_vehicle_sale_user] FOREIGN KEY ([modified_by]) REFERENCES [dbsecurity].[user] ([user])
 );
+
+
 
 
 

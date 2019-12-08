@@ -1,12 +1,11 @@
 ﻿-- =============================================
 -- Author:		hock
--- Create date: 18.11.2019
--- Description:	select vehicle payment
+-- Create date: 9.12.2019
+-- Description:	select misc vehicle payment received for vehicle sale
 -- =============================================
-CREATE PROCEDURE fin.sp_select_vehicle_payment 
+CREATE PROCEDURE fin.sp_select_veh_sale_payment_receive_misc
 	-- Add the parameters for the stored procedure here
-	@vehicle int = 0,
-	@pay_function int = 2
+	@vehicle int = 0
 AS
 BEGIN
 	-- SET NOCOUNT ON added to prevent extra result sets from
@@ -14,10 +13,8 @@ BEGIN
 	SET NOCOUNT ON;
 
     -- Insert statements for procedure here
-
 SELECT 
 	PAYMENT.[payment],
-	VPAYMENT.[charge_to_customer],
 	PAYMENT.[payment_no],
 	PAYMENT.[payment_description],
 	ISNULL(PAYMENT.[pay_to_person],PAYMENT.[pay_to_organisation]) AS [pay_to_id],
@@ -48,10 +45,10 @@ SELECT
 	PAYMENT.[remark],
 	SECURITYUSER.[name] AS [modified_by]
 
-FROM [fin].[vehicle_payment] VPAYMENT
+FROM [fin].[veh_sale_payment_receive_misc] VPAY
 
 JOIN [fin].[payment] PAYMENT
-	ON PAYMENT.[payment] = VPAYMENT.[payment]
+	ON PAYMENT.[payment] = VPAY.[payment]
 
 LEFT JOIN [fin].[payment_method] PAYMENTMETHOD
 	ON PAYMENTMETHOD.[payment_method] = PAYMENT.[payment_method]
@@ -83,9 +80,7 @@ LEFT JOIN [hr].[organisation] FINANCEORG
 JOIN [dbsecurity].[user] SECURITYUSER
 	ON SECURITYUSER.[user] = PAYMENT.[modified_by]
 
-WHERE VPAYMENT.[vehicle] = @vehicle
-	AND VPAYMENT.[payment_function] = @pay_function
-
+WHERE VPAY.[vehicle] = @vehicle
 
 
 END
