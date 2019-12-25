@@ -44,9 +44,6 @@ LEFT JOIN [hr].[organisation_branch] CUSTOMERORGBRANCH
 LEFT JOIN [hr].[organisation] CUSTOMERORG
 	ON CUSTOMERORG.[organisation] = CUSTOMERORGBRANCH.[organisation]
 
-LEFT JOIN [hr].[organisation] LOANORG
-	ON LOANORG.[organisation] = VSALE.[loan]
-
 LEFT JOIN [hr].[person] GUARANTOR
 	ON GUARANTOR.[person] = VSALE.[guarantor_person]
 
@@ -55,12 +52,6 @@ LEFT JOIN [hr].[organisation_branch] INSURANCEORGBRANCH
 
 LEFT JOIN [hr].[organisation] INSURANCEORG
 	ON INSURANCEORG.[organisation] = INSURANCEORGBRANCH.[organisation]
-
-LEFT JOIN [fin].[insurance_category] INSURANCECAT
-	ON INSURANCECAT.[insurance_category] = VSALE.[insurance_category]
-
-LEFT JOIN [fin].[insurance_type] INSURANCETYPE
-	ON INSURANCETYPE.[insurance_type] = VSALE.[insurance_type]
 
 LEFT JOIN [hr].[salesperson] SALESPERSON
 	ON SALESPERSON.[salesperson] = VSALE.[salesperson]

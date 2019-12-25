@@ -33,6 +33,7 @@ JOIN [hr].[organisation_type] ORGTYPE
 JOIN [hr].[country] HRCOUNTRY
 	ON HRCOUNTRY.[country] = HRORG.[country]
 
-WHERE HRORG.[organisation] = @org
+WHERE @org = -1 
+	OR HRORG.[organisation] = @org
 
 END

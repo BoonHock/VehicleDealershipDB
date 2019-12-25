@@ -1,7 +1,7 @@
 ﻿-- =============================================
--- Author:		HOCK
--- Create date: 3.12.2019
--- Description:	delete vehicle sale
+-- Author:		hock
+-- Create date: 5.12.2019
+-- Description:	delete all vehicle sale stuffs
 -- =============================================
 CREATE PROCEDURE [fin].[sp_delete_vehicle_sale] 
 	-- Add the parameters for the stored procedure here
@@ -16,7 +16,52 @@ BEGIN
 
     -- Insert statements for procedure here
 
-DELETE FROM [fin].[vehicle_sale]
-WHERE [vehicle] = @vehicle
+BEGIN TRY
+    BEGIN TRANSACTION 
+		-- delete sale charges
+		DELETE FROM [fin].[vehicle_sale_charges]
+		WHERE [vehicle] = @vehicle
+
+		-- delete payment received from buyer and also misc payment received
+		DELETE FROM [fin].[payment]
+		WHERE [payment] IN (
+			SELECT [payment]
+			FROM [fin].[veh_sale_payment_customer]
+			WHERE [vehicle] = @vehicle
+
+			UNION ALL
+
+			SELECT [payment]
+			FROM [fin].[veh_sale_payment_receive_misc]
+			WHERE [vehicle] = @vehicle
+		)
+
+		-- remove any trade-in dependency
+		UPDATE [veh].[vehicle]
+		SET [vehicle_sale] = NULL
+		WHERE [vehicle_sale] = @vehicle
+
+		-- delete all insurance drivers
+		DELETE FROM [fin].[insurance_driver]
+		WHERE [vehicle] = @vehicle
+
+		-- delete insurance misc charges
+		DELETE FROM [fin].[insurance_misc_charges]
+		WHERE [vehicle] = @vehicle
+
+		-- delete vehicle sale completely
+		DELETE FROM [fin].[vehicle_sale]
+		WHERE [vehicle] = @vehicle
+
+    COMMIT
+END TRY
+BEGIN CATCH
+
+    IF @@TRANCOUNT > 0
+        ROLLBACK
+END CATCH
+
+
+
 
 END

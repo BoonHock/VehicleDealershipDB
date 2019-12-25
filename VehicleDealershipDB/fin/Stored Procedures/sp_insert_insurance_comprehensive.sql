@@ -1,10 +1,11 @@
 ﻿-- =============================================
 -- Author:		hock
--- Create date: 2.12.2019
--- Description:	delete insurance category
+-- Create date: 19.12.2019
+-- Description:	insert insurance comprehensive
 -- =============================================
-CREATE PROCEDURE fin.sp_delete_insurance_category 
+CREATE PROCEDURE fin.sp_insert_insurance_comprehensive 
 	-- Add the parameters for the stored procedure here
+	@title nvarchar(20),
 	@uid int
 
 AS
@@ -14,14 +15,17 @@ BEGIN
 	SET NOCOUNT ON;
 
     -- Insert statements for procedure here
-
-DELETE FROM [fin].[insurance_category]
-WHERE [insurance_category] NOT IN 
+INSERT INTO [fin].[insurance_comprehensive]
 (
-	SELECT [int1]
-	FROM [misc].[bulkcopy_table]
-	WHERE [created_by] = @uid
+	[title],
+	[modified_by]
+)
+VALUES 
+(
+	@title,
+	@uid
 )
 
+SELECT SCOPE_IDENTITY();
 
 END

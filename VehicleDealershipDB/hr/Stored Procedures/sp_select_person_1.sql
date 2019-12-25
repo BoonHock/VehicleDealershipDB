@@ -23,6 +23,7 @@ SELECT
 	PERSONTYPE.[person_type_description],
 	HRPERSON.[driving_license],
 	HRPERSON.[gender],
+	CASE WHEN HRPERSON.[gender] = 1 THEN 'MALE' ELSE 'FEMALE' END AS [gender_description],
 	HRPERSON.[race],
 	HRRACE.[race_description],
 	HRPERSON.[address],
@@ -46,7 +47,8 @@ JOIN [hr].[race] HRRACE
 JOIN [hr].[country] HRCOUNTRY
 	ON HRCOUNTRY.[country] = HRPERSON.[country]
 
-WHERE HRPERSON.[person] = @person
+WHERE @person = -1 
+	OR HRPERSON.[person] = @person
 
 
 END

@@ -238,7 +238,6 @@
     <Build Include="fin\Tables\insurance_type.sql" />
     <Build Include="fin\Tables\insurance_misc_charges.sql" />
     <Build Include="fin\Tables\insurance_driver.sql" />
-    <Build Include="fin\Tables\insurance_category.sql" />
     <Build Include="veh\Views\Vw_veh_model_group_brand.sql" />
     <Build Include="veh\Stored Procedures\sp_select_vehicle_unsold.sql" />
     <Build Include="veh\Stored Procedures\sp_select_vehicle_trade_in.sql" />
@@ -270,19 +269,21 @@
     <Build Include="fin\Stored Procedures\sp_update_vehicle_expenses.sql" />
     <Build Include="fin\Stored Procedures\sp_update_veh_sale_payment_receive_misc.sql" />
     <Build Include="fin\Stored Procedures\sp_update_veh_sale_payment_customer.sql" />
-    <Build Include="fin\Stored Procedures\sp_update_insert_insurance_type.sql" />
     <Build Include="fin\Stored Procedures\sp_update_insert_insurance_misc_charges.sql" />
     <Build Include="fin\Stored Procedures\sp_update_insert_insurance_driver.sql" />
-    <Build Include="fin\Stored Procedures\sp_update_insert_insurance_category.sql" />
     <Build Include="fin\Stored Procedures\sp_select_vehicle_payment_seller.sql" />
     <Build Include="fin\Stored Procedures\sp_select_vehicle_expenses.sql" />
     <Build Include="fin\Stored Procedures\sp_select_veh_sale_payment_receive_misc.sql" />
     <Build Include="fin\Stored Procedures\sp_select_veh_sale_payment_customer.sql" />
-    <Build Include="fin\Stored Procedures\sp_select_insurance_type.sql" />
-    <Build Include="fin\Stored Procedures\sp_select_insurance_category.sql" />
-    <Build Include="fin\Stored Procedures\sp_delete_vehicle_sale_full.sql" />
     <Build Include="fin\Stored Procedures\sp_delete_vehicle_sale.sql" />
-    <Build Include="fin\Stored Procedures\sp_delete_insurance_type.sql" />
-    <Build Include="fin\Stored Procedures\sp_delete_insurance_category.sql" />
+    <Build Include="fin\Tables\insurance_comprehensive_rate.sql" />
+    <Build Include="fin\Tables\insurance_comprehensive.sql" />
+    <Build Include="veh\Stored Procedures\sp_select_vehicle_for_trade_in.sql" />
+    <Build Include="fin\Stored Procedures\sp_update_insurance_comprehensive.sql" />
+    <Build Include="fin\Stored Procedures\sp_update_insert_ins_com_rate.sql" />
+    <Build Include="fin\Stored Procedures\sp_select_insurance_comprehensive_rate.sql" />
+    <Build Include="fin\Stored Procedures\sp_select_insurance_comprehensive.sql" />
+    <Build Include="fin\Stored Procedures\sp_insert_insurance_comprehensive.sql" />
+    <Build Include="fin\Stored Procedures\sp_check_ins_com_title_available.sql" />
   </ItemGroup>
 </Project>

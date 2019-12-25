@@ -1,10 +1,13 @@
 ﻿-- =============================================
 -- Author:		hock
--- Create date: 1.12.2019
--- Description:	select insurance category
+-- Create date: 19.12.2019
+-- Description:	check insurance comprehensive title taken
 -- =============================================
-CREATE PROCEDURE fin.sp_select_insurance_category 
+CREATE PROCEDURE fin.[sp_check_ins_com_title_available] 
 	-- Add the parameters for the stored procedure here
+	@title nvarchar(20),
+	@ins_com int
+
 AS
 BEGIN
 	-- SET NOCOUNT ON added to prevent extra result sets from
@@ -12,10 +15,10 @@ BEGIN
 	SET NOCOUNT ON;
 
     -- Insert statements for procedure here
-SELECT
-	[insurance_category],
-	[description]
+SELECT COUNT(*)
+FROM [fin].[insurance_comprehensive]
 
-FROM [fin].[insurance_category]
+WHERE [title] = @title
+	AND [insurance_comprehensive] <> @ins_com
 
 END

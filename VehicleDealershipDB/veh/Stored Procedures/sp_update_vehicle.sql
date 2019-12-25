@@ -15,7 +15,7 @@ CREATE PROCEDURE [veh].[sp_update_vehicle]
 	@is_new bit,
 	@location int,
 	@engine_no nvarchar(20),
-	@engine_cc float,
+	@engine_cc int,
 	@mileage int,
 	@vehicle_sale int,
 	@consignment_mortgate bit,

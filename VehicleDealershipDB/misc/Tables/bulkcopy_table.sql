@@ -8,10 +8,13 @@
     [nvarchar5]          NVARCHAR (MAX)  NULL,
     [int1]               INT             NULL,
     [int2]               INT             NULL,
+    [int3]               INT             NULL,
     [decimal18_4]        DECIMAL (18, 4) NULL,
     [created_by]         INT             NOT NULL,
     CONSTRAINT [FK_temporary_table_user] FOREIGN KEY ([created_by]) REFERENCES [dbsecurity].[user] ([user])
 );
+
+
 
 
 

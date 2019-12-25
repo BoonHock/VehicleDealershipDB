@@ -11,7 +11,7 @@
     [is_new]                        BIT             NOT NULL,
     [location]                      INT             CONSTRAINT [DF_vehicle_location] DEFAULT (NULL) NULL,
     [engine_no]                     NVARCHAR (20)   NOT NULL,
-    [engine_cc]                     FLOAT (53)      NOT NULL,
+    [engine_cc]                     INT             NOT NULL,
     [mileage]                       INT             NOT NULL,
     [vehicle_sale]                  INT             CONSTRAINT [DF_vehicle_vehicle_sale] DEFAULT (NULL) NULL,
     [consignment_mortgage]          BIT             CONSTRAINT [DF_vehicle_consignment_mortgage] DEFAULT (NULL) NULL,
@@ -51,6 +51,8 @@
     CONSTRAINT [FK_vehicle_user1] FOREIGN KEY ([modified_by]) REFERENCES [dbsecurity].[user] ([user]),
     CONSTRAINT [FK_vehicle_vehicle_sale] FOREIGN KEY ([vehicle_sale]) REFERENCES [fin].[vehicle_sale] ([vehicle])
 );
+
+
 
 
 

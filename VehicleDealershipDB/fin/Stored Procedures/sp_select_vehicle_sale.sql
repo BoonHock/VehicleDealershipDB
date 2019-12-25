@@ -14,7 +14,6 @@ BEGIN
 	SET NOCOUNT ON;
 
     -- Insert statements for procedure here
-
 SELECT
 	VSALE.[reference_no],
 	VSALE.[customer_person],
@@ -29,6 +28,8 @@ SELECT
 
 	CASE WHEN VSALE.[customer_person] IS NULL THEN 'ORGANISATION' ELSE 'PERSON' END AS [customer_type],
 
+	VSALE.[salesperson] AS [salesperson_id],
+	ISNULL(SALESPERSONPERSON.[name], SALESPERSONORG.[name]) AS [salesperson],
 	VSALE.[sale_date],
 	VSALE.[sale_price],
 	VSALE.[road_tax_amount],
@@ -36,6 +37,7 @@ SELECT
 
 	-- LOAN
 	VSALE.[loan],
+	LOANORGBRANCH.[branch_name] AS [loan_org_branch_name],
 	LOANORG.[name] AS [loan_org_name],
 	LOANORG.[registration_no] AS [loan_org_reg_no],
 	VSALE.[loan_amount],
@@ -55,21 +57,23 @@ SELECT
 	VSALE.[insurance_endorsement_no],
 	VSALE.[insurance_policy_no],
 	VSALE.[insurance_date],
-	VSALE.[insurance_category],
 	VSALE.[insurance_type],
 	VSALE.[insurance_sum_insured],
-	VSALE.[insurance_premium],
-	VSALE.[insurance_stamp_duty],
+	VSALE.[insurance_basic_premium],
+	VSALE.[insurance_sum_insured],
+	VSALE.[insurance_comprehensive],
+	VSALE.[insurance_additional_comprehensive],
+	VSALE.[insurance_adjustment],
+	VSALE.[insurance_loading_age_percent],
 	VSALE.[insurance_loading_percent],
-	VSALE.[insurance_ncb_percent],
-	VSALE.[insurance_windscreen],
+	VSALE.[insurance_ncd_percent],
+	VSALE.[insurance_stamp_duty],
 	VSALE.[insurance_windscreen_sum_insured],
+	VSALE.[insurance_windscreen],
+	VSALE.[insurance_total_payable],
 
 	VSALE.[guarantor_person],
 	GUARANTOR.[name] AS [guarantor_name],
-
-	VSALE.[salesperson] AS [salesperson_id],
-	ISNULL(SALESPERSONPERSON.[name], SALESPERSONORG.[name]) AS [salesperson],
 
 	VSALE.[remark]
 
@@ -85,8 +89,11 @@ LEFT JOIN [hr].[organisation_branch] CUSTOMERORGBRANCH
 LEFT JOIN [hr].[organisation] CUSTOMERORG
 	ON CUSTOMERORG.[organisation] = CUSTOMERORGBRANCH.[organisation]
 
+LEFT JOIN [hr].[organisation_branch] LOANORGBRANCH
+	ON LOANORGBRANCH.[organisation_branch] = VSALE.[loan]
+
 LEFT JOIN [hr].[organisation] LOANORG
-	ON LOANORG.[organisation] = VSALE.[loan]
+	ON LOANORGBRANCH.[organisation] = LOANORG.[organisation]
 
 LEFT JOIN [hr].[person] GUARANTOR
 	ON GUARANTOR.[person] = VSALE.[guarantor_person]

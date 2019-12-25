@@ -1,13 +1,11 @@
 ﻿-- =============================================
 -- Author:		hock
--- Create date: 11.11.2019
--- Description:	select vehicle trade in
+-- Create date: 26.12.2019
+-- Description:	select vehicle for trade in
 -- =============================================
-CREATE PROCEDURE [veh].[sp_select_vehicle_trade_in] 
+CREATE PROCEDURE veh.sp_select_vehicle_for_trade_in 
 	-- Add the parameters for the stored procedure here
-	@vsale int = 1,
-	@vid_combine nvarchar(max) = '1'
-
+	@vid_exclude_combine nvarchar(max) = '1'
 AS
 BEGIN
 	-- SET NOCOUNT ON added to prevent extra result sets from
@@ -32,7 +30,10 @@ JOIN [veh].[chassis] CHASSIS
 JOIN [veh].[Vw_veh_model_group_brand] VMGB
 	ON VMGB.[vehicle_model] = CHASSIS.[vehicle_model]
 
-WHERE VEHICLE.[vehicle_sale] = @vsale
-	OR VEHICLE.[vehicle] IN (SELECT * FROM string_split(@vid_combine,','))
+WHERE VEHICLE.[vehicle_sale] IS NULL
+	AND VEHICLE.[vehicle] NOT IN (SELECT * FROM string_split(@vid_exclude_combine,','))
+
+ORDER BY VEHICLE.[registration_no]
+
 
 END
