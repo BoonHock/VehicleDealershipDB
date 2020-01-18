@@ -3,7 +3,7 @@
 -- Create date: 22.10.2019
 -- Description:	insert vehicle return
 -- =============================================
-CREATE PROCEDURE fin.sp_insert_vehicle_return 
+CREATE PROCEDURE [fin].[sp_insert_vehicle_return] 
 	-- Add the parameters for the stored procedure here
 	@vid int,
 	@return_date date,
@@ -38,5 +38,10 @@ VALUES
 	@remark,
 	@modified_by
 )
+
+-- returned vehicle cannot be trade-in
+UPDATE [veh].[vehicle]
+SET [vehicle_sale] = NULL
+WHERE [vehicle] = @vid
 
 END

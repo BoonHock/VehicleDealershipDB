@@ -3,7 +3,7 @@
 -- Create date: 16.9.2019
 -- Description:	select org branch
 -- =============================================
-CREATE PROCEDURE hr.sp_select_organisation_branch_with_org_details
+CREATE PROCEDURE [hr].[sp_select_organisation_branch_with_org_details]
 	-- Add the parameters for the stored procedure here
 	@orgbranch int
 
@@ -42,7 +42,7 @@ JOIN [hr].[organisation_type] ORGTYPE
 JOIN [hr].[country] HRCOUNTRY
 	ON HRCOUNTRY.[country] = ORGBRANCH.[country]
 
-WHERE [organisation_branch] = @orgbranch
+WHERE @orgbranch = -1 OR [organisation_branch] = @orgbranch
 
 
 END

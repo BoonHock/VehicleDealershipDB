@@ -2,6 +2,7 @@
     [vehicle]                            INT             NOT NULL,
     [reference_no_prefix]                NVARCHAR (5)    CONSTRAINT [DF_vehicle_sale_reference_no_prefix] DEFAULT ('') NOT NULL,
     [reference_no]                       AS              ([reference_no_prefix]+CONVERT([nvarchar],[vehicle])),
+    [reference_no_ext]                   NVARCHAR (15)   CONSTRAINT [DF_vehicle_sale_reference_no_ext] DEFAULT ('') NOT NULL,
     [customer_person]                    INT             NULL,
     [customer_organisation_branch]       INT             NULL,
     [salesperson]                        INT             NOT NULL,
@@ -48,6 +49,8 @@
     CONSTRAINT [FK_vehicle_sale_salesperson] FOREIGN KEY ([salesperson]) REFERENCES [hr].[salesperson] ([salesperson]),
     CONSTRAINT [FK_vehicle_sale_user] FOREIGN KEY ([modified_by]) REFERENCES [dbsecurity].[user] ([user])
 );
+
+
 
 
 

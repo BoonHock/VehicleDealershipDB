@@ -3,7 +3,7 @@
 -- Create date: 9.12.2019
 -- Description:	select vehicle expenses
 -- =============================================
-CREATE PROCEDURE fin.sp_select_vehicle_expenses 
+CREATE PROCEDURE [fin].[sp_select_vehicle_expenses] 
 	-- Add the parameters for the stored procedure here
 	@vehicle int = 0
 AS
@@ -14,8 +14,8 @@ BEGIN
 
     -- Insert statements for procedure here
 SELECT 
-	PAYMENT.[payment],
-	VEXP.[charge_to_customer],
+	PAYMENT.[payment_out],
+	VEXP.[vehicle],
 	PAYMENT.[payment_no],
 	PAYMENT.[payment_description],
 	ISNULL(PAYMENT.[pay_to_person],PAYMENT.[pay_to_organisation]) AS [pay_to_id],
@@ -48,8 +48,8 @@ SELECT
 
 FROM [fin].[vehicle_expenses] VEXP
 
-JOIN [fin].[payment] PAYMENT
-	ON PAYMENT.[payment] = VEXP.[payment]
+JOIN [fin].[payment_out] PAYMENT
+	ON PAYMENT.[payment_out] = VEXP.[payment]
 
 LEFT JOIN [fin].[payment_method] PAYMENTMETHOD
 	ON PAYMENTMETHOD.[payment_method] = PAYMENT.[payment_method]

@@ -23,15 +23,15 @@ BEGIN TRY
 		WHERE [vehicle] = @vehicle
 
 		-- delete payment received from buyer and also misc payment received
-		DELETE FROM [fin].[payment]
-		WHERE [payment] IN (
-			SELECT [payment]
+		DELETE FROM [fin].[payment_in]
+		WHERE [payment_in] IN (
+			SELECT [payment_in]
 			FROM [fin].[veh_sale_payment_customer]
 			WHERE [vehicle] = @vehicle
 
 			UNION ALL
 
-			SELECT [payment]
+			SELECT [payment_in]
 			FROM [fin].[veh_sale_payment_receive_misc]
 			WHERE [vehicle] = @vehicle
 		)

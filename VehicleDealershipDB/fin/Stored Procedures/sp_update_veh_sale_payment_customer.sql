@@ -3,7 +3,7 @@
 -- Create date: 9.12.2019
 -- Description:	update vehicle expenses
 -- =============================================
-CREATE PROCEDURE fin.sp_update_veh_sale_payment_customer
+CREATE PROCEDURE [fin].[sp_update_veh_sale_payment_customer]
 	-- Add the parameters for the stored procedure here
 	@vehicle int,
 	@payment_combine nvarchar(max),
@@ -28,31 +28,31 @@ FROM string_split(@payment_combine,',')
 WHERE ISNUMERIC([value]) = 1
 
 -- if incoming data does not provide a payment id associated with this vehicle, user deleted it already
-DELETE FROM [fin].[payment]
-WHERE [payment] IN
+DELETE FROM [fin].[payment_in]
+WHERE [payment_in] IN
 (
-	SELECT [payment]
+	SELECT [payment_in]
 	FROM [fin].[veh_sale_payment_customer]
 	WHERE [vehicle] = @vehicle
-		AND [payment] NOT IN (SELECT * FROM @payment_table)
+		AND [payment_in] NOT IN (SELECT * FROM @payment_table)
 )
 
 -- no duplicate payment_id allowed
 INSERT INTO [fin].[veh_sale_payment_customer]
 (
 	[vehicle],
-	[payment],
+	[payment_in],
 	[modified_by]
 )
 SELECT 
 	@vehicle,
-	[payment],
+	[payment_in],
 	@uid
 
-FROM [fin].[payment] PAYMENT
+FROM [fin].[payment_in] PAYMENT
 
-WHERE [payment] IN (SELECT * FROM @payment_table)
-	AND [payment] NOT IN (SELECT [payment] FROM [fin].[veh_sale_payment_customer])
+WHERE [payment_in] IN (SELECT * FROM @payment_table)
+	AND [payment_in] NOT IN (SELECT [payment_in] FROM [fin].[veh_sale_payment_customer])
 
 
 END

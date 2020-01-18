@@ -19,9 +19,9 @@ UPDATE TRANSMISSION
 SET [transmission_name] = UPPER(BULKCOPY.[nvarchar1]),
 	modified_by = @uid
 
-FROM [VehicleDealership].[misc].[bulkcopy_table] BULKCOPY
+FROM [misc].[bulkcopy_table] BULKCOPY
 
-JOIN [VehicleDealership].[veh].[transmission] TRANSMISSION
+JOIN [veh].[transmission] TRANSMISSION
 	ON TRANSMISSION.[transmission] = BULKCOPY.[int1]
 
 WHERE BULKCOPY.[created_by] = @uid

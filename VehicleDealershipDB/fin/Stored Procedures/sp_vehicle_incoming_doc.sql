@@ -15,6 +15,7 @@ BEGIN
 
     -- Insert statements for procedure here
 SELECT 
+	VEHICLE.[vehicle],
 	SECURITYCOMPANY.[company_name],
 	SECURITYCOMPANY.[registration_no] AS [company_registration_no],
 	SECURITYCOMPANY.[address] AS [company_address],
@@ -117,12 +118,6 @@ JOIN [misc].[colour] COLOUR
 JOIN [dbsecurity].[user] MODIFIEDBY
 	ON MODIFIEDBY.[user] = VEHICLE.[modified_by]
 
-LEFT JOIN [fin].[vehicle_sale] VEHSALE
-	ON VEHSALE.[vehicle] = VEHICLE.[vehicle]
-
-LEFT JOIN [fin].[vehicle_return] VEHRETURN
-	ON VEHRETURN.[vehicle] = VEHICLE.[vehicle]
-
 JOIN [dbsecurity].[company] SECURITYCOMPANY
 	ON 1 = 1
 
@@ -133,8 +128,8 @@ LEFT JOIN (
 
 	FROM [fin].[vehicle_expenses] VEXP
 
-	JOIN [fin].[payment] PAYMENT
-		ON PAYMENT.[payment] = VEXP.[payment]
+	JOIN [fin].[payment_out] PAYMENT
+		ON PAYMENT.[payment_out] = VEXP.[payment]
 
 	GROUP BY VEXP.[vehicle]
 ) VEXP

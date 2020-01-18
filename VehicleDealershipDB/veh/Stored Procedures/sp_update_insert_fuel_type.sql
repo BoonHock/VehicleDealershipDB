@@ -20,9 +20,9 @@ UPDATE FUELTYPE
 SET fuel_type_name = UPPER(BULKCOPY.[nvarchar1]),
 	modified_by = @uid
 
-FROM [VehicleDealership].[misc].[bulkcopy_table] BULKCOPY
+FROM [misc].[bulkcopy_table] BULKCOPY
 
-JOIN [VehicleDealership].[veh].[fuel_type] FUELTYPE
+JOIN [veh].[fuel_type] FUELTYPE
 	ON FUELTYPE.[fuel_type] = BULKCOPY.[int1]
 
 WHERE BULKCOPY.[created_by] = @uid

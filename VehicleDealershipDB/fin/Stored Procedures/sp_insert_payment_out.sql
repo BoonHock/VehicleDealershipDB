@@ -3,7 +3,7 @@
 -- Create date: 23.9.2019
 -- Description:	insert payment
 -- =============================================
-CREATE PROCEDURE [fin].[sp_insert_payment] 
+CREATE PROCEDURE [fin].[sp_insert_payment_out] 
 	-- Add the parameters for the stored procedure here
 	@payment_prefix nvarchar(20),
 	@payment_desc nvarchar(50),
@@ -26,7 +26,7 @@ BEGIN
 
     -- Insert statements for procedure here
 
-INSERT INTO [fin].[payment]
+INSERT INTO [fin].[payment_out]
 (
 	[payment_no_prefix],
 	[payment_description],

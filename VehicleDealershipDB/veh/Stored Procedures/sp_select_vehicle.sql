@@ -150,7 +150,7 @@ JOIN [dbsecurity].[user] MODIFIEDBY
 	ON MODIFIEDBY.[user] = VEHICLE.[modified_by]
 
 LEFT JOIN [fin].[vehicle_sale] VEHSALE
-	ON VEHSALE.[vehicle] = VEHICLE.[vehicle]
+	ON VEHSALE.[vehicle] = VEHICLE.[vehicle_sale]
 
 LEFT JOIN [fin].[vehicle_return] VEHRETURN
 	ON VEHRETURN.[vehicle] = VEHICLE.[vehicle]

@@ -19,7 +19,7 @@ UPDATE COLOUR
 SET [colour_name] = BULKCOPY.[nvarchar1],
 	[modified_by] = @uid
 
-FROM [VehicleDealership].[misc].[bulkcopy_table] BULKCOPY
+FROM [misc].[bulkcopy_table] BULKCOPY
 
 JOIN [misc].[colour] COLOUR
 	ON COLOUR.[colour] = BULKCOPY.[int1]

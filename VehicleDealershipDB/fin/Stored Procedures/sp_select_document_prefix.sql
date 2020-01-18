@@ -5,7 +5,7 @@
 -- =============================================
 CREATE PROCEDURE [fin].[sp_select_document_prefix] 
 	-- Add the parameters for the stored procedure here
-	@doc_prefix nvarchar(20)
+	@doc_prefix nvarchar(100)
 
 AS
 BEGIN
@@ -18,7 +18,7 @@ BEGIN
 SELECT 
 	[document_prefix_text]
 
-FROM [VehicleDealership].[fin].[document_prefix]
+FROM [fin].[document_prefix]
 
 WHERE [document_prefix] = @doc_prefix
 

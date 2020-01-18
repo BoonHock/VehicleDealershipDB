@@ -22,7 +22,7 @@ BEGIN
     -- Insert statements for procedure here
 
 
-INSERT INTO [VehicleDealership].[hr].[organisation]
+INSERT INTO [hr].[organisation]
 (
 	[name]
 	,[registration_no]

@@ -18,7 +18,7 @@ SELECT
 	[ic_no],
 	[url]
 
-FROM [VehicleDealership].[hr].[person]
+FROM [hr].[person]
 
 WHERE [person] NOT IN 
 (

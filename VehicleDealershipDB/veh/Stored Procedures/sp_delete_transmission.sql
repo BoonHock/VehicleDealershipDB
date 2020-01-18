@@ -22,7 +22,7 @@ FROM [veh].[transmission]
 
 WHERE [transmission] NOT IN (
 	SELECT [int1]
-	FROM [VehicleDealership].[misc].[bulkcopy_table]
+	FROM [misc].[bulkcopy_table]
 	WHERE [bulkcopy_table].[created_by] = @uid
 
 	UNION
@@ -45,7 +45,7 @@ WHERE [transmission] IN (
 
 	WHERE [transmission] NOT IN (
 		SELECT [int1]
-		FROM [VehicleDealership].[misc].[bulkcopy_table]
+		FROM [misc].[bulkcopy_table]
 		WHERE [bulkcopy_table].[created_by] = @uid
 	)
 )

@@ -20,7 +20,7 @@ SELECT
 	DBFILEPATH.[filepath_dir], 
 	SECURITYUSER.[name] AS [modified_by]
 
-FROM [VehicleDealership].[dbsecurity].[filepath] DBFILEPATH
+FROM [dbsecurity].[filepath] DBFILEPATH
 
 JOIN [dbsecurity].[user] SECURITYUSER
 	ON SECURITYUSER.[user] = DBFILEPATH.[modified_by]

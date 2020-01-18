@@ -19,7 +19,7 @@ SELECT
 	[vehicle_group],
 	[vehicle_group_name]
 
-FROM [VehicleDealership].[veh].[vehicle_group]
+FROM [veh].[vehicle_group]
 
 WHERE vehicle_brand = @vbrand
 

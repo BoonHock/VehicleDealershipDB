@@ -17,7 +17,7 @@ SELECT
 	[fuel_type_name],
 	DBUSER.[name] AS [modified_by]
 
-FROM [VehicleDealership].[veh].[fuel_type] FUELTYPE
+FROM [veh].[fuel_type] FUELTYPE
 
 JOIN [dbsecurity].[user] DBUSER
 	ON FUELTYPE.[modified_by] = DBUSER.[user]

@@ -19,7 +19,7 @@ UPDATE MISCLOCATION
 SET [location_name] = BULKCOPY.[nvarchar1],
 	[modified_by] = @uid
 
-FROM [VehicleDealership].[misc].[bulkcopy_table] BULKCOPY
+FROM [misc].[bulkcopy_table] BULKCOPY
 
 JOIN [misc].[location] MISCLOCATION
 	ON MISCLOCATION.[location] = BULKCOPY.[int1]

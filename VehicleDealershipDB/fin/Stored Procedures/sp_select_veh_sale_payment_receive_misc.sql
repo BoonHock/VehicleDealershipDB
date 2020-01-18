@@ -3,7 +3,7 @@
 -- Create date: 9.12.2019
 -- Description:	select misc vehicle payment received for vehicle sale
 -- =============================================
-CREATE PROCEDURE fin.sp_select_veh_sale_payment_receive_misc
+CREATE PROCEDURE [fin].[sp_select_veh_sale_payment_receive_misc]
 	-- Add the parameters for the stored procedure here
 	@vehicle int = 0
 AS
@@ -14,15 +14,11 @@ BEGIN
 
     -- Insert statements for procedure here
 SELECT 
-	PAYMENT.[payment],
+	PAYMENT.[payment_in],
 	PAYMENT.[payment_no],
 	PAYMENT.[payment_description],
-	ISNULL(PAYMENT.[pay_to_person],PAYMENT.[pay_to_organisation]) AS [pay_to_id],
-	CASE WHEN PAYMENT.[pay_to_person] IS NOT NULL THEN PAYTOPERSON.[name] ELSE [PAYTOORG].[name] END as [pay_to],
-	CASE WHEN PAYMENT.[pay_to_person] IS NOT NULL THEN 'PERSON' ELSE 'ORGANISATION' END as [pay_to_type],
 	PAYMENT.[amount],
 	PAYMENT.[payment_date],
-	PAYMENT.[is_paid],
 
 	CASE WHEN PAYMENT.[cheque] IS NOT NULL THEN
 		'CHEQUE'
@@ -47,8 +43,8 @@ SELECT
 
 FROM [fin].[veh_sale_payment_receive_misc] VPAY
 
-JOIN [fin].[payment] PAYMENT
-	ON PAYMENT.[payment] = VPAY.[payment]
+JOIN [fin].[payment_in] PAYMENT
+	ON PAYMENT.[payment_in] = VPAY.[payment_in]
 
 LEFT JOIN [fin].[payment_method] PAYMENTMETHOD
 	ON PAYMENTMETHOD.[payment_method] = PAYMENT.[payment_method]
@@ -64,12 +60,6 @@ LEFT JOIN [fin].[cheque] CHEQUE
 
 LEFT JOIN [hr].[finance] FINANCE
 	ON FINANCE.[finance] = ISNULL(CHEQUE.[finance],CREDITCARD.[finance])
-
-LEFT JOIN [hr].[person] PAYTOPERSON
-	ON PAYTOPERSON.[person] = PAYMENT.[pay_to_person]
-
-LEFT JOIN [hr].[organisation] PAYTOORG
-	ON PAYTOORG.[organisation] = PAYMENT.[pay_to_organisation]
 
 LEFT JOIN [hr].[organisation_branch] FINANCEORGBRANCH
 	ON FINANCEORGBRANCH.[organisation_branch] = FINANCE.[finance]

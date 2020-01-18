@@ -20,7 +20,7 @@ FROM [veh].[fuel_type]
 
 WHERE [fuel_type] NOT IN (
 	SELECT [int1]
-	FROM [VehicleDealership].[misc].[bulkcopy_table]
+	FROM [misc].[bulkcopy_table]
 	WHERE [bulkcopy_table].[created_by] = @uid
 
 	UNION
@@ -41,7 +41,7 @@ WHERE [fuel_type] IN (
 
 	WHERE [fuel_type] NOT IN (
 		SELECT [int1]
-		FROM [VehicleDealership].[misc].[bulkcopy_table]
+		FROM [misc].[bulkcopy_table]
 		WHERE [bulkcopy_table].[created_by] = @uid
 	)
 )

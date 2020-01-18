@@ -3,7 +3,7 @@
 -- Create date: 25.9.2019
 -- Description:	update payment
 -- =============================================
-CREATE PROCEDURE [fin].[sp_update_payment] 
+CREATE PROCEDURE [fin].[sp_update_payment_out] 
 	-- Add the parameters for the stored procedure here
 	@payment int,
 	@payment_desc nvarchar(50),
@@ -26,7 +26,7 @@ BEGIN
 
     -- Insert statements for procedure here
 
-UPDATE [fin].[payment]
+UPDATE [fin].[payment_out]
 SET [payment_description] = @payment_desc,
 	[payment_date] = @payment_date,
 	[amount] = @amount,
@@ -39,6 +39,6 @@ SET [payment_description] = @payment_desc,
 	[remark] = @remark,
 	[modified_by] = @modified_by
 
-WHERE [payment] = @payment
+WHERE [payment_out] = @payment
 
 END

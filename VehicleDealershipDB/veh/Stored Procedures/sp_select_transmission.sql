@@ -16,7 +16,7 @@ SELECT
 	[transmission],
 	[transmission_name]
 
-FROM [VehicleDealership].[veh].[transmission]
+FROM [veh].[transmission]
 
 ORDER BY [transmission_name]
 

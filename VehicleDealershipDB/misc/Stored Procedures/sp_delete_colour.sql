@@ -21,7 +21,7 @@ FROM [misc].[colour]
 
 WHERE [colour] NOT IN (
 	SELECT [int1]
-	FROM [VehicleDealership].[misc].[bulkcopy_table]
+	FROM [misc].[bulkcopy_table]
 	WHERE [bulkcopy_table].[created_by] = @uid
 )
 

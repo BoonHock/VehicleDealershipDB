@@ -30,6 +30,15 @@ WHERE BULKCOPY.[created_by] = @created_by
 	AND (CHARGES.[amount] <> BULKCOPY.[decimal18_4] 
 		OR CHARGES.[description] <> BULKCOPY.[nvarchar1] )
 
+DELETE FROM [fin].[vehicle_sale_charges]
+WHERE [vehicle] = vehicle
+	AND [vehicle_sale_charges] NOT IN 
+	(
+		SELECT [int1]
+		FROM [misc].[bulkcopy_table]
+		WHERE [created_by] = @created_by
+	)
+
 INSERT INTO [fin].[vehicle_sale_charges]
 (
 	[vehicle],

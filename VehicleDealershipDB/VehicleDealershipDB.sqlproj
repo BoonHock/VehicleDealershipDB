@@ -180,7 +180,6 @@
     <Build Include="fin\Tables\payment_method.sql" />
     <Build Include="fin\Tables\vehicle_return.sql" />
     <Build Include="fin\Tables\vehicle_sale.sql" />
-    <Build Include="fin\Tables\payment.sql" />
     <Build Include="fin\Tables\credit_card.sql" />
     <Build Include="hr\Stored Procedures\sp_update_insert_finance.sql" />
     <Build Include="hr\Stored Procedures\sp_select_organisation_not_finance.sql" />
@@ -214,13 +213,11 @@
     <Build Include="veh\Stored Procedures\sp_select_vehicle_attachment.sql" />
     <Build Include="veh\Stored Procedures\sp_insert_vehicle.sql" />
     <Build Include="veh\Stored Procedures\sp_insert_chassis.sql" />
-    <Build Include="fin\Stored Procedures\sp_update_payment.sql" />
     <Build Include="fin\Stored Procedures\sp_update_insert_credit_card.sql" />
     <Build Include="fin\Stored Procedures\sp_update_insert_cheque.sql" />
     <Build Include="fin\Stored Procedures\sp_select_credit_card_type.sql" />
     <Build Include="fin\Stored Procedures\sp_select_credit_card.sql" />
     <Build Include="fin\Stored Procedures\sp_select_cheque.sql" />
-    <Build Include="fin\Stored Procedures\sp_insert_payment.sql" />
     <Build Include="veh\Stored Procedures\sp_update_vehicle.sql" />
     <Build Include="veh\Stored Procedures\sp_insert_vehicle_image.sql" />
     <Build Include="veh\Stored Procedures\sp_insert_vehicle_attachment.sql" />
@@ -285,5 +282,12 @@
     <Build Include="fin\Stored Procedures\sp_select_insurance_comprehensive.sql" />
     <Build Include="fin\Stored Procedures\sp_insert_insurance_comprehensive.sql" />
     <Build Include="fin\Stored Procedures\sp_check_ins_com_title_available.sql" />
+    <Build Include="fin\Tables\payment_out.sql" />
+    <Build Include="fin\Tables\payment_in.sql" />
+    <Build Include="fin\Stored Procedures\sp_update_payment_out.sql" />
+    <Build Include="fin\Stored Procedures\sp_update_payment_in.sql" />
+    <Build Include="fin\Stored Procedures\sp_insert_payment_out.sql" />
+    <Build Include="fin\Stored Procedures\sp_insert_payment_in.sql" />
+    <Build Include="fin\Stored Procedures\sp_vehicle_sale_doc.sql" />
   </ItemGroup>
 </Project>

@@ -5,6 +5,8 @@
 -- =============================================
 CREATE PROCEDURE [fin].[sp_select_vehicle_sale_simplified] 
 	-- Add the parameters for the stored procedure here
+	@exclude_vehicle int
+
 AS
 BEGIN
 	-- SET NOCOUNT ON added to prevent extra result sets from
@@ -65,5 +67,6 @@ LEFT JOIN [hr].[organisation_branch] SALESPERSONORGBRANCH
 LEFT JOIN [hr].[organisation] SALESPERSONORG
 	ON SALESPERSONORG.[organisation] = SALESPERSONORGBRANCH.[organisation]
 
+WHERE VSALE.[vehicle] <> @exclude_vehicle
 
 END

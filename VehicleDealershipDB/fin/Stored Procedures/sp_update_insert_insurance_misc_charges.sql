@@ -38,6 +38,15 @@ JOIN [misc].[bulkcopy_table] BULKCOPY
 WHERE BULKCOPY.[created_by] = @uid
 	AND INSMISC.[vehicle] = @vehicle
 
+-- delete old data that is not used anymore
+DELETE FROM [fin].[insurance_misc_charges]
+WHERE [vehicle] = @vehicle
+	AND [insurance_misc_charges] NOT IN 
+	(
+		SELECT [int1]
+		FROM [misc].[bulkcopy_table]
+		WHERE [created_by] = @uid
+	)
 
 -- insert new data
 INSERT INTO [fin].[insurance_misc_charges]
@@ -57,15 +66,5 @@ SELECT
 FROM [misc].[bulkcopy_table]
 WHERE [int1] < 0
 	AND [created_by] = @uid
-
--- delete old data that is not used anymore
-DELETE FROM [fin].[insurance_misc_charges]
-WHERE [vehicle] = @vehicle
-	AND [insurance_misc_charges] NOT IN 
-	(
-		SELECT [int1]
-		FROM [misc].[bulkcopy_table]
-		WHERE [created_by] = @uid
-	)
 
 END
